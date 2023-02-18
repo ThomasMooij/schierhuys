@@ -39,14 +39,29 @@ const RightSide = styled.div`
 display: flex;
 align-items: center;
 `
-const Navbar = () => {
+const Navbar = ({selectedPage}) => {
   return (
     <Nav>
         <NavContainer>
             <Logo>Schierhuys</Logo>
             <InnerContainer>
                 <LeftSide>
-                   <Link   />
+                  <Link 
+                      page="Home" 
+                      selectedPage={selectedPage} 
+                    />
+                   <Link 
+                      page="fotos"  
+                      selectedPage={selectedPage} 
+                    />
+                   <Link 
+                      page="reserve" 
+                      selectedPage={selectedPage}
+                    />
+                   <Link 
+                      page="Reviews&info" 
+                      selectedPage={selectedPage} 
+                    />
                 </LeftSide>
                 <RightSide>
                    button
