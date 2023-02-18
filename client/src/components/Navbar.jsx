@@ -39,7 +39,7 @@ const RightSide = styled.div`
 display: flex;
 align-items: center;
 `
-const Navbar = ({selectedPage}) => {
+const Navbar = ({selectedPage, setSelectedPage}) => {
   return (
     <Nav>
         <NavContainer>
@@ -48,19 +48,23 @@ const Navbar = ({selectedPage}) => {
                 <LeftSide>
                   <Link 
                       page="Home" 
-                      selectedPage={selectedPage} 
+                      selectedPage={selectedPage}
+                      setSelectedPage={setSelectedPage} 
                     />
                    <Link 
                       page="fotos"  
-                      selectedPage={selectedPage} 
+                      selectedPage={selectedPage}
+                      setSelectedPage={setSelectedPage}  
                     />
                    <Link 
                       page="reserve" 
                       selectedPage={selectedPage}
+                      setSelectedPage={setSelectedPage} 
                     />
                    <Link 
                       page="Reviews&info" 
-                      selectedPage={selectedPage} 
+                      selectedPage={selectedPage}
+                      setSelectedPage={setSelectedPage}  
                     />
                 </LeftSide>
                 <RightSide>

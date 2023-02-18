@@ -8,7 +8,7 @@ const Btn = styled.button`
     cursor: pointer;
     color: white;
     border-radius: 10px;
-    background-color:${(props) => props.selectedPage === props.page ? "#93ad78" : ""} ;
+    background-color:${(props) => (props.selectedPage === "home" ? "blue" : "black")} ;
     &:hover{
         background-color: #93ad78;
     }
@@ -17,11 +17,17 @@ const Btn = styled.button`
 
 
 const Link = ({page, selectedPage}) => {
-  console.log(page)
+ console.log(selectedPage)
+  const lowerCasePage = page.toLowerCase().replace(/ /g, "")
+
   return (
    
-    <Btn>
-      <AnchorLink page={page} selectedPage={selectedPage}>{page}</AnchorLink>
+    <Btn 
+    page={page} 
+    selectedPage={selectedPage}
+    onClick={()=> setSelectedPage(page)}
+    >
+      <AnchorLink >{page}</AnchorLink>
     </Btn>
   )
 }

@@ -18,6 +18,7 @@ function App() {
   <BrowserRouter>
   <Navbar 
     selectedPage={selectedPage} 
+    setSelectedPage={setSelectedPage}
   />
     <Routes>
       <Route path='/' element ={<Landing />}  />
