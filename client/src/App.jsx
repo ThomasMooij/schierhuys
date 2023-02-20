@@ -10,7 +10,7 @@ import Navbar from "./components/Navbar";
 
 function App() {
  
-  const [selectedPage, setSelectedPage] = useState('home')
+  const [selectedPage, setSelectedPage] = useState('Home')
   const [topOfPage, setTopOfPage] = useState(true)
 
   return (

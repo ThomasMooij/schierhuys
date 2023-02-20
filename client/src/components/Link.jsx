@@ -8,16 +8,14 @@ const Btn = styled.button`
     cursor: pointer;
     color: white;
     border-radius: 10px;
-    background-color:${(props) => (props.selectedPage === "home" ? "blue" : "black")} ;
+    background-color:${(props) => (props.page === props.selectedPage ? "#93ad78" : "#42630c")} ;
     &:hover{
         background-color: #93ad78;
     }
 
 `
-
-
-const Link = ({page, selectedPage, setSelectedPage}) => {
- console.log(selectedPage)
+  const Link = ({page, selectedPage, setSelectedPage}) => {
+  console.log(selectedPage)
   const lowerCasePage = page.toLowerCase().replace(/ /g, "")
 
   return (
