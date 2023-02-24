@@ -16,7 +16,6 @@ const Btn = styled.button`
 `
   const Link = ({page, selectedPage, setSelectedPage}) => {
   console.log(selectedPage)
-  const lowerCasePage = page.toLowerCase().replace(/ /g, "")
 
   return (
    
