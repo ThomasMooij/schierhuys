@@ -11,17 +11,29 @@ const NavContainer = styled.div`
   background-color: #5d8238;
   width:100%;
   z-index: 30;
-  height: 70px;
+  height: 90px;
   justify-content: center;
   display: flex;
   justify-content: space-evenly;
 
 `
+const LogoContainer = styled.div`
+  background-color:#93ad78;
+  display: flex;
+  align-items: center;
+  padding: 0px 25px;
+  border-radius: 30%;
+  flex-direction: column;
+  margin-left: 5px;
+`
 const Logo = styled.p`
 font-size: 25px;
 color: whitesmoke;
-align-self: center;
 padding: 10px ;
+`
+const LogoText = styled.p`
+font-size: 14;
+color: whitesmoke;
 `
 const InnerContainer = styled.div`
  margin: auto;
@@ -43,7 +55,10 @@ const Navbar = ({selectedPage, setSelectedPage}) => {
   return (
     <Nav>
         <NavContainer>
+          <LogoContainer>
             <Logo>Schierhuys</Logo>
+            <LogoText>Vakanties in Drenthe</LogoText>
+          </LogoContainer>
             <InnerContainer>
                 <LeftSide>
                   <Link 

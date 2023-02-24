@@ -4,7 +4,7 @@ import styled from "styled-components"
 const Btn = styled.button`
    margin-left: 15px;
     border: none;
-    padding:15px;
+    padding:15px 25px;
     cursor: pointer;
     color: white;
     border-radius: 10px;
