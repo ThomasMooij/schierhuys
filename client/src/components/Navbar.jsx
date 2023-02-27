@@ -1,52 +1,92 @@
 import styled from 'styled-components'
 import Link from './Link'
-
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import HouseIcon from '@mui/icons-material/House';
 
 const Nav = styled.nav`
    position: sticky;
    top: 0px;
     z-index: 999;
+    
 `
 const NavContainer = styled.div`
   background-color: #5d8238;
   width:100%;
   z-index: 30;
-  height: 90px;
+  height: 105px;
   justify-content: center;
   display: flex;
   justify-content: space-evenly;
 
 `
-const LogoContainer = styled.div`
-  background-color:#93ad78;
+const InnerContainer = styled.div`
+ margin: auto;
+  width: 95%;
+  display: flex;
+  justify-content: space-evenly;
+`
+const ContactContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: 0px 25px;
+  gap: 12px;
+  justify-content: center;
+  background-color: #93ad78;
+  padding: 15px 28px;
+  border-radius: 60%;
+`
+const IconDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+`
+const TextDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+`
+const ContactLogo = styled.div`
+  background-color: whitesmoke;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+const ContactText = styled.p`
+  
+`
+const LeftSide = styled.div`
+margin: auto;
+width: 70%;
+display: flex;
+justify-content: space-evenly;
+`
+const LogoContainer = styled.div`
+  /* background-color:#93ad78; */
+  display: flex;
+  align-items: center;
+  padding: 5px 45px;
   border-radius: 30%;
   flex-direction: column;
-  margin-left: 5px;
+  margin-left: 75px;
 `
 const Logo = styled.p`
-font-size: 25px;
+font-size: 35px;
 color: whitesmoke;
 padding: 10px ;
+font-weight: 700;
 `
 const LogoText = styled.p`
 font-size: 14;
 color: whitesmoke;
+font-weight: 600;
 `
-const InnerContainer = styled.div`
- margin: auto;
-  width: 80%;
-  display: flex;
-  justify-content: space-evenly;
-`
-const LeftSide = styled.div`
-margin: auto;
-width: 40%;
-display: flex;
-justify-content: space-between;
-`
+
 const RightSide = styled.div`
 display: flex;
 align-items: center;
@@ -55,11 +95,21 @@ const Navbar = ({selectedPage, setSelectedPage}) => {
   return (
     <Nav>
         <NavContainer>
-          <LogoContainer>
-            <Logo>Schierhuys</Logo>
-            <LogoText>Vakanties in Drenthe</LogoText>
-          </LogoContainer>
             <InnerContainer>
+              <ContactContainer>
+
+                <IconDiv>
+                  <ContactLogo><LocalPhoneIcon /></ContactLogo>
+                  <ContactLogo><HouseIcon /></ContactLogo>
+                </IconDiv>
+               
+                <TextDiv>
+                  <ContactText>06000006</ContactText>
+                  <ContactText>Berkenlaan 10, 1800PX</ContactText>
+                </TextDiv>
+              
+
+              </ContactContainer>
                 <LeftSide>
                   <Link 
                       page="Home" 
@@ -71,11 +121,18 @@ const Navbar = ({selectedPage, setSelectedPage}) => {
                       selectedPage={selectedPage}
                       setSelectedPage={setSelectedPage}  
                     />
-                   <Link 
+
+                    <LogoContainer>
+                      <Logo>Schierhuys</Logo>
+                      <LogoText>Vakanties in Drenthe</LogoText>
+                    </LogoContainer>
+
+                    <Link 
                       page="Reserve" 
                       selectedPage={selectedPage}
                       setSelectedPage={setSelectedPage} 
                     />
+
                      <Link 
                       page="Contact" 
                       selectedPage={selectedPage}
@@ -88,7 +145,7 @@ const Navbar = ({selectedPage, setSelectedPage}) => {
                     />
                 </LeftSide>
                 <RightSide>
-                   button
+                   NL
                 </RightSide>
             </InnerContainer>
         </NavContainer>
