@@ -35,22 +35,27 @@ position: relative;
 const TextContainer = styled.div`
 position: absolute;
 width: 100%;
-height:15%;
+height:11%;
 display: flex;
 align-items: center;
 justify-content: flex-end;
 flex-direction: column;
-top: 700px;
+top: 780px;
 left: -25px;
 `
 
 const Button = styled.button`
 padding:10px 35px;
 font-size:20px;
+font-weight: 700;
+color: white;
 background-color:#5d8238;
 border-radius: 10px;
+box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
 cursor:pointer;
-&:hover{background-color:white}
+&:hover{background-color:#93ad78;}
+// springt niet naar boven zoals de bedoeling is
+transform: translateY(-7px);
 `
 const ArrowDown = styled.div`
 width:50px;
@@ -63,6 +68,9 @@ justify-content:center;
 margin: auto;
 cursor:pointer;
 z-index:2;
+&:hover{background-color:#93ad78;}
+// springt niet naar boven zoals de bedoeling is
+transform: translateY(-7px);
 `;
 
 const Landing = () => {
@@ -75,7 +83,7 @@ const Landing = () => {
         <SlideContainer>
             <Slide />
             <TextContainer>     
-                <Button> reserveer</Button>
+                <Button> reserveer het huisje</Button>
                 <ArrowDown><ArrowCircleDownIcon /></ArrowDown>
             </TextContainer>
         </SlideContainer> 

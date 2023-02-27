@@ -67,13 +67,11 @@ display: flex;
 justify-content: space-evenly;
 `
 const LogoContainer = styled.div`
-  /* background-color:#93ad78; */
   display: flex;
   align-items: center;
   padding: 5px 45px;
   border-radius: 30%;
   flex-direction: column;
-  margin-left: 75px;
 `
 const Logo = styled.p`
 font-size: 35px;
@@ -108,7 +106,6 @@ const Navbar = ({selectedPage, setSelectedPage}) => {
                   <ContactText>Berkenlaan 10, 1800PX</ContactText>
                 </TextDiv>
               
-
               </ContactContainer>
                 <LeftSide>
                   <Link 
