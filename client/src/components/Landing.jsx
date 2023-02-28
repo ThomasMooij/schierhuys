@@ -78,7 +78,6 @@ transform: translateY(-7px);
 
 const Landing = () => {
 
-
   return (
     <>
       <Container>
