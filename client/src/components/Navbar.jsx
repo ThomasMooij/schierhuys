@@ -7,6 +7,7 @@ const Nav = styled.nav`
    position: sticky;
    top: 0px;
     z-index: 999;
+    box-shadow: 0px 1px 10px #999;
     
 `
 const NavContainer = styled.div`

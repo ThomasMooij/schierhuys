@@ -40,7 +40,7 @@ display: flex;
 align-items: center;
 justify-content: flex-end;
 flex-direction: column;
-top: 780px;
+top: 800px;
 left: -25px;
 `
 
@@ -51,16 +51,19 @@ font-weight: 700;
 color: white;
 background-color:#5d8238;
 border-radius: 10px;
-box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
 cursor:pointer;
-&:hover{background-color:#93ad78;}
+&:hover{
+  background-color:#93ad78;
+  transform: translateY(-17px);
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+}
 // springt niet naar boven zoals de bedoeling is
-transform: translateY(-7px);
+
 `
 const ArrowDown = styled.div`
 width:50px;
 height:50px;
-background-color:#FAF9F6; 
+background-color:#2ed418; 
 border-radius:50%;
 display:flex;
 align-items:center;
