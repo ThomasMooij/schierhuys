@@ -72,7 +72,6 @@ margin: auto;
 cursor:pointer;
 z-index:2;
 &:hover{background-color:#93ad78;}
-// springt niet naar boven zoals de bedoeling is
 transform: translateY(-7px);
 `;
 
