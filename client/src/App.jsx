@@ -5,7 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 import Landing from "./components/Landing";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar"
 
 
 function App() {
