@@ -4,8 +4,8 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import Landing from "./components/Landing";
 import Navbar from "./components/Navbar"
+import Home from "./pages/Home";
 
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
     setSelectedPage={setSelectedPage}
   />
     <Routes>
-      <Route path='/' element ={<Landing />}  />
+      <Route path='/' element ={<Home />}  />
     </Routes>
    </BrowserRouter>
     </>

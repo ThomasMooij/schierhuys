@@ -1,23 +1,27 @@
 import AnchorLink from "react-anchor-link-smooth-scroll"
 import styled from "styled-components"
+import {Link} from 'react-scroll';
 
-const Btn = styled.button`
+
+const Btn = styled(Link)`
    margin-left: 15px;
     border: none;
     padding:3px 35px;
     cursor: pointer;
     color: white;
     font-size: 19px;
+    align-self: center;
+    display: block;
     font-weight: 700;
-    border-radius: 10px;
-    background-color:${(props) => (props.page === props.selectedPage ? "#93ad78" : "#5d8238")} ;
+    background-color: transparent;
+    border-bottom:${(props) => (props.page === props.selectedPage ? "3px solid" : "")} ;
+    border-spacing: 13px;
     &:hover{
-        background-color: #93ad78;
+        border-bottom: 3px solid;
     }
 
 `
-  const Link = ({page, selectedPage, setSelectedPage}) => {
-  console.log(selectedPage)
+  const NavLink = ({page, selectedPage, setSelectedPage}) => {
 
   return (
    
@@ -25,10 +29,15 @@ const Btn = styled.button`
     page={page} 
     selectedPage={selectedPage}
     onClick={()=> setSelectedPage(page)}
+    to={page} 
+    smooth={true} 
+    offset={-120} 
+    duration={500}
+    spy={true}
     >
       <AnchorLink >{page}</AnchorLink>
     </Btn>
   )
 }
 
-export default Link
+export default NavLink

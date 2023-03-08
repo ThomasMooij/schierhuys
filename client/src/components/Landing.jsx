@@ -79,7 +79,7 @@ const Landing = () => {
 
   return (
     <>
-      <Container>
+      <Container id="Home">
         <Wrapper>
         <SlideContainer>
             <Slide />

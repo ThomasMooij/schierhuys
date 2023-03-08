@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Link from './Link'
+import NavLink from './Link'
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import HouseIcon from '@mui/icons-material/House';
 
@@ -31,9 +31,7 @@ const ContactContainer = styled.div`
   align-items: center;
   gap: 12px;
   justify-content: center;
-  background-color: #93ad78;
   padding: 15px 28px;
-  border-radius: 60%;
 `
 const IconDiv = styled.div`
   display: flex;
@@ -59,7 +57,7 @@ const ContactLogo = styled.div`
   justify-content: center;
 `
 const ContactText = styled.p`
-  
+  color: white;
 `
 const LeftSide = styled.div`
 margin: auto;
@@ -94,7 +92,7 @@ const Navbar = ({selectedPage, setSelectedPage}) => {
   return (
     <Nav>
         <NavContainer>
-            <InnerContainer>
+           <InnerContainer>
               <ContactContainer>
 
                 <IconDiv>
@@ -109,12 +107,12 @@ const Navbar = ({selectedPage, setSelectedPage}) => {
               
               </ContactContainer>
                 <LeftSide>
-                  <Link 
+                  <NavLink 
                       page="Home" 
                       selectedPage={selectedPage}
                       setSelectedPage={setSelectedPage} 
                     />
-                   <Link 
+                   <NavLink 
                       page="Fotos"  
                       selectedPage={selectedPage}
                       setSelectedPage={setSelectedPage}  
@@ -125,18 +123,18 @@ const Navbar = ({selectedPage, setSelectedPage}) => {
                       <LogoText>Vakanties in Drenthe</LogoText>
                     </LogoContainer>
 
-                    <Link 
+                    <NavLink 
                       page="Reserve" 
                       selectedPage={selectedPage}
                       setSelectedPage={setSelectedPage} 
                     />
 
-                     <Link 
+                     <NavLink 
                       page="Contact" 
                       selectedPage={selectedPage}
                       setSelectedPage={setSelectedPage} 
                     />
-                   <Link 
+                   <NavLink 
                       page="Reviews&info" 
                       selectedPage={selectedPage}
                       setSelectedPage={setSelectedPage}  
