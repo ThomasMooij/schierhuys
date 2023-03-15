@@ -4,6 +4,9 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import styled from "styled-components";
 
+// bugfile
+// add evenlistener if scroll away from this page the picture must close
+// pictures must be imported dynamically so admin can upload from admin panel
 
 const Container = styled.main`
   width: 100%;
