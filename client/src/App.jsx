@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import Navbar from "./components/Navbar"
 import Home from "./pages/Home";
-
+import Pay from "./pages/Pay";
 
 function App() {
  
@@ -22,6 +22,7 @@ function App() {
   />
     <Routes>
       <Route path='/' element ={<Home />}  />
+      <Route path='/pay' element ={<Pay />}  />
     </Routes>
    </BrowserRouter>
     </>

@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import NavLink from './Link'
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import HouseIcon from '@mui/icons-material/House';
+import { Link } from 'react-router-dom';
 
 const Nav = styled.nav`
    position: sticky;
@@ -134,11 +135,13 @@ const Navbar = ({selectedPage, setSelectedPage}) => {
                       selectedPage={selectedPage}
                       setSelectedPage={setSelectedPage} 
                     />
-                   <NavLink 
-                      page="Reviews&info" 
-                      selectedPage={selectedPage}
-                      setSelectedPage={setSelectedPage}  
-                    />
+                  
+                      <NavLink 
+                          page="Reviews&info" 
+                          selectedPage={selectedPage}
+                          setSelectedPage={setSelectedPage}  
+                          />
+                  
                 </LeftSide>
                 <RightSide>
                    NL

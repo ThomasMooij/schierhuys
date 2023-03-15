@@ -165,6 +165,10 @@ const Reserve = () => {
     });
   };
 
+  const handleSearch = () =>{
+    navigate("/pay" , {state: {guest, date, options, }})
+  }
+
   return (
     <Container>
         <Wrapper>
@@ -251,7 +255,7 @@ const Reserve = () => {
                     <WrapperTitle>Algemene gegevens</WrapperTitle>
                     <Rooms>4 slaapkamers voor 2 personen</Rooms>
                     <BathRooms>1 badkamer en 1 slaapkamer met badkamer</BathRooms>
-                    <ReserveBtn>Reserveer uw verblijf</ReserveBtn>
+                    <ReserveBtn onClick={()=> handleSearch()}>Reserveer uw verblijf</ReserveBtn>
                  </RightWrapper>
               </Right>
             </Form>
