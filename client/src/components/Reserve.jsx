@@ -1,6 +1,4 @@
 import styled from "styled-components"
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -12,7 +10,6 @@ width: 100%;
 height: 100%;
 background-color: whitesmoke;
 `
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -144,8 +141,6 @@ const Reserve = () => {
     lastname: "",
     email: "",
   })
-
-  const [email, setEmail] = useState("")
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -170,7 +165,7 @@ const Reserve = () => {
     !guest.firstname ? alert("gelieve voornaam in te vullen") 
     : !guest.lastname ? alert("gelieve achternaam in te vullen") 
     : !guest.email ? alert("gelieve email in te vullen") :
-      navigate("/pay" , {state: {guest, date, options, }})
+      navigate("/paysummary" , {state: {guest, date, options, }})
      }
 
   return (

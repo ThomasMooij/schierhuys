@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Navbar from "./components/Navbar"
 import Home from "./pages/Home";
-import Pay from "./pages/Pay";
+import PaySummary from "./components/PaySummary";
 import ReviewComponent from "./components/ReviewComponent"
 import InfoComponent from "./components/InfoComponent"
 import OmgevingComponent from "./components/OmgevingComponent"
@@ -33,7 +33,7 @@ function App() {
         <Route path="omgeving" element={<OmgevingComponent />}/>
         <Route path="info" element={<InfoComponent />}/>
       </Route>
-      <Route path='/pay' element ={<Pay />}  />
+      <Route path='/paysummary' element ={<PaySummary />}  />
       <Route path='/login' element ={<Login />}  />
       <Route path="/admin" element={<Protected />}>
         <Route exact path="/admin" element={<Admin />} />
