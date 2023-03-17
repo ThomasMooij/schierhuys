@@ -145,6 +145,7 @@ const Reserve = () => {
     email: "",
   })
 
+  const [email, setEmail] = useState("")
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -165,9 +166,12 @@ const Reserve = () => {
     });
   };
 
-  const handleSearch = () =>{
-    navigate("/pay" , {state: {guest, date, options, }})
-  }
+  const handleSearch = (e) =>{
+    !guest.firstname ? alert("gelieve voornaam in te vullen") 
+    : !guest.lastname ? alert("gelieve achternaam in te vullen") 
+    : !guest.email ? alert("gelieve email in te vullen") :
+      navigate("/pay" , {state: {guest, date, options, }})
+     }
 
   return (
     <Container id="Reserve">
@@ -255,7 +259,7 @@ const Reserve = () => {
                     <WrapperTitle>Algemene gegevens</WrapperTitle>
                     <Rooms>4 slaapkamers voor 2 personen</Rooms>
                     <BathRooms>1 badkamer en 1 slaapkamer met badkamer</BathRooms>
-                    <ReserveBtn onClick={()=> handleSearch()}>Reserveer uw verblijf</ReserveBtn>
+                    <ReserveBtn disabled={!guest} onClick={()=> handleSearch()}>Reserveer uw verblijf</ReserveBtn>
                  </RightWrapper>
               </Right>
             </Form>

@@ -90,6 +90,9 @@ display: flex;
 align-items: center;
 `
 const Navbar = ({selectedPage, setSelectedPage}) => {
+
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+
   return (
     <Nav>
         <NavContainer>
@@ -141,8 +144,8 @@ const Navbar = ({selectedPage, setSelectedPage}) => {
                       setSelectedPage={setSelectedPage} 
                     />
                   
-                   
-                  
+                {currentUser?._doc.isGert ?
+                  <Link to="/admin">Admin</Link> : null}
                 </LeftSide>
                 <RightSide>
                    NL

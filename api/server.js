@@ -6,6 +6,7 @@ import authRoute from "./routes/auth.route.js"
 import usersRoute from "./routes/users.route.js"
 import reserveRoute from "./routes/reserve.route.js"
 import reviewsRoute from "./routes/reviews.route.js"
+import cookieParser from "cookie-parser";
 
 dotenv.config()
 
@@ -24,8 +25,9 @@ const connect = async () => {
     }
 }
 
-app.use(cors({origin:"http://localhost:5173/" , credentials: true}))
+app.use(cors({origin:"http://localhost:5173" , credentials: true}))
 app.use(express.json())
+app.use(cookieParser())
 
 app.use("/api/auth" , authRoute)
 app.use("/api/users" , usersRoute)

@@ -1,6 +1,6 @@
 import User from "../models/users.model.js"
 import bcrypt from "bcrypt"
-
+import jwt from "jsonwebtoken"
 
 export const login = async (req,res,next) =>{
     try{
@@ -15,6 +15,7 @@ export const login = async (req,res,next) =>{
             id: user._id,
             isGert: user.isGert,
         }, process.env.JWT)
+        console.log(token)
         // get password out of user object so it is not send on completion
         const {password, ...info} = user
         //pass cookie up the chain
@@ -23,7 +24,7 @@ export const login = async (req,res,next) =>{
         })
         res.status(200).send(info)
     }catch(err){
-        res.status(500).send("something went wrong:" , err || "")
+        res.status(500).send(err)
     }
 }
 export const register = async (req,res,next) =>{

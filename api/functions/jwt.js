@@ -1,7 +1,7 @@
-import {jwt} from "jsonwebtoken"
-import createError from "./createError"
+import jwt from "jsonwebtoken"
+import createError from "./createError.js"
 
-const verifyToken = (req,res,next) => {
+export const verifyToken = (req,res,next) => {
     // set token to current cookie
     const token = req.cookies.accessToken;
     if(!token) return next(createError(401, "you are not logged in "));
