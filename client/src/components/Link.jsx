@@ -14,10 +14,12 @@ const Btn = styled(Link)`
     display: block;
     font-weight: 700;
     background-color: transparent;
-    border-bottom:${(props) => (props.page === props.selectedPage ? "3px solid" : "")} ;
     border-spacing: 13px;
     &:hover{
         border-bottom: 3px solid;
+    }
+    &.active{
+       border-bottom: 3px solid;
     }
 
 `
@@ -31,7 +33,7 @@ const Btn = styled(Link)`
     onClick={()=> setSelectedPage(page)}
     to={page} 
     smooth={true} 
-    offset={-120} 
+    offset={-250} 
     duration={500}
     spy={true}
     >

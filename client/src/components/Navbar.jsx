@@ -129,6 +129,11 @@ const Navbar = ({selectedPage, setSelectedPage}) => {
                       selectedPage={selectedPage}
                       setSelectedPage={setSelectedPage} 
                     />
+                    <NavLink 
+                      page="Reviews&info" 
+                      selectedPage={selectedPage}
+                      setSelectedPage={setSelectedPage}  
+                    />
 
                      <NavLink 
                       page="Contact" 
@@ -136,11 +141,7 @@ const Navbar = ({selectedPage, setSelectedPage}) => {
                       setSelectedPage={setSelectedPage} 
                     />
                   
-                      <NavLink 
-                          page="Reviews&info" 
-                          selectedPage={selectedPage}
-                          setSelectedPage={setSelectedPage}  
-                          />
+                   
                   
                 </LeftSide>
                 <RightSide>

@@ -7,6 +7,9 @@ import {
 import Navbar from "./components/Navbar"
 import Home from "./pages/Home";
 import Pay from "./pages/Pay";
+import ReviewComponent from "./components/ReviewComponent"
+import InfoComponent from "./components/InfoComponent"
+import OmgevingComponent from "./components/OmgevingComponent"
 
 function App() {
  
@@ -21,7 +24,11 @@ function App() {
     setSelectedPage={setSelectedPage}
   />
     <Routes>
-      <Route path='/' element ={<Home />}  />
+      <Route path='/' element ={<Home setSelectedPage={setSelectedPage} />}>
+        <Route path="reviews" element={<ReviewComponent />}/>
+        <Route path="omgeving" element={<OmgevingComponent />}/>
+        <Route path="info" element={<InfoComponent />}/>
+      </Route>
       <Route path='/pay' element ={<Pay />}  />
     </Routes>
    </BrowserRouter>

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
+import { Link } from "react-scroll";
 
 const Container =styled.main`
 width: 100%;
@@ -75,7 +76,7 @@ z-index:2;
 transform: translateY(-7px);
 `;
 
-const Landing = () => {
+const Landing = ({setSelectedPage}) => {
 
   return (
     <>
@@ -84,7 +85,14 @@ const Landing = () => {
         <SlideContainer>
             <Slide />
             <TextContainer>     
-                <Button> reserveer het huisje</Button>
+                <Link 
+                onClick={()=> setSelectedPage("Reserve")}
+                to="Reserve"
+                smooth={true} 
+                offset={-250} 
+                duration={500}
+                spy={true}>
+                <Button> reserveer het huisje</Button></Link>
                 <ArrowDown><ArrowCircleDownIcon /></ArrowDown>
             </TextContainer>
         </SlideContainer> 

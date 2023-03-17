@@ -7,6 +7,7 @@ import styled from "styled-components";
 // bugfile
 // add evenlistener if scroll away from this page the picture must close
 // pictures must be imported dynamically so admin can upload from admin panel
+// import thrid party carousel for better performance, this one sucks
 
 const Container = styled.main`
   width: 100%;
