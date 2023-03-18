@@ -31,7 +31,7 @@ const Btn = styled(Link)`
     page={page} 
     selectedPage={selectedPage}
     onClick={()=> setSelectedPage(page)}
-    to={page} 
+    to={page || "/"} 
     smooth={true} 
     offset={-250} 
     duration={500}
