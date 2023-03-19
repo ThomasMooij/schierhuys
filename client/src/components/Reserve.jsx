@@ -204,10 +204,16 @@ const Reserve = () => {
     });
   };
 
+  const [firstName , setFirstName] = useState(false)
+  const [lastName , setLastName] = useState(false)
+  const [email , setEmail] = useState(false)
+
+
   const handleSearch = (e) =>{
-    !guest.firstname ? alert("gelieve voornaam in te vullen") 
-    : !guest.lastname ? alert("gelieve achternaam in te vullen") 
-    : !guest.email ? alert("gelieve email in te vullen") :
+    e.preventDefault()
+    !guest.firstname ? setFirstName(!firstName)
+    : !guest.lastname ? setLastName(!lastName)
+    : !guest.email ? setEmail(!email) :
       navigate("/paysummary" , {state: {guest, date, options, }})
      }
 
@@ -220,7 +226,7 @@ const Reserve = () => {
                 <Top>
 
                   <LeftTitle>Uw persoonsgegevens</LeftTitle>
-                  <NameLabel htmlFor="">Voornaam</NameLabel>
+                  <NameLabel htmlFor="">Voornaam</NameLabel> {firstName ? <span><b>Gelieve dit veld in te vullen</b></span> : "" }
                   <NameInput 
                     name="firstname"
                     type="text"
@@ -228,7 +234,7 @@ const Reserve = () => {
                     onChange={handleChange}
                     ></NameInput>
 
-                   <LastNameLabel htmlFor="">Voornaam</LastNameLabel>
+                   <LastNameLabel htmlFor="">Achternaam</LastNameLabel> {lastName ? <span><b>Gelieve dit veld in te vullen</b></span> : "" }
                   <LastNameInput 
                     name="lastname"
                     type="text"
@@ -236,7 +242,7 @@ const Reserve = () => {
                     onChange={handleChange}
                     ></LastNameInput>
 
-                  <EmailLabel htmlFor="">Email</EmailLabel>
+                  <EmailLabel htmlFor="">Email</EmailLabel> {email ? <span><b>Gelieve dit veld in te vullen</b></span> : "" }
                   <EmailInput 
                     name="email"
                     type="email"
@@ -304,7 +310,7 @@ const Reserve = () => {
                     <Rooms>4 slaapkamers voor 2 personen</Rooms>
                     <BathRooms>1 badkamer en 1 slaapkamer met badkamer</BathRooms>
                  </RightWrapper>
-                 <ReserveBtn disabled={!guest} onClick={()=> handleSearch()}>Reserveer uw verblijf</ReserveBtn>
+                 <ReserveBtn disabled={!guest} onClick={(e)=> handleSearch(e)}>Reserveer uw verblijf</ReserveBtn>
               </Right>
             </Form>
         </Wrapper>

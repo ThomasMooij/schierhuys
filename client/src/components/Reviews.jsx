@@ -52,7 +52,7 @@ const Reviews = () => {
     <Main>
       <SideBar>
         <Btn 
-          to="reviews"
+          to="/"
           onClick={()=> setSelectedPage("Review")}
         > 
           <Review >Recensies</Review>

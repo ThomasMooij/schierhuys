@@ -29,7 +29,7 @@ function App() {
   />
     <Routes>
       <Route path='/' element ={<Home setSelectedPage={setSelectedPage} />}>
-        <Route path="reviews" element={<ReviewComponent />}/>
+        <Route path="/" element={<ReviewComponent />}/>
         <Route path="omgeving" element={<OmgevingComponent />}/>
         <Route path="info" element={<InfoComponent />}/>
       </Route>

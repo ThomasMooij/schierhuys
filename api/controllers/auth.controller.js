@@ -16,7 +16,7 @@ export const login = async (req,res,next) =>{
             isGert: user.isGert,
         }, process.env.JWT)
         console.log(token)
-        // get password out of user object so it is not send on completion
+        // get password out off user object so it is not send on completion
         const {password, ...info} = user
         //pass cookie up the chain
         res.cookie("accessToken", token , {
