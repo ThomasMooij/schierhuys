@@ -1,6 +1,6 @@
 import { format } from "date-fns"
 import { useState } from "react"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import newRequest from "../functions/newRequest.js"
 
@@ -95,8 +95,12 @@ const getDatesInRange = (startDate, endDate) => {
 
 const allDays = getDatesInRange(date[0].startDate, date[0].endDate)
 
-const handleClick = async () =>{
+const navigate = useNavigate()
+
+const handleClick = async (e) =>{
+
   try{  
+
     await newRequest.post("/reserve/create-payment-intent", {
       firstname: guest.firstname,
       lastname: guest.lastname,
@@ -108,11 +112,13 @@ const handleClick = async () =>{
       price: 5,
       payment_intent: "temporary",
     })
-
+    navigate("/checkout")
   }catch(err){
     console.log(err)
   }
 }
+
+console.log(children.length)
   return (
    <Main>
     <Top>
@@ -147,9 +153,10 @@ const handleClick = async () =>{
             </Select>         
           </Form>  
         ))}
-        <Link to="/Checkout">
-          <Btn onClick={handleClick}>Bevestig gegevens</Btn>
-        </Link>
+        {childAges.length === children.length ?   
+        <Btn onClick={handleClick}>Bevestig gegevens</Btn> :
+          <span>gelieve alle leeftijden in te vullen</span>}
+        
       </Options>
     </Top>
    </Main>
