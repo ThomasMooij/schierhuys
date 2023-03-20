@@ -30,7 +30,7 @@ export const login = async (req,res,next) =>{
 export const register = async (req,res,next) =>{
     try{  
         // only admin user can register 
-        // if(!req.isGert) return next(createError(403, "You are not gertje"))
+        if(!req.isGert) return next(createError(403, "You are not gertje"))
         // encrypt sent password
         
         const hash = bcrypt.hashSync(req.body.password, 5)

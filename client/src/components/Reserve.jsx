@@ -259,15 +259,14 @@ const Reserve = () => {
                              type="button"
                              > - </CounterBtn>
 
-                              <CounterNum> {options.adult}</CounterNum>
+                                <CounterNum> {options.adult}</CounterNum>
 
                               <CounterBtn
                                disabled={totaal >= 8}
                                onClick={()=> handleOptions("adult" , "i")}
                                type="button"
                                > + </CounterBtn>
-                            </OptionsCounter>
-                      
+                           </OptionsCounter>                     
                     </OptionsItem>
                     <OptionsItem>
                         <OptionsText>Kinderen </OptionsText>
@@ -278,7 +277,7 @@ const Reserve = () => {
                                type="button"                
                                > - </CounterBtn>
 
-                              <CounterNum> {options.children} </CounterNum>
+                                <CounterNum> {options.children} </CounterNum>
 
                               <CounterBtn 
                               disabled={totaal >= 8}

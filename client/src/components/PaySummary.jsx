@@ -3,7 +3,9 @@ import { useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import newRequest from "../functions/newRequest.js"
-
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./Checkout.jsx"
 
 const Main = styled.main`
   
@@ -46,16 +48,19 @@ const Btn = styled.button`
 `
 
 const Bottom = styled.div`
-  
+  padding: 20px;
 `
+
+const stripePromise = loadStripe("pk_test_51Mla1bLbsEaFtLUIDOIf7b6IlnK65iLS88NgQbymTY3BMVbZv7GYpn6BCiStvrClCbhW5GeGP4s8X3UgQTsb9WsH0015EUMJmm");
+
+
+
 const PaySummary = () => {
+
   const location = useLocation()
   const [date, setDate] = useState(location.state.date)
   const [guest, setGuest] = useState(location.state.guest)
-  const [options, setOptions] = useState(location.state.options)
-console.log("date:", date)
-console.log("guest:" , guest)
-console.log("options:", options)
+  const [numGuests, setNumGuests] = useState(location.state.options)
 
 const childCount = (count) =>{
   let child = []
@@ -64,7 +69,7 @@ const childCount = (count) =>{
   }
   return child
 }
-const children = childCount(options.children)
+const children = childCount(numGuests.children)
 
 const [childAges, setChildAges] = useState([])
 
@@ -75,7 +80,6 @@ const handleSubmit = (event) =>{
     event.target.value
   ])
 }
-// if childAges.length != children
 
 const getDatesInRange = (startDate, endDate) => {
   const start = new Date(startDate)
@@ -95,30 +99,46 @@ const getDatesInRange = (startDate, endDate) => {
 
 const allDays = getDatesInRange(date[0].startDate, date[0].endDate)
 
-const navigate = useNavigate()
+const priceChildren = allDays.length * 35 * numGuests.children
+
+const priceAdults =  allDays.length * 45 * numGuests.adult
+
+const total = priceChildren + priceAdults
+
+
+const [clientSecret, setClientSecret] = useState("");
 
 const handleClick = async (e) =>{
 
   try{  
-
-    await newRequest.post("/reserve/create-payment-intent", {
+   
+   const res =  await newRequest.post("/reserve/create-payment-intent", {
       firstname: guest.firstname,
       lastname: guest.lastname,
       email: guest.email,
-      adults:options.adult,
-      children:options.children,
+      adults:numGuests.adult,
+      children:numGuests.children,
       childrenAge:childAges,
       dates: allDays,
-      price: 5,
-      payment_intent: "temporary",
+      price: total,
+      days: allDays.length,
     })
-    navigate("/checkout")
+
+  setClientSecret(res.data.clientSecret)
+  
   }catch(err){
     console.log(err)
   }
 }
 
-console.log(children.length)
+const appearance = {
+  theme: 'stripe',
+};
+const options = {
+  clientSecret,
+  appearance,
+};
+
   return (
    <Main>
     <Top>
@@ -128,6 +148,7 @@ console.log(children.length)
         <Adult>aantaal volwassenen: {options.adult}</Adult>
         <Children>aantal kinderen: {options.children}</Children>
         <span>{`${format(date[0].startDate, "dd/MM/yyyy")} tot ${format(date[0].endDate, "dd/MM/yyyy")} `}</span>
+        <span>Prijs: {total}</span>
         {children.map((item)=> (
         <Form>
           <Label htmlFor="children">Gelieve de leeftijd van de kinderen in te vullen</Label>
@@ -153,12 +174,19 @@ console.log(children.length)
             </Select>         
           </Form>  
         ))}
-        {childAges.length === children.length ?   
+        {childAges.length >= children.length ?   
         <Btn onClick={handleClick}>Bevestig gegevens</Btn> :
           <span>gelieve alle leeftijden in te vullen</span>}
         
       </Options>
     </Top>
+    <Bottom>
+    {clientSecret && (
+        <Elements options={options} stripe={stripePromise}>
+          <CheckoutForm dates={allDays}/>
+        </Elements>
+        )}
+    </Bottom>
    </Main>
   )
 }
