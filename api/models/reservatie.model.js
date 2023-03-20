@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const ReservationSchema = new Schema({
+const ReservatieSchema = new Schema({
 
     firstname:{
         type:String,
@@ -10,6 +10,10 @@ const ReservationSchema = new Schema({
     lastname:{
         type:String,
         required: true,
+    },
+    email:{
+        type: String,
+        required: true
     },
     adults:{
         type:Number,
@@ -22,7 +26,7 @@ const ReservationSchema = new Schema({
         type: [Number]
     },
     dates: {
-        type:Date ,
+        type:[Date ],
     },
     unavailableDates:{
         type:[Date],
@@ -47,4 +51,4 @@ const ReservationSchema = new Schema({
   }
 );
 
-export default mongoose.model("Reservation", ReservationSchema)
+export default mongoose.model("Reservatie", ReservatieSchema)

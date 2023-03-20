@@ -1,4 +1,4 @@
-import Reserve from "../models/reservation.model.js"
+import Reserve from "../models/reservatie.model.js"
 
 export const intent = async (req,res,next) => {
     try{
@@ -6,6 +6,7 @@ export const intent = async (req,res,next) => {
         const newReserve = new Reserve({
             firstname: req.body.firstname,
             lastname: req.body.lastname,
+            email: req.body.email,
             adults: req.body.adults,
             children: req.body.children,
             childrenAge:req.body.childrenAge,
@@ -14,13 +15,13 @@ export const intent = async (req,res,next) => {
             desc: req.body.desc,
             payment_intent: req.body.payment_intent
         })
-        
+      
         await newReserve.save()
-    
+        console.log(req.body)
         res.status(200).send("new reservation created")
-
+      
     }catch(err){
-
+        console.log(err)
     }
 }
 

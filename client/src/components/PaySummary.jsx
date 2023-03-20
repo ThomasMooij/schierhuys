@@ -1,8 +1,9 @@
 import { format } from "date-fns"
 import { useState } from "react"
-import { useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import styled from "styled-components"
-import Checkout from "./Checkout"
+import newRequest from "../functions/newRequest.js"
+
 
 const Main = styled.main`
   
@@ -74,10 +75,6 @@ const handleSubmit = (event) =>{
     event.target.value
   ])
 }
-
-const handleClick = async () =>{
-
-}
 // if childAges.length != children
 
 const getDatesInRange = (startDate, endDate) => {
@@ -98,12 +95,29 @@ const getDatesInRange = (startDate, endDate) => {
 
 const allDays = getDatesInRange(date[0].startDate, date[0].endDate)
 
-console.log("allDays:" , allDays)
+const handleClick = async () =>{
+  try{  
+    await newRequest.post("/reserve/create-payment-intent", {
+      firstname: guest.firstname,
+      lastname: guest.lastname,
+      email: guest.email,
+      adults:options.adult,
+      children:options.children,
+      childrenAge:childAges,
+      dates: allDays,
+      price: 5,
+      payment_intent: "temporary",
+    })
+
+  }catch(err){
+    console.log(err)
+  }
+}
   return (
    <Main>
     <Top>
       <Title>Neem de gegevens goed door en bevestig deze alstublieft </Title>
-      <Guest></Guest>
+      <Guest>voornaam: {guest.firstname} achternaam: {guest.lastname} email: {guest.email}</Guest>
       <Options>
         <Adult>aantaal volwassenen: {options.adult}</Adult>
         <Children>aantal kinderen: {options.children}</Children>
@@ -133,10 +147,11 @@ console.log("allDays:" , allDays)
             </Select>         
           </Form>  
         ))}
-        <Btn onClick={handleClick}>Bevestig gegevens</Btn>
+        <Link to="/Checkout">
+          <Btn onClick={handleClick}>Bevestig gegevens</Btn>
+        </Link>
       </Options>
     </Top>
-    <Bottom> <Checkout /></Bottom>
    </Main>
   )
 }
