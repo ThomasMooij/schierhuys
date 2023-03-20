@@ -6,10 +6,10 @@ export const login = async (req,res,next) =>{
     try{
         //check username
         const user = await User.findOne({username: req.body.guestname});
-        if(!user) return res.status(404).send("username incorrect")
+        if(!user) return res.status(404).send("username or password incorrect")
         // check password
         const isCorrect = bcrypt.compareSync(req.body.password, user.password)
-        if(!isCorrect) return res.status(404).send(" password incorrect")
+        if(!isCorrect) return res.status(404).send("username or password incorrect")
         //create cookie on login
         const token = jwt.sign({
             id: user._id,
@@ -28,10 +28,11 @@ export const login = async (req,res,next) =>{
     }
 }
 export const register = async (req,res,next) =>{
-    try{
+    try{  
         // only admin user can register 
-        if(!req.isGert) return next(createError(403, "You are not gertje"))
+        // if(!req.isGert) return next(createError(403, "You are not gertje"))
         // encrypt sent password
+        
         const hash = bcrypt.hashSync(req.body.password, 5)
         // pass sent data to variable, set sent password to hashed password
         const newUser = new User({
@@ -43,13 +44,16 @@ export const register = async (req,res,next) =>{
         res.status(200).send("user created")
 
     }catch(err){
-        res.status(500).send("something went wrong")
+        res.status(500).send(err)
     }
 }
 export const logout = async (req,res,next) =>{
     try{
-
+        res.clearCookie("accessToken" , {
+            sameSite:"none",
+            secure: true,
+        }).status(200).send("user has been logged out")
     }catch(err){
-        
+        res.status(500).send("something went wrong")
     }
 }

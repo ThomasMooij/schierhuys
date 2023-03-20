@@ -1,3 +1,4 @@
+import { format } from "date-fns"
 import { useState } from "react"
 import { useLocation } from "react-router-dom"
 import styled from "styled-components"
@@ -16,11 +17,33 @@ const Guest = styled.span`
   
 `
 const Options = styled.div`
-  
+  display: flex;
+  flex-direction: column;
 `
 const Adult = styled.span`
   
 `
+const Children = styled.span`
+
+`
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+`
+const Label = styled.label`
+  
+`
+const Select = styled.select`
+  
+`
+const Option = styled.option`
+  
+`
+const Btn = styled.button`
+  width: 30%;
+`
+
 const Bottom = styled.div`
   
 `
@@ -29,8 +52,9 @@ const PaySummary = () => {
   const [date, setDate] = useState(location.state.date)
   const [guest, setGuest] = useState(location.state.guest)
   const [options, setOptions] = useState(location.state.options)
-
-  console.log(options.children)
+console.log("date:", date)
+console.log("guest:" , guest)
+console.log("options:", options)
 
 const childCount = (count) =>{
   let child = []
@@ -39,21 +63,77 @@ const childCount = (count) =>{
   }
   return child
 }
-
 const children = childCount(options.children)
 
-console.log(children)
+const [childAges, setChildAges] = useState([])
 
+const handleSubmit = (event) =>{
+  event.preventDefault()
+  setChildAges([
+    ...childAges,
+    event.target.value
+  ])
+}
+
+const handleClick = async () =>{
+
+}
+// if childAges.length != children
+
+const getDatesInRange = (startDate, endDate) => {
+  const start = new Date(startDate)
+  const end = new Date(endDate)
+
+  const date = new Date(start)
+
+  const dates =[]
+
+  while(date <= end){
+      dates.push(new Date(date));
+      date.setDate(date.getDate() + 1)
+  }
+
+  return dates;
+}
+
+const allDays = getDatesInRange(date[0].startDate, date[0].endDate)
+
+console.log("allDays:" , allDays)
   return (
    <Main>
     <Top>
-      <Title> </Title>
+      <Title>Neem de gegevens goed door en bevestig deze alstublieft </Title>
       <Guest></Guest>
       <Options>
-        <Adult></Adult>
+        <Adult>aantaal volwassenen: {options.adult}</Adult>
+        <Children>aantal kinderen: {options.children}</Children>
+        <span>{`${format(date[0].startDate, "dd/MM/yyyy")} tot ${format(date[0].endDate, "dd/MM/yyyy")} `}</span>
         {children.map((item)=> (
-          <div>child</div>
+        <Form>
+          <Label htmlFor="children">Gelieve de leeftijd van de kinderen in te vullen</Label>
+            <Select name="children" id="children" onChange={handleSubmit}>
+              <Option value={0}>0</Option>
+              <Option value="1">1</Option>
+              <Option value="2">2</Option>
+              <Option value="3">3</Option>
+              <Option value="4">4</Option>
+              <Option value="5">5</Option>
+              <Option value="6">6</Option>
+              <Option value="7">7</Option>
+              <Option value="8">8</Option>
+              <Option value="9">9</Option>
+              <Option value="10">10</Option>
+              <Option value="11">11</Option>
+              <Option value="12">12</Option>
+              <Option value="13">13</Option>
+              <Option value="14">14</Option>
+              <Option value="15">15</Option>
+              <Option value="16">16</Option>
+              <Option value="17">17</Option>
+            </Select>         
+          </Form>  
         ))}
+        <Btn onClick={handleClick}>Bevestig gegevens</Btn>
       </Options>
     </Top>
     <Bottom> <Checkout /></Bottom>

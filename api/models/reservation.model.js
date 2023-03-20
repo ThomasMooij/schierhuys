@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const ReserveSchema = new Schema({
+const ReservationSchema = new Schema({
 
     firstname:{
         type:String,
@@ -11,12 +11,15 @@ const ReserveSchema = new Schema({
         type:String,
         required: true,
     },
-    numChildren:
-         [{num: Number, age:{type: [Number]}}],
-
-    numAdults:{
+    adults:{
         type:Number,
         required: true,
+    },
+    Children:{
+        type: Number,
+      },
+    ChildrenAge: {
+        type: [Number]
     },
     dates: {
         type:Date ,
@@ -44,4 +47,4 @@ const ReserveSchema = new Schema({
   }
 );
 
-export default mongoose.model("Reserve", ReserveSchema)
+export default mongoose.model("Reservation", ReservationSchema)

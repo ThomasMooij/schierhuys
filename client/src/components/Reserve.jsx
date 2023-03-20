@@ -208,7 +208,6 @@ const Reserve = () => {
   const [lastName , setLastName] = useState(false)
   const [email , setEmail] = useState(false)
 
-
   const handleSearch = (e) =>{
     e.preventDefault()
     !guest.firstname ? setFirstName(!firstName)
@@ -300,6 +299,7 @@ const Reserve = () => {
                       ranges={date}
                       className="date"
                       minDate={new Date()}
+                      disabledDates={["21/02/2023"]}
                     />          
                   </Calender>
               </Left>
