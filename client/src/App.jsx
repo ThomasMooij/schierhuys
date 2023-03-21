@@ -15,6 +15,7 @@ import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import Protected from "./components/Protected";
 import Success from "./components/Success";
+import Bedankt from "./components/Bedankt";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
       <Route path='/paysummary' element ={<PaySummary />}  />
       <Route path='/login' element ={<Login />}  />
       <Route path='/success' element ={<Success />}  />
+      <Route path='/bedankt' element ={<Bedankt />}  />
       <Route path="/admin" element={<Protected />}>
         <Route exact path="/admin" element={<Admin />} />
       </Route>

@@ -37,9 +37,6 @@ const Info = styled.span`
 `
 const Body = styled.div`
   flex: 3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `
 
 

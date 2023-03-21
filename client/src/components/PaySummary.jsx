@@ -56,12 +56,12 @@ const stripePromise = loadStripe("pk_test_51Mla1bLbsEaFtLUIDOIf7b6IlnK65iLS88NgQ
 
 
 const PaySummary = () => {
-
+// LOCATION VARIABLES FROM PREVIOUS PAGE
   const location = useLocation()
   const [date, setDate] = useState(location.state.date)
   const [guest, setGuest] = useState(location.state.guest)
   const [numGuests, setNumGuests] = useState(location.state.options)
-
+//CALCULATE NUMBER OF CHILDREN FOR AGE SUBMISION
 const childCount = (count) =>{
   let child = []
   for( let i = 0; i < count; i++){
@@ -70,7 +70,6 @@ const childCount = (count) =>{
   return child
 }
 const children = childCount(numGuests.children)
-
 const [childAges, setChildAges] = useState([])
 
 const handleSubmit = (event) =>{
@@ -80,13 +79,11 @@ const handleSubmit = (event) =>{
     event.target.value
   ])
 }
-
+// CALCULATE NUMBER OF DAYS FOR PRICE CALCULATION
 const getDatesInRange = (startDate, endDate) => {
   const start = new Date(startDate)
   const end = new Date(endDate)
-
   const date = new Date(start)
-
   const dates =[]
 
   while(date <= end){
@@ -96,22 +93,17 @@ const getDatesInRange = (startDate, endDate) => {
 
   return dates;
 }
-
+// PRICE CALCULATIONS
 const allDays = getDatesInRange(date[0].startDate, date[0].endDate)
-
 const priceChildren = allDays.length * 35 * numGuests.children
-
 const priceAdults =  allDays.length * 45 * numGuests.adult
-
 const total = priceChildren + priceAdults
-
-
+//CLIENT SECRET AND API POST
 const [clientSecret, setClientSecret] = useState("");
 
 const handleClick = async (e) =>{
-
   try{  
-   
+  
    const res =  await newRequest.post("/reserve/create-payment-intent", {
       firstname: guest.firstname,
       lastname: guest.lastname,
@@ -130,7 +122,7 @@ const handleClick = async (e) =>{
     console.log(err)
   }
 }
-
+// STRIPE VARIABLES
 const appearance = {
   theme: 'stripe',
 };
@@ -145,8 +137,8 @@ const options = {
       <Title>Neem de gegevens goed door en bevestig deze alstublieft </Title>
       <Guest>voornaam: {guest.firstname} achternaam: {guest.lastname} email: {guest.email}</Guest>
       <Options>
-        <Adult>aantaal volwassenen: {options.adult}</Adult>
-        <Children>aantal kinderen: {options.children}</Children>
+        <Adult>aantaal volwassenen: {numGuests.adult}</Adult>
+        <Children>aantal kinderen: {numGuests.children}</Children>
         <span>{`${format(date[0].startDate, "dd/MM/yyyy")} tot ${format(date[0].endDate, "dd/MM/yyyy")} `}</span>
         <span>Prijs: {total}</span>
         {children.map((item)=> (

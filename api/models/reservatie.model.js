@@ -23,7 +23,7 @@ const ReservatieSchema = new Schema({
         type: Number,
       },
     ChildrenAge: {
-        type: [Number]
+        type: [String]
     },
     dates: {
         type:[Date ],

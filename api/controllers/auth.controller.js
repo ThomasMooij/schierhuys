@@ -1,6 +1,8 @@
 import User from "../models/users.model.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import createError from "../functions/createError.js"
+
 
 export const login = async (req,res,next) =>{
     try{
@@ -30,6 +32,7 @@ export const login = async (req,res,next) =>{
 export const register = async (req,res,next) =>{
     try{  
         // only admin user can register 
+        console.log(req)
         if(!req.isGert) return next(createError(403, "You are not gertje"))
         // encrypt sent password
         
@@ -44,7 +47,7 @@ export const register = async (req,res,next) =>{
         res.status(200).send("user created")
 
     }catch(err){
-        res.status(500).send(err)
+        next(err)
     }
 }
 export const logout = async (req,res,next) =>{

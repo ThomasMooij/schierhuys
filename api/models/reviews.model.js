@@ -6,9 +6,10 @@ const ReviewsSchema = new Schema({
         type:String,
         required:true,
     },
-    stars:{
+    star:{
         type:Number,
         required:true,
+        enum:[1,2,3,4,5]
     },
     desc:{
         type:String,

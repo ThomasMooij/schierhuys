@@ -223,7 +223,6 @@ const Reserve = () => {
             <Form>
               <Left>
                 <Top>
-
                   <LeftTitle>Uw persoonsgegevens</LeftTitle>
                   <NameLabel htmlFor="">Voornaam</NameLabel> {firstName ? <span><b>Gelieve dit veld in te vullen</b></span> : "" }
                   <NameInput 
@@ -232,7 +231,6 @@ const Reserve = () => {
                     placeholder="Jan"
                     onChange={handleChange}
                     ></NameInput>
-
                    <LastNameLabel htmlFor="">Achternaam</LastNameLabel> {lastName ? <span><b>Gelieve dit veld in te vullen</b></span> : "" }
                   <LastNameInput 
                     name="lastname"
@@ -240,7 +238,6 @@ const Reserve = () => {
                     placeholder="Smit"
                     onChange={handleChange}
                     ></LastNameInput>
-
                   <EmailLabel htmlFor="">Email</EmailLabel> {email ? <span><b>Gelieve dit veld in te vullen</b></span> : "" }
                   <EmailInput 
                     name="email"

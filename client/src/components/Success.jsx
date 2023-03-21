@@ -14,9 +14,11 @@ const Success = () => {
     useEffect(() => {
         const makeRequest = async () => {
           try {
+            console.log("enters")
             await newRequest.put("/reserve", { payment_intent , dates});
          setTimeout(() =>{
             navigate("/");
+            
          }, 5000)
 
           } catch (err) {

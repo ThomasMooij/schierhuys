@@ -3,8 +3,9 @@ import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 import { Link } from "react-scroll";
 
 const Container =styled.main`
-width: 100%;
-height: 100%;
+width: 100vw;
+height: 100vh;
+max-width: 100%;
 display:flex;
 position:relative;
 overflow:hidden;
