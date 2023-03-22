@@ -224,7 +224,8 @@ const Reserve = () => {
               <Left>
                 <Top>
                   <LeftTitle>Uw persoonsgegevens</LeftTitle>
-                  <NameLabel htmlFor="">Voornaam</NameLabel> {firstName ? <span><b>Gelieve dit veld in te vullen</b></span> : "" }
+                  <NameLabel htmlFor="">Voornaam</NameLabel> 
+                  {firstName ? <span><b>Gelieve dit veld in te vullen</b></span> : "" }
                   <NameInput 
                     name="firstname"
                     type="text"

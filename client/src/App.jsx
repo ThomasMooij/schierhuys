@@ -3,7 +3,6 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Navigate
 } from "react-router-dom";
 import Home from "./pages/Home";
 import PaySummary from "./components/pay/PaySummary";
@@ -14,17 +13,14 @@ import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import Protected from "./components/Protected";
 import Success from "./components/pay/Success";
-
 import NavBar from "./pages/navbars/NavBar";
 import Register from "./components/admin/Register";
 import Datum from "./components/admin/Datum";
 import Reserves from "./components/admin/Reserves";
 
-
 function App() {
  
   const [selectedPage, setSelectedPage] = useState('Home')
-
   return (
     <>
   <BrowserRouter>

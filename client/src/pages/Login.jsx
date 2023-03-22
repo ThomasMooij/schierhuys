@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import newRequest from "../functions/newRequest"
 
-
 const Main = styled.main`
     display: flex;
     align-items: center;
@@ -37,7 +36,6 @@ const Btn = styled.button`
         background-color: #1dbf73;
         cursor: pointer;
 `
-
 const Login = () => {
     const [guestname , setGuestname] = useState("")
     const [password , setPassword] = useState("")

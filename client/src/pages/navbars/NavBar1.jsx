@@ -85,7 +85,6 @@ font-size: 14;
 color: whitesmoke;
 font-weight: 600;
 `
-
 const RightSide = styled.div`
 display: flex;
 align-items: center;
@@ -101,7 +100,6 @@ const NavBar1 = ({selectedPage, setSelectedPage}) => {
     localStorage.setItem("currentUser" , null)
     navigate('/')
   }
-
   return (
     <Nav>
         <NavContainer>
