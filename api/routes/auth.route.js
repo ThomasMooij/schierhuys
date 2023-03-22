@@ -4,7 +4,7 @@ import {verifyToken} from "../functions/jwt.js"
 
 const router = express.Router()
 
-router.post("/login",login)
+router.post("/login", login)
 router.post("/register", verifyToken, register)
 router.post("/logout",logout)
 

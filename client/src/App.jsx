@@ -5,28 +5,30 @@ import {
   Route,
   Navigate
 } from "react-router-dom";
-import Navbar from "./components/Navbar"
 import Home from "./pages/Home";
-import PaySummary from "./components/PaySummary";
-import ReviewComponent from "./components/ReviewComponent"
-import InfoComponent from "./components/InfoComponent"
-import OmgevingComponent from "./components/OmgevingComponent"
+import PaySummary from "./components/pay/PaySummary";
+import ReviewComponent from "./components/home/ReviewComponent"
+import InfoComponent from "./components/home/InfoComponent"
+import OmgevingComponent from "./components/home/OmgevingComponent"
 import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import Protected from "./components/Protected";
-import Success from "./components/Success";
-import Bedankt from "./components/Bedankt";
+import Success from "./components/pay/Success";
+
+import NavBar from "./pages/navbars/NavBar";
+import Register from "./components/admin/Register";
+import Datum from "./components/admin/Datum";
+import Reserves from "./components/admin/Reserves";
 
 
 function App() {
  
   const [selectedPage, setSelectedPage] = useState('Home')
-  const [topOfPage, setTopOfPage] = useState(true)
 
   return (
     <>
   <BrowserRouter>
-  <Navbar 
+  <NavBar 
     selectedPage={selectedPage} 
     setSelectedPage={setSelectedPage}
   />
@@ -39,9 +41,12 @@ function App() {
       <Route path='/paysummary' element ={<PaySummary />}  />
       <Route path='/login' element ={<Login />}  />
       <Route path='/success' element ={<Success />}  />
-      <Route path='/bedankt' element ={<Bedankt />}  />
       <Route path="/admin" element={<Protected />}>
-        <Route exact path="/admin" element={<Admin />} />
+        <Route exact path="/admin" element={<Admin />}>
+          <Route path="" element={<Register />}/>
+          <Route exact path="datum" element={<Datum  />}/>
+          <Route exact path="Reserve" element={<Reserves  />}/>
+        </Route>
       </Route>
     </Routes>
    </BrowserRouter>

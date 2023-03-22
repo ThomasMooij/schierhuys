@@ -39,7 +39,7 @@ const Btn = styled.button`
 `
 
 const Login = () => {
-    const [username , setUsername] = useState("")
+    const [guestname , setGuestname] = useState("")
     const [password , setPassword] = useState("")
     const [error , setError] = useState("")
 
@@ -48,7 +48,7 @@ const Login = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault()
         try{
-            const res = await newRequest.post("/auth/login", {username, password})
+            const res = await newRequest.post("/auth/login", {guestname, password})
             localStorage.setItem("currentUser" , JSON.stringify(res.data))
            
             navigate("/")
@@ -69,7 +69,7 @@ const Login = () => {
                 name="Gebruikersnaam"
                 type="text"
                 placeholder="Gertje"
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => setGuestname(e.target.value)}
             />
             <Label htmlFor="">Wachtwoord</Label>
             <Input 
@@ -78,7 +78,6 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
             />
             <Btn onClick={handleSubmit}> Aanmelden</Btn>
-            {error && error}
         </Form>
     </Main>
   )

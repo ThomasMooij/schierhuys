@@ -9,14 +9,16 @@ export const createReview = async (req,res,next)=>{
         star: req.body.star
     })
     try{
+       
         const review = await Review.findOne({
+        
             userId: req.userId
         })
         if(review) return next(createError(403, "U mag slechts een recentie achterlaten"))
 
         const savedReview = await newReview.save()
     }catch(err){
-
+        next(err)
     }
 }
 

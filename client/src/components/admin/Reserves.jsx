@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Bedankt = () => {
+const Reserves = () => {
   return (
     <div>
-        bedankt
+        Reserve
     </div>
   )
 }
 
-export default Bedankt
+export default Reserves

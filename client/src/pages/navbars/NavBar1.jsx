@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import NavLink from './Link'
+import NavLink from '../../components/home/Link'
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import HouseIcon from '@mui/icons-material/House';
 import { Link, useNavigate } from 'react-router-dom';
-import newRequest from '../functions/newRequest';
+import newRequest from '../../functions/newRequest';
 
 const Nav = styled.nav`
    position: sticky;
@@ -90,7 +90,7 @@ const RightSide = styled.div`
 display: flex;
 align-items: center;
 `
-const Navbar = ({selectedPage, setSelectedPage}) => {
+const NavBar1 = ({selectedPage, setSelectedPage}) => {
 
   const currentUser = JSON.parse(localStorage.getItem('currentUser'))
 
@@ -166,4 +166,4 @@ const Navbar = ({selectedPage, setSelectedPage}) => {
   )
 }
 
-export default Navbar
+export default NavBar1

@@ -6,8 +6,10 @@ import createError from "../functions/createError.js"
 
 export const login = async (req,res,next) =>{
     try{
+        console.log(req.body.guestname)
         //check username
-        const user = await User.findOne({username: req.body.guestname});
+        const user = await User.findOne({guestname: req.body.guestname});
+        console.log("user:" , user)
         if(!user) return res.status(404).send("username or password incorrect")
         // check password
         const isCorrect = bcrypt.compareSync(req.body.password, user.password)

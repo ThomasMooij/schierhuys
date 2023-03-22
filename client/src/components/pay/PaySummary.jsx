@@ -1,11 +1,12 @@
 import { format } from "date-fns"
 import { useState } from "react"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import styled from "styled-components"
-import newRequest from "../functions/newRequest.js"
+import newRequest from "../../functions/newRequest.js"
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./Checkout.jsx"
+
 
 const Main = styled.main`
   
