@@ -29,6 +29,7 @@ const Admin = () => {
     <Main>
       <SideBar>
         <Link to=""><Article>Klant registeren</Article></Link>
+        <Link to="/admin/costumers"><Article>Geregisteerden klanten en reviews</Article></Link>
         <Link to="/admin/datum"><Article>Datum vast zetten</Article></Link>
         <Link to="/admin/reserve"><Article>Reservaties beheren</Article></Link>
       </SideBar>

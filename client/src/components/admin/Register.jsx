@@ -1,5 +1,7 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import newRequest from "../../functions/newRequest.js"
 
 const Main = styled.main`
 width: 100wh;
@@ -29,44 +31,62 @@ const Register = () => {
     const [guest, setGuest] = useState({
         guestname:"",
         email: "",
-        password: ""
+        password: "",
+        password1: ""
     })
+    // error variables
+    const [nameError, setNameError] = useState(false)
+    const [emailError, setEmailError] = useState(false)
+    const [passwordError, setPasswordError] = useState(false)
+    const [password1Error, setPassword1Error] = useState(false)
+    const [correctError, setCorrectError] = useState(false)
 
-    const [error , setError] = useState({
-        guestname:false,
-        email:false,
-        password:false,
-        passwordCorrect: false,
-
-    })
+    const navigate = useNavigate()
 
    const handleChange = (e) =>{
     setGuest((prev) =>{
         return {...prev, [e.target.name]: e.target.value}
     })
    }
-    const handleClick = (e) =>{
-        e.preventDefault()
-        !guest.name ? setError((prev) => {
-            return {...prev , [error.guestname]: true}
+    const handleClick = async (e) =>{
+    if (!guest.guestname){
+        setNameError(!setNameError)
+    }else if (!guest.email){
+        setEmailError(!emailError)
+    }else if(!guest.password){
+        setPasswordError(!passwordError)
+    } else if(!guest.password1){
+        setPassword1Error(!password1Error)
+    }else if(guest.password !== guest.password1 ){
+        setCorrectError(!correctError) 
+    }else
+      { 
+        try{
+        await newRequest.post("/auth/register" ,{
+            guestname: guest.guestname,
+            email: guest.email,
+            password: guest.password
         })
-        : !guest.email ? setError({email: !error.email,}) 
-        : ""
-
+        alert("klant geregistreerd")
+        navigate('/admin')
+       } catch(err){
+        console.log(err)
+       }
     }
-    console.log(error.guestname)
+    }
+    
   return (
    <Main>
     <Wrapper>
         <Label htmlFor="">naam gast</Label>
-        {error.guestname? <span>Wel de naam in vulle he Gertje</span> : ""}
+        {nameError ? <span>Wel de naam invullen Gertje</span> : null}
         <Input 
             name="guestname"
             type="text"
             placeholder="ons gert"
             onChange={handleChange}
         />
-
+       {emailError ? <span>Wel de email invullen Gertje</span> : null}
         <Label> email</Label>
         <Input 
             name="email"
@@ -74,7 +94,8 @@ const Register = () => {
             placeholder="gert@onsgert"
             onChange={handleChange}
         />
-
+        {passwordError ? <span>Wel het wachtwoord invullen Gertje</span> : null}
+        {correctError ? <span>De wachtwoorden komen niet overeen Gertje</span> : null}
         <Label>Wachtwoord</Label>
         <Input 
             name="password"
@@ -83,6 +104,8 @@ const Register = () => {
             onChange={handleChange}
         />
           <Label>Wachtwoord bevestigen</Label>
+          {password1Error ? <span>Wel het wachtwoord bevestigen Gertje</span> : null}
+          {correctError ? <span>De wachtwoorden komen niet overeen Gertje</span> : null}
         <Input 
             name="password1"
             type="password"

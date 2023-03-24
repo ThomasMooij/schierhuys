@@ -41,6 +41,9 @@ const Title = styled.h3`
 const Input = styled.input`
     
 `
+const Text = styled.span`
+    
+`
 const Select = styled.select`
     
 `
@@ -67,11 +70,7 @@ const ReviewComponent = () => {
     }
     const res = await newRequest.post(
         "http://localhost:8080/api/reviews", 
-        {desc, star})
-
-  
-       
-   
+        {desc, star}) 
   }
 
   return (
@@ -81,7 +80,7 @@ const ReviewComponent = () => {
         <Right>
           { !currentUser ?   
             <>
-            <p>Heeft u bij ons verbleven? login en laat een recensie achter </p>
+            <p>Heeft u bij ons verbleven? login met de gegevens die u ontvangen heeft in de bedankt email en laat een recensie achter </p>
                   <Link to="login"><Btn>Login</Btn></Link> 
             </> 
           : "laat een recensie achter"}
@@ -105,6 +104,7 @@ const ReviewComponent = () => {
               placeholder ="Schrijf uw recensie"
               onChange={(e)=> setDesc(e.target.value)}
               />
+            <Text>Rating:</Text>
             <Select onChange={(e) => setStar(e.target.value)}>
                 <option value={5}>5</option>
                 <option value={4}>4</option>

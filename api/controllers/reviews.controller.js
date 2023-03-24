@@ -1,15 +1,13 @@
 import createError from "../functions/createError.js"
 import Review from "../models/reviews.model.js"
 
-
 export const createReview = async (req,res,next)=>{
     const newReview = new Review({
         userId: req.userId,
         desc: req.body.desc,
         star: req.body.star
     })
-    try{
-       
+    try{    
         const review = await Review.findOne({
         
             userId: req.userId
@@ -21,17 +19,26 @@ export const createReview = async (req,res,next)=>{
         next(err)
     }
 }
-
 export const getReviews = async (req,res,next)=>{
     try{
-        const reviews = await Review.find({})
+        const reviews = await Review.find()
 
         res.status(200).send(reviews)
     }catch(err){
-        
+        next(err)
     }
 }
+export const getReview = async (req,res,next)=>{
+    try{
+        const review = await Review.findOne({
+            userId: req.params.id
+        })
 
+        res.status(200).send(review)
+    }catch(err){
+        next(err)
+    }
+}
 export const deleteReview = async (req,res,next)=>{
     try{
 

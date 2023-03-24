@@ -12,7 +12,7 @@ const Home = ( {setSelectedPage}) => {
       <Photos />
       <Reserve />
       <Reviews />
-      {/* <Contact /> */}
+      <Contact />
      
     </>
   )

@@ -46,7 +46,7 @@ const SingleReview = ({review}) => {
     <UserInfo>
 
     <User>
-        <Info><Name>{data.guestname}</Name><TimeStamp>{format(date, "dd/MM/yyyy")}</TimeStamp></Info>
+        <Info><Name>{data.guestname || "verwijderd account"}</Name><TimeStamp>{format(date, "dd/MM/yyyy")}</TimeStamp></Info>
     </User>
     <Stars>
         {Array(review.star).fill().map((item, i) => (

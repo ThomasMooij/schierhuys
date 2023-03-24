@@ -17,6 +17,7 @@ import NavBar from "./pages/navbars/NavBar";
 import Register from "./components/admin/Register";
 import Datum from "./components/admin/Datum";
 import Reserves from "./components/admin/Reserves";
+import Costumers from "./components/admin/Costumers";
 
 function App() {
  
@@ -40,6 +41,7 @@ function App() {
       <Route path="/admin" element={<Protected />}>
         <Route exact path="/admin" element={<Admin />}>
           <Route path="" element={<Register />}/>
+          <Route exact path="costumers" element={<Costumers  />}/>
           <Route exact path="datum" element={<Datum  />}/>
           <Route exact path="Reserve" element={<Reserves  />}/>
         </Route>

@@ -36,6 +36,7 @@ const Info = styled.span`
   
 `
 const Body = styled.div`
+background-color: whitesmoke;
   flex: 3;
 `
 

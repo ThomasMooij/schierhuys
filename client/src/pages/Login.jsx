@@ -55,7 +55,6 @@ const Login = () => {
             setError(err.response)
         }
     }
-
   return (
     <Main>
         <Form>

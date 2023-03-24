@@ -50,7 +50,25 @@ export const intent = async (req,res,next) => {
 
 export const getReserves = async (req,res,next) => {
     try{
-      
+        if(!req.isGert) return next(createError(403, "You are not Gertje"))
+        const reserves = await Reserve.find({})
+
+        res.status(200).send(reserves)
+
+    }catch(err){
+        next(err)
+    }
+}
+
+export const getReserve = async (req,res,next) => {
+    try{
+        if(!req.isGert) return next(createError(403, "You are not Gertje"))
+
+        const reserve = await Reserve.find({
+            _id: req.params.id
+        })
+
+        res.status(200).send(reserve)
 
     }catch(err){
         
@@ -67,6 +85,21 @@ export const confirm = async (req,res,next) => {
             console.log(req.body.dates),
             {'created_at' : 1}, 
             {$push: {"unavailableDates" : req.body.dates}})
+
+    }catch(err){
+        
+    }
+}
+
+export const deleteReserve = async (req,res,next) => {
+    try{
+        if(!req.isGert) return next(createError(403, "You are not Gertje"))
+
+        const reserve = await Reserve.findByIdAndDelete({
+            _id: req.params.id
+        })
+
+        res.status(200).send(reserve)
 
     }catch(err){
         

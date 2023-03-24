@@ -6,7 +6,6 @@ import createError from "../functions/createError.js"
 
 export const login = async (req,res,next) =>{
     try{
-        console.log(req.body.guestname)
         //check username
         const user = await User.findOne({guestname: req.body.guestname});
         console.log("user:" , user)
@@ -34,7 +33,7 @@ export const login = async (req,res,next) =>{
 export const register = async (req,res,next) =>{
     try{  
         // only admin user can register 
-        console.log(req)
+    
         if(!req.isGert) return next(createError(403, "You are not gertje"))
         // encrypt sent password
         

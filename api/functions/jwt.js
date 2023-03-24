@@ -4,7 +4,6 @@ import createError from "./createError.js"
 export const verifyToken = (req,res,next) => {
     // set token to current cookie
     const token = req.cookies.accessToken;
-    console.log(req.cookies.accessToken)
     if(!token) return next(createError(401, "you are not logged in "));
     // verify cookie and to next middleware
     jwt.verify(token , process.env.JWT , async (err, payload) => {
