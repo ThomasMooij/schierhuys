@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+ 
 `
 const TitleDiv = styled.div`
 display: flex;
@@ -53,7 +53,7 @@ const Top = styled.div`
   padding: 15px;
   background-color: #F9FBFF;
   box-shadow: 0px 1px 10px #999;
-  border-radius: 15px;
+  border: 1px solid;
 `
 const LeftTitle = styled.h1`
   font-family: "Urbanist";
@@ -89,8 +89,7 @@ z-index: 2;
   
 `
 const OptionsTitle = styled.h2`
-  color: #383333;
-  font-weight: 400;
+  
 `
 const OptionsItem = styled.div`
   width: 200px;
@@ -137,7 +136,7 @@ box-shadow: 0px 1px 10px #999;
 border-radius: 15px;
 `
 const CalendarTitle = styled.h2`
-  color: #383333;
+    color: #383333;
   font-weight: 400;
 `
 const Right = styled.div`
@@ -160,6 +159,7 @@ padding: 85px;
 background-color: #F9FBFF;
 box-shadow: 0px 1px 10px #999;
 border-radius: 50%;
+
 `
 const WrapperTitle = styled.h2`
   color: #383333;
@@ -169,11 +169,11 @@ const WrapperSub = styled.h3`
   
 `
 const Rooms = styled.span`
-  color: #383333;
+   color: #383333;
   font-weight: 800;
 `
 const BathRooms = styled.span`
-  color: #383333;
+   color: #383333;
   font-weight: 800;
 `
 const ReserveBtn = styled.button`
@@ -184,6 +184,7 @@ const ReserveBtn = styled.button`
   background-color: white;
   font-weight: 800;
   font-size: 19px;
+  
   &:hover{
     transform: translateY(-17px);
     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
@@ -241,22 +242,21 @@ const Reserve = () => {
   return (
     <Container id="Reserve">
         <Wrapper>
-          <TitleDiv><Title>Boek uw verblijf !</Title></TitleDiv>
-        
+        <TitleDiv><Title>Book your stay!</Title> </TitleDiv>
             <Form>
               <Left>
                 <Top>
-                  <LeftTitle>Uw persoonsgegevens</LeftTitle>
-                  <NameLabel htmlFor="">Voornaam</NameLabel> 
-                  {firstName ? <span style={{color:"red", fontSize: "22px"}}><b>Gelieve dit veld in te vullen</b></span> : "" }
+                  <LeftTitle>Please provide your details</LeftTitle>
+                  <NameLabel htmlFor="">First name</NameLabel> 
+                  {firstName ? <span style={{color:"red", fontSize: "22px"}}><b>Please don't forget this field</b></span> : "" }
                   <NameInput 
                     name="firstname"
                     type="text"
                     placeholder="Jan"
                     onChange={handleChange}
                     ></NameInput>
-                   <LastNameLabel htmlFor="">Achternaam</LastNameLabel> 
-                   {lastName ? <span style={{color:"red", fontSize: "22px"}}><b>Gelieve dit veld in te vullen</b></span> : "" }
+                   <LastNameLabel htmlFor="">Last name</LastNameLabel> 
+                   {lastName ? <span style={{color:"red", fontSize: "22px"}}><b>Please don't forget this field</b></span> : "" }
                   <LastNameInput 
                     name="lastname"
                     type="text"
@@ -264,7 +264,7 @@ const Reserve = () => {
                     onChange={handleChange}
                     ></LastNameInput>
                   <EmailLabel htmlFor="">Email</EmailLabel> 
-                  {email ? <span style={{color:"red", fontSize: "22px"}}><b>Gelieve dit veld in te vullen</b></span> : "" }
+                  {email ? <span style={{color:"red", fontSize: "22px"}}><b>Please don't forget this field</b></span> : "" }
                   <EmailInput 
                     name="email"
                     type="email"
@@ -272,9 +272,9 @@ const Reserve = () => {
                     onChange={handleChange}
                     ></EmailInput >
                   <Options>
-                    <OptionsTitle>Gelieve het aantal gasten aan te geven</OptionsTitle>
+                    <OptionsTitle>Let us know how many guests to expect</OptionsTitle>
                     <OptionsItem>
-                        <OptionsText>Volwassenen   </OptionsText>
+                        <OptionsText>Adults   </OptionsText>
                             <OptionsCounter>
                             <CounterBtn
                              disabled={options.adult <= 0}
@@ -292,7 +292,7 @@ const Reserve = () => {
                            </OptionsCounter>                     
                     </OptionsItem>
                     <OptionsItem>
-                        <OptionsText>Kinderen </OptionsText>
+                        <OptionsText>Children </OptionsText>
                             <OptionsCounter>
                               <CounterBtn
                                disabled={options.children <= 0}
@@ -313,7 +313,7 @@ const Reserve = () => {
                   </Options>
                 </Top>
                   <Calender > 
-                    <CalendarTitle>Selecteer de datum van uw verblijf</CalendarTitle>
+                    <CalendarTitle>Select dates</CalendarTitle>
                     <DateRange
                       editableDateInputs={true}
                       onChange={(item) => setDate([item.selection])}
@@ -327,12 +327,12 @@ const Reserve = () => {
               </Left>
               <Right>
                  <RightWrapper>
-                    <WrapperTitle>Algemene gegevens</WrapperTitle>
-                    <WrapperSub>Het huis beschikt over de volgende faciliteiten</WrapperSub>
-                    <Rooms>4 slaapkamers voor 2 personen</Rooms>
-                    <BathRooms>1 badkamer en 1 slaapkamer met badkamer</BathRooms>
+                    <WrapperTitle>General info </WrapperTitle>
+                    <WrapperSub>Our holiday home has the following faculties</WrapperSub>
+                    <Rooms>4 bedrooms for two people</Rooms>
+                    <BathRooms>1 separte bathroom , 1 bedroom with bathroom</BathRooms>
                  </RightWrapper>
-                 <ReserveBtn disabled={!guest} onClick={(e)=> handleSearch(e)}>Reserveer uw verblijf</ReserveBtn>
+                 <ReserveBtn disabled={!guest} onClick={(e)=> handleSearch(e)}>Reserve your stay</ReserveBtn>
               </Right>
             </Form>
         </Wrapper>

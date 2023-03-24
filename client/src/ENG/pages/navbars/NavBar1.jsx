@@ -3,9 +3,9 @@ import NavLink from '../../components/home/Link'
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import HouseIcon from '@mui/icons-material/House';
 import { Link, useNavigate } from 'react-router-dom';
-import newRequest from '../../functions/newRequest';
+import newRequest from '../../../functions/newRequest';
 import { useContext } from 'react';
-import { langContext } from '../../context/langContext';
+import { langContext } from '../../../context/langContext';
 
 
 const Nav = styled.nav`
@@ -105,7 +105,6 @@ border-radius: 50%;
 padding: 15px;
 outline: inherit;
 border: none;
-
 `
 const LangOption = styled.button`
 display: none;
@@ -125,8 +124,8 @@ const NavBar1 = ({selectedPage, setSelectedPage}) => {
   const {lang, setLang} = useContext(langContext)
 
   const changeLang = () =>{
-    localStorage.setItem("lang" , "ENG")
-    setLang("ENG")
+     localStorage.setItem("lang" , "NL")
+     setLang("NL")
   }
 
 
@@ -154,14 +153,14 @@ const NavBar1 = ({selectedPage, setSelectedPage}) => {
                       setSelectedPage={setSelectedPage} 
                     />
                    <NavLink 
-                      page="Fotos"  
+                      page="Photos"  
                       selectedPage={selectedPage}
                       setSelectedPage={setSelectedPage}  
                     />
 
                     <LogoContainer>
                       <Logo>Schierhuys</Logo>
-                      <LogoText>Vakanties in Drenthe</LogoText>
+                      <LogoText>Explore the eastern Netherlands</LogoText>
                     </LogoContainer>
 
                     <NavLink 
@@ -185,8 +184,12 @@ const NavBar1 = ({selectedPage, setSelectedPage}) => {
                 {currentUser ? <Link onClick={handleLogout}>logout</Link> : null}
 
                 </LeftSide>
-                <RightSide>           
+                <RightSide>
+               
                       <LangBtn onClick={changeLang}>{lang}</LangBtn>
+                   
+                
+                 
                 </RightSide>
             </InnerContainer>
         </NavContainer>

@@ -16,6 +16,9 @@ const Children = styled.span`
 `
 const Dates = styled.span`
 `
+const Delete = styled.button`
+`
+
 
 const SingleReserve = ({reserve}) => {
 const dates = reserve.dates
@@ -34,7 +37,9 @@ const deleteReserve = async (id) =>{
         <Adults> aantal volwassenen: {reserve.adults}</Adults>
         <Children>Aantal kinderen: {reserve.children} </Children>
         <Dates>Data verblijf:</Dates>
-      </Info>
+        <Delete onClick={() => deleteReserve(reserve._id)}>Delete</Delete> 
+        </Info>
+    
 
   )
 }

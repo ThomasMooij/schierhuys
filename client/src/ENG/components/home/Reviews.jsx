@@ -50,7 +50,7 @@ const Reviews = () => {
   const [selectedPage, setSelectedPage] = useState("")
 
   return (
-    <Main id='Reviews&info'>
+    <Main id="Reviews&info">
       <SideBar>
         <Btn 
           to="/"

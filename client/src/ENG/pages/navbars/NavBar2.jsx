@@ -1,12 +1,8 @@
 import styled from 'styled-components'
-import NavLink from '../../components/home/Link'
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import HouseIcon from '@mui/icons-material/House';
 import { Link, useNavigate } from 'react-router-dom';
-import newRequest from '../../functions/newRequest';
-import { useContext } from 'react';
-import { langContext } from '../../context/langContext';
-
+import newRequest from '../../../functions/newRequest';
 
 const Nav = styled.nav`
    position: sticky;
@@ -88,29 +84,12 @@ font-size: 14;
 color: whitesmoke;
 font-weight: 600;
 `
+
 const RightSide = styled.div`
 display: flex;
 align-items: center;
 `
-const LangDiv = styled.div`
-
-`
-const LangBtn = styled.button`
-cursor: pointer;
-background-color:inherit;
-color: white;
-font-size: 19px;
-font-weight:900;
-border-radius: 50%;
-padding: 15px;
-outline: inherit;
-border: none;
-
-`
-const LangOption = styled.button`
-display: none;
-`
-const NavBar1 = ({selectedPage, setSelectedPage}) => {
+const NavBar2 = ({selectedPage, setSelectedPage}) => {
 
   const currentUser = JSON.parse(localStorage.getItem('currentUser'))
 
@@ -121,14 +100,6 @@ const NavBar1 = ({selectedPage, setSelectedPage}) => {
     localStorage.setItem("currentUser" , null)
     navigate('/')
   }
-
-  const {lang, setLang} = useContext(langContext)
-
-  const changeLang = () =>{
-    localStorage.setItem("lang" , "ENG")
-    setLang("ENG")
-  }
-
 
   return (
     <Nav>
@@ -148,45 +119,16 @@ const NavBar1 = ({selectedPage, setSelectedPage}) => {
               
               </ContactContainer>
                 <LeftSide>
-                  <NavLink 
-                      page="Home" 
-                      selectedPage={selectedPage}
-                      setSelectedPage={setSelectedPage} 
-                    />
-                   <NavLink 
-                      page="Fotos"  
-                      selectedPage={selectedPage}
-                      setSelectedPage={setSelectedPage}  
-                    />
-
-                    <LogoContainer>
-                      <Logo>Schierhuys</Logo>
-                      <LogoText>Vakanties in Drenthe</LogoText>
-                    </LogoContainer>
-
-                    <NavLink 
-                      page="Reserve" 
-                      selectedPage={selectedPage}
-                      setSelectedPage={setSelectedPage} 
-                    />
-                    <NavLink 
-                      page="Reviews&info" 
-                      selectedPage={selectedPage}
-                      setSelectedPage={setSelectedPage}  
-                    />
-
-                     <NavLink 
-                      page="Contact" 
-                      selectedPage={selectedPage}
-                      setSelectedPage={setSelectedPage} 
-                    />
+              <Link to="/">
+                Home
+              </Link>
                   
                 {currentUser?._doc?.isGert ? <Link to="/admin">Admin</Link> : null }
                 {currentUser ? <Link onClick={handleLogout}>logout</Link> : null}
 
                 </LeftSide>
-                <RightSide>           
-                      <LangBtn onClick={changeLang}>{lang}</LangBtn>
+                <RightSide>
+                   NL
                 </RightSide>
             </InnerContainer>
         </NavContainer>
@@ -194,4 +136,4 @@ const NavBar1 = ({selectedPage, setSelectedPage}) => {
   )
 }
 
-export default NavBar1
+export default NavBar2

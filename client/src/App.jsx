@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+// NL IMPORTS
 import Home from "./pages/Home";
 import PaySummary from "./components/pay/PaySummary";
 import ReviewComponent from "./components/home/ReviewComponent"
@@ -18,37 +19,78 @@ import Register from "./components/admin/Register";
 import Datum from "./components/admin/Datum";
 import Reserves from "./components/admin/Reserves";
 import Costumers from "./components/admin/Costumers";
+import { langContext } from "./context/langContext";
+// ENG IMPORTS 
+import NavBarENG from "./ENG/pages/navbars/NavBarENG"
+import HomeENG from "./ENG/pages/HomeENG";
 
 function App() {
  
   const [selectedPage, setSelectedPage] = useState('Home')
+  const [lang, setLang] = useState(localStorage.getItem("lang") || "NL")
+
   return (
-    <>
   <BrowserRouter>
-  <NavBar 
-    selectedPage={selectedPage} 
-    setSelectedPage={setSelectedPage}
-  />
-    <Routes>
-      <Route path='/' element ={<Home setSelectedPage={setSelectedPage} />}>
-        <Route path="/" element={<ReviewComponent />}/>
-        <Route path="omgeving" element={<OmgevingComponent />}/>
-        <Route path="info" element={<InfoComponent />}/>
-      </Route>
-      <Route path='/paysummary' element ={<PaySummary />}  />
-      <Route path='/login' element ={<Login />}  />
-      <Route path='/success' element ={<Success />}  />
-      <Route path="/admin" element={<Protected />}>
-        <Route exact path="/admin" element={<Admin />}>
-          <Route path="" element={<Register />}/>
-          <Route exact path="costumers" element={<Costumers  />}/>
-          <Route exact path="datum" element={<Datum  />}/>
-          <Route exact path="Reserve" element={<Reserves  />}/>
+  <langContext.Provider value={{lang,setLang}}>
+    { lang === "NL" &&
+    <>
+    <NavBar 
+      selectedPage={selectedPage} 
+      setSelectedPage={setSelectedPage}
+      lang = {lang}
+      />
+      <Routes>
+        <Route path='/' element ={<Home setSelectedPage={setSelectedPage} />}>
+          <Route path="/" element={<ReviewComponent />}/>
+          <Route path="omgeving" element={<OmgevingComponent />}/>
+          <Route path="info" element={<InfoComponent />}/>
         </Route>
-      </Route>
-    </Routes>
+        <Route path='/paysummary' element ={<PaySummary />}  />
+        <Route path='/login' element ={<Login />}  />
+        <Route path='/success' element ={<Success />}  />
+        <Route path="/admin" element={<Protected />}>
+          <Route exact path="/admin" element={<Admin />}>
+            <Route path="" element={<Register />}/>
+            <Route exact path="costumers" element={<Costumers  />}/>
+            <Route exact path="datum" element={<Datum  />}/>
+            <Route exact path="Reserve" element={<Reserves  />}/>
+          </Route>
+        </Route>
+      </Routes> 
+      </>}
+
+      {lang === "ENG" &&
+        <>
+          <NavBarENG
+      selectedPage={selectedPage} 
+      setSelectedPage={setSelectedPage}
+      lang = {lang}
+      />
+        <Routes>
+        <Route path='/' element ={<HomeENG setSelectedPage={setSelectedPage} />}>
+          <Route path="/" element={<ReviewComponent />}/>
+          <Route path="omgeving" element={<OmgevingComponent />}/>
+          <Route path="info" element={<InfoComponent />}/>
+        </Route>
+        <Route path='/paysummary' element ={<PaySummary />}  />
+        <Route path='/login' element ={<Login />}  />
+        <Route path='/success' element ={<Success />}  />
+        <Route path="/admin" element={<Protected />}>
+          <Route exact path="/admin" element={<Admin />}>
+            <Route path="" element={<Register />}/>
+            <Route exact path="costumers" element={<Costumers  />}/>
+            <Route exact path="datum" element={<Datum  />}/>
+            <Route exact path="Reserve" element={<Reserves  />}/>
+          </Route>
+        </Route>
+      </Routes> 
+        </>
+      }
+
+
+    </langContext.Provider>
    </BrowserRouter>
-    </>
+    
   )
 }
 

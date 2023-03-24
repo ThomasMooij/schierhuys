@@ -112,7 +112,7 @@ const photos = [
 
   return (
     <>
-      <Container id="Fotos"> 
+      <Container id="Photos"> 
         <Wrapper>
 
         {open && (
