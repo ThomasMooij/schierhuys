@@ -20,8 +20,15 @@ export const createReview = async (req,res,next)=>{
     }
 }
 export const getReviews = async (req,res,next)=>{
+
+    const query = req.query;
+
+    const filter = {
+        ...(query.star && {star: query.star})
+    }
+
     try{
-        const reviews = await Review.find()
+        const reviews = await Review.find(filter).sort({createdAt: -1}).select('-updatedAt')
 
         res.status(200).send(reviews)
     }catch(err){

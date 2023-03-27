@@ -175,6 +175,11 @@ const Rooms = styled.span`
 const BathRooms = styled.span`
   color: #383333;
   font-weight: 800;
+  margin-bottom: 45px;
+`
+const Price = styled.span`
+  color: #383333;
+  font-size:21px;
 `
 const ReserveBtn = styled.button`
   width: 40%;
@@ -277,7 +282,7 @@ const Reserve = () => {
                         <OptionsText>Volwassenen   </OptionsText>
                             <OptionsCounter>
                             <CounterBtn
-                             disabled={options.adult <= 0}
+                             disabled={options.adult <= 1}
                              onClick={()=> handleOptions("adult" , "decrease")}
                              type="button"
                              > - </CounterBtn>
@@ -331,6 +336,7 @@ const Reserve = () => {
                     <WrapperSub>Het huis beschikt over de volgende faciliteiten</WrapperSub>
                     <Rooms>4 slaapkamers voor 2 personen</Rooms>
                     <BathRooms>1 badkamer en 1 slaapkamer met badkamer</BathRooms>
+                    <Price><b>150 euro</b> per nacht</Price>
                  </RightWrapper>
                  <ReserveBtn disabled={!guest} onClick={(e)=> handleSearch(e)}>Reserveer uw verblijf</ReserveBtn>
               </Right>

@@ -48,7 +48,9 @@ const Register = () => {
         return {...prev, [e.target.name]: e.target.value}
     })
    }
+
     const handleClick = async (e) =>{
+    const guestname = guest?.guestname.toLowerCase()
     if (!guest.guestname){
         setNameError(!setNameError)
     }else if (!guest.email){
@@ -63,7 +65,7 @@ const Register = () => {
       { 
         try{
         await newRequest.post("/auth/register" ,{
-            guestname: guest.guestname,
+            guestname,
             email: guest.email,
             password: guest.password
         })

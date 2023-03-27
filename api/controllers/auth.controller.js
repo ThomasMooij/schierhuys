@@ -8,7 +8,7 @@ export const login = async (req,res,next) =>{
     try{
         //check username
         const user = await User.findOne({guestname: req.body.guestname});
-        console.log("user:" , user)
+
         if(!user) return res.status(404).send("username or password incorrect")
         // check password
         const isCorrect = bcrypt.compareSync(req.body.password, user.password)
@@ -22,7 +22,7 @@ export const login = async (req,res,next) =>{
         // get password out off user object so it is not send on completion
         const {password, ...info} = user
         //pass cookie up the chain
-        res.cookie("accessToken", token , {
+        res.cookie("accessToken", user , {
             httpOnly:true
         })
         res.status(200).send(info)

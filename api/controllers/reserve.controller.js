@@ -14,7 +14,6 @@ export const intent = async (req,res,next) => {
 
             return childPrice + adultPrice
         }
-
         const paymentIntent = await stripe.paymentIntents.create({
             amount: calculatePrice(
                 req.body.children,
@@ -25,7 +24,6 @@ export const intent = async (req,res,next) => {
                 enabled: true,
             }
         });
-
         const newReserve = new Reserve({
             firstname: req.body.firstname,
             lastname: req.body.lastname,
@@ -52,14 +50,13 @@ export const getReserves = async (req,res,next) => {
     try{
         if(!req.isGert) return next(createError(403, "You are not Gertje"))
         const reserves = await Reserve.find({})
+        .select('-_id').select('-unavailableDates').select('-payment_intent').select('-createdAt').select('-updatedAt')
 
         res.status(200).send(reserves)
-
     }catch(err){
         next(err)
     }
 }
-
 export const getReserve = async (req,res,next) => {
     try{
         if(!req.isGert) return next(createError(403, "You are not Gertje"))
@@ -74,7 +71,6 @@ export const getReserve = async (req,res,next) => {
         
     }
 }
-
 export const confirm = async (req,res,next) => {
     try{
         //update unavailables
@@ -90,7 +86,6 @@ export const confirm = async (req,res,next) => {
         
     }
 }
-
 export const deleteReserve = async (req,res,next) => {
     try{
         if(!req.isGert) return next(createError(403, "You are not Gertje"))

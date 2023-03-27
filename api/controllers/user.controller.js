@@ -16,7 +16,7 @@ export const getUser = async (req,res,next) => {
 
 export const getUsers = async (req,res,next) => {
     try{
-        const user = await User.find();
+        const user = await User.find().select('-updatedAt').select('-createdAt');
 
         res.status(200).send(user);
     }

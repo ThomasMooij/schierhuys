@@ -37,7 +37,7 @@ const Btn = styled.button`
         cursor: pointer;
 `
 const Login = () => {
-    const [guestname , setGuestname] = useState("")
+    const [guestName , setGuestname] = useState("")
     const [password , setPassword] = useState("")
     const [error , setError] = useState("")
 
@@ -46,6 +46,8 @@ const Login = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault()
         try{
+            const guestname = guestName.toLowerCase()
+            console.log("name:" , guestname)
             const res = await newRequest.post("/auth/login", {guestname, password})
             localStorage.setItem("currentUser" , JSON.stringify(res.data))
            

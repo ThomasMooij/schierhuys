@@ -3,75 +3,197 @@ import styled from "styled-components"
 import useFetch from "../../functions/useFetch.js"
 import SingleReview from "./SingleReview.jsx"
 import newRequest from "../../functions/newRequest.js"
-import { useState } from "react"
+import {  useState,useEffect} from "react"
+import ReactPaginate from 'react-paginate';
+import './pagination.css'
 
 const Main = styled.main`
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
     gap: 35px;
 `
 const Nav = styled.nav`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     gap: 25px;
     margin: auto;
+    background-color: beige;
+    width: 100%;
+    min-height: 85px;
 `
-const Left = styled.div`
+const Left = styled.span`
+  font-family: "Urbanist";
+  color: #383333;
+  margin: auto;
+  font-weight: 700;
+  font-size: 19px;
 `
 const Right = styled.div`
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    gap: 15px;
 `
 const Body = styled.div`
     display: flex;
     align-items: flex-start;
-    justify-content: center;
+    margin: auto;
     flex-direction: column;
+    padding-left:5px;
     gap: 15px;
 `
-const Btn = styled.button`
-    
+const BodyNav = styled.nav`
+  display: flex;
+ gap: 35px;
 `
-const Form = styled.div`
-    
+const BodyTitle = styled.h3`
+  
+`
+const BodyFilter = styled.div`
+  display: flex;
+  gap: 5px;
+`
+const Select = styled.select`
+  
+`
+const Option = styled.option`
+  
+`
+const ReviewBtn = styled.button`
+  cursor: pointer;
+  padding: 8px;
+  background-color: white;
+  border-radius: 5px;
+  border: none;
+`
+const Btn = styled.button`
+  cursor: pointer;
+  margin-bottom:8px;
+  padding: 9px 15px;
+  align-self: center;
+  border-radius: 15px;
+  border: none;
+  background-color: white;
+  font-weight: 700;
+  &:hover{
+    transform: translateY(-17px);
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  }
 `
 const Title = styled.h3`
-    
+    font-size: 22px;
+    font-weight: 700;
+`
+const SubTitle = styled.h3`
+    font-size: 22px;
+    font-weight: 400;
+`
+const ReviewBox = styled.div`
+ background-color: #F9FBFF;
+box-shadow: 0px 1px 10px #999;
+ width: 660px;
+ height: 160px;
+ border-radius: 5px;
+ display: flex;
+ align-items: center;
+ gap: 15px;
+
 `
 const Input = styled.input`
-    
+    padding: 35px;
+    width: 550px;
+    height:70px;
 `
 const Text = styled.span`
     
 `
-const Select = styled.select`
-    
+const Bottom = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+margin: auto;
+  
+`
+const SelectDiv = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 15px;
 `
 const BottomBtn = styled.button`
-    
-`
 
+  padding: 8px;
+  background-color: #6565e7;
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+  border-radius: 5px;
+`
+function Items({ currentItems }) {
+  return (
+    <>
+      {currentItems &&
+        currentItems.map((review, i) => (
+          <ReviewBox>
+            <SingleReview key={i} review={review} /> 
+          </ReviewBox>
+        ))}
+    </>
+  );
+}
 
 const ReviewComponent = () => {
 
-  const {data,loading, error, reFetch} = useFetch("http://localhost:8080/api/reviews")
   const currentUser = JSON.parse(localStorage.getItem('currentUser'))
 
   const [desc , setDesc] = useState("")
-
   const [star , setStar] = useState(5)
+  const  [filter, setFilter] = useState('')
+
+  const {data,loading, error, reFetch} = useFetch(`http://localhost:8080/api/reviews?star=${filter}`)
+
+  const refetch = () =>{
+    reFetch()
+  }
 
   const handleClick = async (e) =>{
     e.preventDefault()
     try{
-
-    }catch(err){
-      
-    }
-    const res = await newRequest.post(
+      await newRequest.post(
         "http://localhost:8080/api/reviews", 
-        {desc, star}) 
+        {desc, star}).then(alert("bedankt !"))
+   
+    }catch(err){
+      console.log(err)
+    }
+   
   }
+  const apply = (e) =>{
+    setReviews(true)
+    setFilter(e.target.value)
+  }
+  const [itemOffset, setItemOffset] = useState(0);
+
+  let itemsPerPage = 4;
+
+  const endOffset = itemOffset + itemsPerPage;
+  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  const currentItems = data.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(data.length / itemsPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % data.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+  const [reviews, setReviews] = useState(false) 
 
   return (
     <Main>
@@ -80,42 +202,73 @@ const ReviewComponent = () => {
         <Right>
           { !currentUser ?   
             <>
-            <p>Heeft u bij ons verbleven? login met de gegevens die u ontvangen heeft in de bedankt email en laat een recensie achter </p>
+            <p style={{fontWeight: "600"}}>Heeft u bij ons verbleven? </p>
+            <p>login met de gegevens die u ontvangen heeft in de bedankt email en laat een recensie achter </p>
                   <Link to="login"><Btn>Login</Btn></Link> 
             </> 
-          : "laat een recensie achter"}
+          : <p><b>laat een recensie achter!</b></p>}    
         </Right>  
       </Nav>
       <Body>
+        <BodyNav>
+          <BodyTitle>Dit vonden voorgaande gasten ervan</BodyTitle>
+          <BodyFilter>
+            <p>Filter op rating:</p>
+            <Select name="filter" id="filter" onChange={(e) => apply(e)}>
+              <Option value={5} >5</Option>
+              <Option value={4} >4</Option>
+              <Option value={3} >3</Option>
+              <Option value={2} >2</Option>
+              <Option value={1} >1</Option>
+            </Select>
+           {reviews && <ReviewBtn onClick={() => {setFilter(''); setReviews(false)}}>Alle reviews</ReviewBtn>}
+          </BodyFilter>
+        </BodyNav>
       { loading ? "loading" : error ? "something went horribly wrong" : 
-      data.map((review, i) => (
-   
-        <SingleReview key={i} review={review} /> 
-    
-      ))}
-      </Body>
+       <>
+       <Items currentItems={currentItems} />
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="volgende >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="< vorige"
+          renderOnZeroPageCount={null}
+          containerClassName={"pagination"}
+          previousLinkClassName={"pagination__link"}
+          nextLinkClassName={"pagination__link"}
+          disabledClassName={"pagination__link--disabled"}
+          activeClassName={"pagination__link--active"}
+        />   
+     </>
+      }
+    </Body>
       
-{    currentUser ?      
-          <>
+    {currentUser ?      
+          <Bottom>
             <Title>Laat ons weten wat u ervan vond </Title>
-            <Title>U kunt een resencie achterlaten per bezoek</Title>
+            <SubTitle>U kunt <b>één</b> resencie achterlaten per bezoek</SubTitle>
             <Input
               type="text"
               placeholder ="Schrijf uw recensie"
               onChange={(e)=> setDesc(e.target.value)}
               />
-            <Text>Rating:</Text>
-            <Select onChange={(e) => setStar(e.target.value)}>
-                <option value={5}>5</option>
-                <option value={4}>4</option>
-                <option value={3}>3</option>
-                <option value={2}>2</option>
-                <option value={1}>1</option>
-            </Select>
-            <BottomBtn onClick={handleClick}>Verstuur</BottomBtn> 
-          </>
-          : null}
-      
+            <SelectDiv>
+              <div>
+                <Text>Rating:</Text>
+                <Select onChange={(e) => setStar(e.target.value)}>
+                    <option value={5}>5</option>
+                    <option value={4}>4</option>
+                    <option value={3}>3</option>
+                    <option value={2}>2</option>
+                    <option value={1}>1</option>
+                </Select>
+              </div>
+              <BottomBtn onClick={handleClick}>Verstuur</BottomBtn> 
+            </SelectDiv>
+          </Bottom>
+          : null}   
     </Main>
   )
 }

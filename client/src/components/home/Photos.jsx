@@ -64,6 +64,11 @@ const Image = styled.img`
   width: 100%;
   object-fit: cover;
   cursor: pointer;
+
+  &:hover{
+    transform: translateY(-17px);
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  }
 `
 const Photos = () => {
 

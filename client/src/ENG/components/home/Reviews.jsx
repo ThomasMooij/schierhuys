@@ -18,59 +18,76 @@ const SideBar = styled.div`
   box-shadow: 0px 1px 10px #999;
 `
 const Btn = styled(Link)`
-  background: none;
-	color: inherit;
-	border: none;
 	padding: 0;
-	font: inherit;
 	cursor: pointer;
-	outline: inherit;
+	text-decoration:none;
+  font-size: 18px;
+
+  &:hover{
+    border-bottom: 1px solid;
+  }
+  &:nth-child(1){
+      border-bottom:${props => props.selectedPage === 'Review' && '1px solid' };
+      color:${props => props.selectedPage === 'Review' && 'black' } 
+    }
+  &:nth-child(2){
+    border-bottom:${props => props.selectedPage === 'Omgeving' && '1px solid' }; 
+    color:${props => props.selectedPage === 'Omgeving' && 'black' } 
+    }
+  &:nth-child(3){
+    border-bottom:${props => props.selectedPage === 'Info' && '1px solid' };
+    color:${props => props.selectedPage === 'Info' && 'black' }  
+  }
+
 `
 const Review = styled.span`
   
 `
 const Omgeving = styled.span`
-  
+ 
 `
 const Info = styled.span`
-  
+
 `
 const Body = styled.div`
 display: flex;
-align-items: center;
+align-items: flex-start;
 justify-content: center;
 background-color: whitesmoke;
-  flex: 3;
+flex: 3;
 `
 
 
 
 const Reviews = () => {
   
-  const [selectedPage, setSelectedPage] = useState("")
+  const [selectedPage, setSelectedPage] = useState("Review")
 
   return (
-    <Main id="Reviews&info">
+    <Main id='Reviews&info'>
       <SideBar>
         <Btn 
+          selectedPage ={selectedPage}
           to="/"
           onClick={()=> setSelectedPage("Review")}
         > 
-          <Review >Recensies</Review>
+          <Review >Reviews</Review>
         </Btn>
 
         <Btn 
+         selectedPage ={selectedPage}
           to="omgeving"
           onClick={()=> setSelectedPage("Omgeving")}
         > 
-          <Omgeving >Omgeving</Omgeving>
+          <Omgeving >The area</Omgeving>
         </Btn>
               
         <Btn 
+          selectedPage ={selectedPage}
           to="info"
           onClick={()=> setSelectedPage("Info")}
         > 
-          <Info >Praktische informatie</Info>
+          <Info >Practical information</Info>
         </Btn>   
       </SideBar>
       <Body><Outlet /></Body>
