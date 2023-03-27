@@ -121,7 +121,7 @@ const NavBar1 = ({selectedPage, setSelectedPage}) => {
     localStorage.setItem("currentUser" , null)
     navigate('/')
   }
-
+console.log(currentUser)
   const {lang, setLang} = useContext(langContext)
 
   const changeLang = () =>{
@@ -181,7 +181,7 @@ const NavBar1 = ({selectedPage, setSelectedPage}) => {
                       setSelectedPage={setSelectedPage} 
                     />
                   
-                {currentUser?._doc?.isGert ? <Link to="/admin">Admin</Link> : null }
+                {currentUser?.isGert ? <Link to="/admin">Admin</Link> : null }
                 {currentUser ? <Link onClick={handleLogout}>logout</Link> : null}
 
                 </LeftSide>

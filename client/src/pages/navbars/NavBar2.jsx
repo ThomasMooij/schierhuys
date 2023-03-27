@@ -84,11 +84,6 @@ font-size: 14;
 color: whitesmoke;
 font-weight: 600;
 `
-
-const RightSide = styled.div`
-display: flex;
-align-items: center;
-`
 const NavBar2 = ({selectedPage, setSelectedPage}) => {
 
   const currentUser = JSON.parse(localStorage.getItem('currentUser'))
@@ -127,9 +122,7 @@ const NavBar2 = ({selectedPage, setSelectedPage}) => {
                 {currentUser ? <Link onClick={handleLogout}>logout</Link> : null}
 
                 </LeftSide>
-                <RightSide>
-                   NL
-                </RightSide>
+            
             </InnerContainer>
         </NavContainer>
     </Nav>
