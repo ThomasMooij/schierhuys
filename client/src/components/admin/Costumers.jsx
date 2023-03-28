@@ -22,7 +22,7 @@ const Costumers = () => {
 <Main>
   <Wrapper>
     {data.map((costumer) =>(
-      <SingleCostumer key={costumer.id} costumer={costumer}/>
+      <SingleCostumer key={costumer._id} costumer={costumer}/>
     ))}
   </Wrapper>
 </Main>

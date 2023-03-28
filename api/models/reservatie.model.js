@@ -26,7 +26,7 @@ const ReservatieSchema = new Schema({
         type: [String]
     },
     dates: {
-        type:[Date ],
+        type:[Date],
     },
     unavailableDates:{
         type:[Date],

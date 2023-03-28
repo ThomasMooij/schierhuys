@@ -9,13 +9,16 @@ const Success = () => {
     const params = new URLSearchParams(search);
     const payment_intent = params.get('payment_intent');
     const dates = params.get('dates')
-
+    let newDates =[]
+   
+  for(let i = 0; i < dates.split(",").length; i++){
+    newDates.push(new Date(dates.split(",")[i]))
+  }
 
     useEffect(() => {
         const makeRequest = async () => {
           try {
-            console.log("enters")
-            await newRequest.put("/reserve", { payment_intent , dates});
+            await newRequest.put("/reserve", {payment_intent , newDates});
          setTimeout(() =>{
             navigate("/");
             
@@ -25,7 +28,6 @@ const Success = () => {
             console.log(err);
           }
         };
-    
         makeRequest();
       }, []);
 

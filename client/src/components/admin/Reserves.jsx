@@ -13,6 +13,7 @@ const Reserves = () => {
 
   const {data, loading, error} = useFetch('http://localhost:8080/api/reserve/')
 
+console.log(data)
 
   return (
     <Main>

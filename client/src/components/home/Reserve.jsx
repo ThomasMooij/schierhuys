@@ -4,6 +4,7 @@ import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useFetch from "../../functions/useFetch"
 
 const Container = styled.main`
 width: 100%;
@@ -14,7 +15,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
 `
 const TitleDiv = styled.div`
 display: flex;
@@ -23,10 +23,8 @@ display: flex;
   background-color: beige;
   justify-content: center;
 `
-
 const Title = styled.h1`
   padding: 20px;
-  font-family: "Urbanist";
   color: #383333;
   font-weight: 400;
 `
@@ -56,24 +54,17 @@ const Top = styled.div`
   border-radius: 15px;
 `
 const LeftTitle = styled.h1`
-  font-family: "Urbanist";
   color: #383333;
   font-weight: 400;
 `
-const NameLabel = styled.label`
-  font-family: "Urbanist";
+const Label = styled.label`
+  font-weight:200;
 `
 const NameInput = styled.input`
    width: 60%;
 `
-const LastNameLabel = styled.label`
-  
-`
 const LastNameInput = styled.input`
    width: 60%;
-`
-const EmailLabel = styled.label`
-  font-family: "Urbanist";
 `
 const EmailInput = styled.input`
    width: 60%;
@@ -241,8 +232,18 @@ const Reserve = () => {
     : !guest.email ? setEmail(!email) :
       navigate("/paysummary" , {state: {guest, date, options, }})
      }
-
-     
+  
+  // DISABLED DATES
+       let disabled_dates =[]    
+       const {data,error,loading} = useFetch('http://localhost:8080/api/reserve/unavailable')
+       const array = Object.values(data);
+       const length = array[0]?.length 
+  
+       for(let i = 0; i < length ; i++){
+        disabled_dates.push(new Date(array[0][i]))
+        array[0][i]
+       }
+       
   return (
     <Container id="Reserve">
         <Wrapper>
@@ -252,7 +253,7 @@ const Reserve = () => {
               <Left>
                 <Top>
                   <LeftTitle>Uw persoonsgegevens</LeftTitle>
-                  <NameLabel htmlFor="">Voornaam</NameLabel> 
+                  <Label htmlFor="">Voornaam</Label> 
                   {firstName ? <span style={{color:"red", fontSize: "22px"}}><b>Gelieve dit veld in te vullen</b></span> : "" }
                   <NameInput 
                     name="firstname"
@@ -260,7 +261,7 @@ const Reserve = () => {
                     placeholder="Jan"
                     onChange={handleChange}
                     ></NameInput>
-                   <LastNameLabel htmlFor="">Achternaam</LastNameLabel> 
+                   <Label htmlFor="">Achternaam</Label> 
                    {lastName ? <span style={{color:"red", fontSize: "22px"}}><b>Gelieve dit veld in te vullen</b></span> : "" }
                   <LastNameInput 
                     name="lastname"
@@ -268,7 +269,7 @@ const Reserve = () => {
                     placeholder="Smit"
                     onChange={handleChange}
                     ></LastNameInput>
-                  <EmailLabel htmlFor="">Email</EmailLabel> 
+                  <Label htmlFor="">E-mail</Label> 
                   {email ? <span style={{color:"red", fontSize: "22px"}}><b>Gelieve dit veld in te vullen</b></span> : "" }
                   <EmailInput 
                     name="email"
@@ -326,7 +327,7 @@ const Reserve = () => {
                       ranges={date}
                       className="date"
                       minDate={new Date()}
-                      disabledDates={["21/02/2023"]}
+                      disabledDates={disabled_dates}
                     />          
                   </Calender>
               </Left>

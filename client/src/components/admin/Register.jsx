@@ -7,7 +7,6 @@ const Main = styled.main`
 width: 100wh;
 height: 100vh;
 max-width: 100%;
-
 `
 const Wrapper = styled.div`
     padding: 50px;
@@ -17,15 +16,11 @@ const Wrapper = styled.div`
     margin: auto;
 `
 const Label = styled.label`
-    
 `
 const Input = styled.input`
-    
 `
 const Btn = styled.button`
-    
 `
-
 const Register = () => {
 
     const [guest, setGuest] = useState({
@@ -43,12 +38,12 @@ const Register = () => {
 
     const navigate = useNavigate()
 
-   const handleChange = (e) =>{
+    const handleChange = (e) =>{
     setGuest((prev) =>{
         return {...prev, [e.target.name]: e.target.value}
     })
    }
-
+   
     const handleClick = async (e) =>{
     const guestname = guest?.guestname.toLowerCase()
     if (!guest.guestname){

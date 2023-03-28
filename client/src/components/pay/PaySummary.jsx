@@ -12,7 +12,13 @@ const Main = styled.main`
   
 `
 const Top = styled.div`
-  
+  display: flex;
+`
+const Left = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding:15px;
 `
 const Title = styled.h2`
   
@@ -42,6 +48,16 @@ const Select = styled.select`
   
 `
 const Option = styled.option`
+  
+`
+const Right = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+
+`
+const TextArea = styled.textarea`
   
 `
 const Btn = styled.button`
@@ -101,7 +117,13 @@ const priceAdults =  allDays.length * 45 * numGuests.adult
 const total = priceChildren + priceAdults
 //CLIENT SECRET AND API POST
 const [clientSecret, setClientSecret] = useState("");
+//GET TEXTAREA MESSAGE
+const [message, setMessage] = useState('')
 
+const handleMessage = (e) => {
+  setMessage(e.target.value)
+}
+console.log("message:",message)
 const handleClick = async (e) =>{
   try{  
   
@@ -113,9 +135,12 @@ const handleClick = async (e) =>{
       children:numGuests.children,
       childrenAge:childAges,
       dates: allDays,
+      desc:message, 
       price: total,
       days: allDays.length,
     })
+
+ 
 
   setClientSecret(res.data.clientSecret)
   
@@ -135,43 +160,56 @@ const options = {
   return (
    <Main>
     <Top>
-      <Title>Neem de gegevens goed door en bevestig deze alstublieft </Title>
-      <Guest>voornaam: {guest.firstname} achternaam: {guest.lastname} email: {guest.email}</Guest>
-      <Options>
-        <Adult>aantaal volwassenen: {numGuests.adult}</Adult>
-        <Children>aantal kinderen: {numGuests.children}</Children>
-        <span>{`${format(date[0].startDate, "dd/MM/yyyy")} tot ${format(date[0].endDate, "dd/MM/yyyy")} `}</span>
-        <span>Prijs: {total}</span>
-        {children.map((item)=> (
-        <Form>
-          <Label htmlFor="children">Gelieve de leeftijd van de kinderen in te vullen</Label>
-            <Select name="children" id="children" onChange={handleSubmit}>
-              <Option value={0}>0</Option>
-              <Option value="1">1</Option>
-              <Option value="2">2</Option>
-              <Option value="3">3</Option>
-              <Option value="4">4</Option>
-              <Option value="5">5</Option>
-              <Option value="6">6</Option>
-              <Option value="7">7</Option>
-              <Option value="8">8</Option>
-              <Option value="9">9</Option>
-              <Option value="10">10</Option>
-              <Option value="11">11</Option>
-              <Option value="12">12</Option>
-              <Option value="13">13</Option>
-              <Option value="14">14</Option>
-              <Option value="15">15</Option>
-              <Option value="16">16</Option>
-              <Option value="17">17</Option>
-            </Select>         
-          </Form>  
-        ))}
-        {childAges.length >= children.length ?   
-        <Btn onClick={handleClick}>Bevestig gegevens</Btn> :
-          <span>gelieve alle leeftijden in te vullen</span>}
-        
-      </Options>
+      <Left>
+        <Title>Neem de gegevens goed door en bevestig deze alstublieft </Title>
+        <Guest>voornaam: {guest.firstname} achternaam: {guest.lastname} email: {guest.email}</Guest>
+        <Options>
+          <Adult>aantaal volwassenen: {numGuests.adult}</Adult>
+          <Children>aantal kinderen: {numGuests.children}</Children>
+          <span>{`${format(date[0].startDate, "dd/MM/yyyy")} tot ${format(date[0].endDate, "dd/MM/yyyy")} `}</span>
+          <span>Prijs: {total}</span>
+          {children.map((item)=> (
+            <Form>
+            <Label htmlFor="children">Gelieve de leeftijd van de kinderen in te vullen</Label>
+              <Select name="children" id="children" onChange={handleSubmit}>
+                <Option value={0}>0</Option>
+                <Option value="1">1</Option>
+                <Option value="2">2</Option>
+                <Option value="3">3</Option>
+                <Option value="4">4</Option>
+                <Option value="5">5</Option>
+                <Option value="6">6</Option>
+                <Option value="7">7</Option>
+                <Option value="8">8</Option>
+                <Option value="9">9</Option>
+                <Option value="10">10</Option>
+                <Option value="11">11</Option>
+                <Option value="12">12</Option>
+                <Option value="13">13</Option>
+                <Option value="14">14</Option>
+                <Option value="15">15</Option>
+                <Option value="16">16</Option>
+                <Option value="17">17</Option>
+              </Select>         
+            </Form>  
+          ))}
+          {childAges.length >= children.length ?   
+          <Btn onClick={handleClick}>Bevestig gegevens</Btn> :
+          <span>gelieve alle leeftijden in te vullen</span>}  
+        </Options>
+      </Left>
+      <Right>
+      <Label htmlFor="message">Wilt u ons iets laten weten? Heeft u speciale wensen? schrijf ze hier op of neem contact met ons op via 06000006 en wij accomoderen uw wensen graag</Label>
+      <TextArea
+        rows={6}
+        cols={60}
+        id="message"
+        name="message"
+        value={message}
+        onChange={handleMessage}
+        maxLength={3000}
+      ></TextArea>
+      </Right>
     </Top>
     <Bottom>
     {clientSecret && (

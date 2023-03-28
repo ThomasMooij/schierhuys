@@ -39,7 +39,7 @@ export const getReview = async (req,res,next)=>{
     try{
         const review = await Review.findOne({
             userId: req.params.id
-        })
+        }).select('-updatedAt -createdAt')
 
         res.status(200).send(review)
     }catch(err){
@@ -48,6 +48,10 @@ export const getReview = async (req,res,next)=>{
 }
 export const deleteReview = async (req,res,next)=>{
     try{
+        if(!req.isGert) return next(createError(404, "alleen Gert mag gebruikers verwijderen"))
+        const review = await Review.findByIdAndDelete(req.params.id)
+
+        res.status(200).send(review)
 
     }catch(err){
         

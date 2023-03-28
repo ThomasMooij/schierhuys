@@ -1,13 +1,12 @@
 import Reserve from "../models/reservatie.model.js"
 import Stripe from "stripe"
-
+import createError from "../functions/createError.js"
 
 export const intent = async (req,res,next) => {
     try{
         const stripe = new Stripe(
             process.env.STRIPE_KEY
         )
-
         const calculatePrice = (child, adult, days) => {
             const childPrice =  days * 35 * child;
             const adultPrice = days * 45 * adult;
@@ -29,8 +28,8 @@ export const intent = async (req,res,next) => {
             lastname: req.body.lastname,
             email: req.body.email,
             adults: req.body.adults,
-            children: req.body.children,
-            childrenAge:req.body.childrenAge,
+            Children: req.body.children,
+            ChildrenAge:req.body.childrenAge,
             dates: req.body.dates,
             price:req.body.price,
             desc: req.body.desc,
@@ -48,10 +47,10 @@ export const intent = async (req,res,next) => {
 
 export const getReserves = async (req,res,next) => {
     try{
+   
         if(!req.isGert) return next(createError(403, "You are not Gertje"))
-        const reserves = await Reserve.find({})
-        .select('-_id').select('-unavailableDates').select('-payment_intent').select('-createdAt').select('-updatedAt')
-
+        const reserves = await Reserve.find({isCompleted: true})
+        .select('-unavailableDates -payment_intent -updatedAt').sort(({createdAt: -1}))
         res.status(200).send(reserves)
     }catch(err){
         next(err)
@@ -64,11 +63,41 @@ export const getReserve = async (req,res,next) => {
         const reserve = await Reserve.find({
             _id: req.params.id
         })
-
         res.status(200).send(reserve)
-
     }catch(err){
         
+    }
+}
+export const getUnavailables = async (req,res,next) =>{ 
+    try{
+        const reserve = await Reserve.findOne().sort( {'created_at' : 1}).select('unavailableDates -_id')
+
+        res.status(200).send(reserve)
+    }catch(err){
+        next(err)
+    }
+}
+export const setUnavailables = async (req,res,next) =>{
+    try{
+        const reserve = await Reserve.findOneAndUpdate(
+            {'created_at' : 1},
+            {$push: {"unavailableDates" :req.body.dates}} )
+
+        res.status(200).send(reserve)
+    }catch(err){
+        next(err)
+    }
+}
+export const unSetUnavailables = async (req,res,next) =>{
+    try{
+    if(!req.isGert) return next(createError(403, "You are not Gertje"))
+        const reserve = await Reserve.findOneAndUpdate(
+            {'created_at' : 1},
+            {$pull: {"unavailableDates" :req.body.dates}} )
+            console.log(req.body.dates)
+        res.status(200).send(reserve)
+    }catch(err){
+        next(err)
     }
 }
 export const confirm = async (req,res,next) => {
@@ -78,22 +107,20 @@ export const confirm = async (req,res,next) => {
             {payment_intent:req.body.payment_intent,} , 
             {$set:{ isCompleted:true,}})
         const dates = await Reserve.findOneAndUpdate(
-            console.log(req.body.dates),
             {'created_at' : 1}, 
-            {$push: {"unavailableDates" : req.body.dates}})
-
+            {$push: {"unavailableDates": req.body.newDates}})
+        res.status(200).send(reserve, dates)
     }catch(err){
-        
+        console.log(err)
     }
 }
 export const deleteReserve = async (req,res,next) => {
     try{
         if(!req.isGert) return next(createError(403, "You are not Gertje"))
-
+        
         const reserve = await Reserve.findByIdAndDelete({
             _id: req.params.id
         })
-
         res.status(200).send(reserve)
 
     }catch(err){

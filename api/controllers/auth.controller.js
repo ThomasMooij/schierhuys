@@ -8,7 +8,6 @@ export const login = async (req,res,next) =>{
     try{
         //check username
         const user = await User.findOne({guestname: req.body.guestname});
-
         if(!user) return res.status(404).send("username or password incorrect")
         // check password
         const isCorrect = bcrypt.compareSync(req.body.password, user.password)
@@ -18,7 +17,6 @@ export const login = async (req,res,next) =>{
             id: user._id,
             isGert: user.isGert,
         }, process.env.JWT)
-        console.log(token)
         // get password out off user object so it is not send on completion
         const {password, ...info} = user._doc
         //pass cookie up the chain
@@ -27,7 +25,7 @@ export const login = async (req,res,next) =>{
         })
         res.status(200).send(info)
     }catch(err){
-        res.status(500).send(err)
+        console.log(err)
     }
 }
 export const register = async (req,res,next) =>{

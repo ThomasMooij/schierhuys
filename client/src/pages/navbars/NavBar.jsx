@@ -11,7 +11,8 @@ const NavBar = ({selectedPage , setSelectedPage}) => {
         if(
         location.pathname.indexOf("admin") >-1 || 
         location.pathname.indexOf("paysummary") >-1 ||
-        location.pathname.indexOf("login") >-1
+        location.pathname.indexOf("login") >-1 ||
+        location.pathname.indexOf("success") >-1
         ){
             setNav(<NavBar2 />)
         }else{
@@ -20,7 +21,6 @@ const NavBar = ({selectedPage , setSelectedPage}) => {
                 setSelectedPage = {setSelectedPage}
             />)
         }
-
     }, [location.pathname])
 
   return (

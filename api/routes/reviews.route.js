@@ -7,6 +7,6 @@ const router = express.Router()
 router.post("/", verifyToken, createReview)
 router.get("/", getReviews)
 router.get("/:id", getReview)
-router.delete("/", verifyToken, deleteReview)
+router.delete("/:id", verifyToken, deleteReview)
 
 export default router

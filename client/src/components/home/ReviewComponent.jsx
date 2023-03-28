@@ -171,7 +171,6 @@ const ReviewComponent = () => {
     }catch(err){
       console.log(err)
     }
-   
   }
   const apply = (e) =>{
     setReviews(true)
@@ -182,15 +181,11 @@ const ReviewComponent = () => {
   let itemsPerPage = 4;
 
   const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
   const currentItems = data.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(data.length / itemsPerPage);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % data.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
     setItemOffset(newOffset);
   };
   const [reviews, setReviews] = useState(false) 
@@ -206,7 +201,7 @@ const ReviewComponent = () => {
             <p>login met de gegevens die u ontvangen heeft in de bedankt email en laat een recensie achter </p>
                   <Link to="login"><Btn>Login</Btn></Link> 
             </> 
-          : <p><b>laat een recensie achter!</b></p>}    
+          : <p>Hartelijk bedankt en hopelijk tot snel</p>}    
         </Right>  
       </Nav>
       <Body>
@@ -244,7 +239,6 @@ const ReviewComponent = () => {
      </>
       }
     </Body>
-      
     {currentUser ?      
           <Bottom>
             <Title>Laat ons weten wat u ervan vond </Title>

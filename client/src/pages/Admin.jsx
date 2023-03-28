@@ -22,6 +22,9 @@ const Article = styled.article`
 `
 const Body = styled.div`
   flex:3;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 `
 
 const Admin = () => {

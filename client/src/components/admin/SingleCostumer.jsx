@@ -40,13 +40,23 @@ const SingleCostumer = ({costumer}) => {
   const deleteUser = async (id) =>{
     const res = await newRequest.delete(`http://localhost:8080/api/users/${id}`)  
   }
+  const deleteReview = async (id) => {
+    const res = await newRequest.delete(`http://localhost:8080/api/reviews/${id}`)
+  }
+
+  const onClick = async (costumerId, reviewId) =>{
+    deleteUser(costumerId);
+    deleteReview(reviewId);
+  }
+
+  console.log(data)
 
   return (
           <Costumer>
             <Info>
               <Name>Klant naam: <b>{costumer.guestname}</b></Name>
               <Email> email: <b>{costumer.email}</b></Email>
-              <Delete onClick={() => deleteUser(costumer._id)} >Delete</Delete>
+              <Delete onClick={() => onClick(costumer._id, data._id )} >Verwijder klant en review</Delete>
             </Info>
             <Review>
                 <Stars>Stars: <b>{data.star}</b></Stars>

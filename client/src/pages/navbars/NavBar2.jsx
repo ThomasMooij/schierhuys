@@ -66,24 +66,7 @@ width: 70%;
 display: flex;
 justify-content: space-evenly;
 `
-const LogoContainer = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 5px 45px;
-  border-radius: 30%;
-  flex-direction: column;
-`
-const Logo = styled.p`
-font-size: 35px;
-color: whitesmoke;
-padding: 10px ;
-font-weight: 700;
-`
-const LogoText = styled.p`
-font-size: 14;
-color: whitesmoke;
-font-weight: 600;
-`
+
 const NavBar2 = ({selectedPage, setSelectedPage}) => {
 
   const currentUser = JSON.parse(localStorage.getItem('currentUser'))
