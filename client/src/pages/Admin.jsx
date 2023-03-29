@@ -31,9 +31,10 @@ const Admin = () => {
   return (
     <Main>
       <SideBar>
+        <h1>WELKOM GERTJE !</h1>
         <Link to=""><Article>Klant registeren</Article></Link>
         <Link to="/admin/costumers"><Article>Geregisteerden klanten en reviews</Article></Link>
-        <Link to="/admin/datum"><Article>Datum vast zetten</Article></Link>
+        <Link to="/admin/datum"><Article>Datum vast zetten/vrijgeven</Article></Link>
         <Link to="/admin/reserve"><Article>Reservaties beheren</Article></Link>
       </SideBar>
       <Body><Outlet/></Body>

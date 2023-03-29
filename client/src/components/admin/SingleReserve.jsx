@@ -18,13 +18,11 @@ const Dates = styled.span`
 `
 const Delete = styled.button`
 `
-
-
-const SingleReserve = ({reserve, dates}) => {
+const SingleReserve = ({reserve}) => {
 
 const onClick = (id, dates) => {
-  deleteReserve(id)
   updateReserve(dates)
+  deleteReserve(id)
 }
 const deleteReserve = async (id) =>{
     try{
@@ -46,13 +44,16 @@ let datesLength = Object.keys(reserve.dates).length
 let array1= reserve.ChildrenAge
 let arrayLength= reserve.ChildrenAge.length
 let array = array1.slice(arrayLength - numChildren)
-
-let newDates = []
+// rdy dates for submission
+const  oldDates = reserve.dates;
+console.log("old dates:", oldDates)
+let newDates = [];
 for(let i = 0; i < reserve.dates.length ; i++){
-  newDates.push(new Date(reserve.dates[i]))
+  newDates.push(...oldDates[i].split(","))
  }
-
-console.log("dates:", newDates)
+ for(let i = 0; i < newDates.length ; i++){
+  newDates[i] = newDates[i].split("T")[0]
+ }
 
   return (
     <Info>
@@ -60,7 +61,7 @@ console.log("dates:", newDates)
         <br></br>
         <Adults> aantal volwassenen: <b>{reserve.adults}</b></Adults>
         <br></br>
-        <Children>Aantal kinderen: <b>{reserve.Children}</b>, leeftijden: <b>{ array.map((item) => (` -${item}`))} </b></Children>
+        <Children>Aantal kinderen: <b>{reserve.Children}</b>, leeftijden: <b>{array.map((item) => (` -${item}`))} </b></Children>
         <br></br>
         <Dates>Data verblijf: <b>{`van ${reserve.dates[0].split('T')[0]} tot ${reserve.dates[datesLength -1].split("T")[0]}`}</b> </Dates>
         <div>{reserve.desc}</div>

@@ -3,9 +3,8 @@ import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { useState } from "react";
-import useFetch from "../../functions/useFetch";
-import { format } from "date-fns";
 import newRequest from "../../functions/newRequest";
+import { format } from "date-fns";
 
 const Main = styled.main`
 display: flex;
@@ -40,27 +39,15 @@ const Btn = styled.button`
   }
 `
 
-const Datum = () => {
+const ReleaseDate = () => {
 
-  const [date, setDate] = useState([
+  const [release, setRelease] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
       key: "selection",
     },
   ]);
-
-    // DISABLED DATES
-    let disabled_dates =[]    
-    const {data,error,loading} = useFetch('http://localhost:8080/api/reserve/unavailable')
-    const array = Object.values(data);
-    const length = array[0]?.length 
-
-    for(let i = 0; i < length ; i++){
-     disabled_dates.push(new Date(array[0][i]))
-     array[0][i]
-    }
-
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate)
     const end = new Date(endDate)
@@ -74,42 +61,37 @@ const Datum = () => {
   
     return dates;
   }
-  const allDays = getDatesInRange(date[0].startDate, date[0].endDate)
+  const allRelease = getDatesInRange(release[0].startDate, release[0].endDate)
 
-  let newDays =[]
-
-  for(let i = 0; i < allDays.length; i++){
-    newDays.push(format(allDays[i], "yyyy-MM-dd"))
+  let newRelease = [];
+  for(let i = 0; i < allRelease.length ; i++){
+    newRelease.push(format(new Date(allRelease[i]), "yyyy-MM-dd"))
+   }
+  const updateReserve = async (dates) =>{
+    try{
+        await newRequest.put(`http://localhost:8080/api/reserve/unavailable`, {dates})
+        alert("gelukt, check de website voor de zekerheid")
+    }catch(err){
+        console.log(err)
+    }
   }
-
-
-const onClick = async (dates) =>{
-  try{
-    await newRequest.put('http://localhost:8080/api/reserve/setUnavailable' , {dates})
-    alert("gelukt! check de website voor de zekerheid")
-
-  }catch(err){
-    console.log(err)
-  }
-
-}
   return (
     <Main>
-      <Calender > 
-        <CalendarTitle>Welke dagen wil je voor jezelf mi Gertje?</CalendarTitle>
+        <Calender > 
+        <CalendarTitle>Datum handmatig vrijzetten( wel mee uitkijken gertje )</CalendarTitle>
           <DateRange
             editableDateInputs={true}
-            onChange={(item) => setDate([item.selection])}
+            onChange={(item) => setRelease([item.selection])}
             moveRangeOnFirstSelection={false}
-            ranges={date}
+            ranges={release}
             className="date"
             minDate={new Date()}
-            disabledDates={disabled_dates}
-          /> 
-           <Btn onClick={()=> onClick(newDays)}>Data reserveren</Btn>           
+          />
+          <Btn onClick={()=> updateReserve(newRelease)}>Data vrijgegeven</Btn>          
         </Calender>
+ 
     </Main>
   )
 }
 
-export default Datum
+export default ReleaseDate

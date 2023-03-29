@@ -13,6 +13,8 @@ export const intent = async (req,res,next) => {
 
             return childPrice + adultPrice
         }
+        console.log("dates in controller:" , req.body.dates)
+        
         const paymentIntent = await stripe.paymentIntents.create({
             amount: calculatePrice(
                 req.body.children,
@@ -41,10 +43,9 @@ export const intent = async (req,res,next) => {
         res.status(200).send({clientSecret: paymentIntent.client_secret,})
       
     }catch(err){
-        console.log(err)
+        next(err)
     }
 }
-
 export const getReserves = async (req,res,next) => {
     try{
    
@@ -65,7 +66,7 @@ export const getReserve = async (req,res,next) => {
         })
         res.status(200).send(reserve)
     }catch(err){
-        
+        next(err)
     }
 }
 export const getUnavailables = async (req,res,next) =>{ 
@@ -78,11 +79,11 @@ export const getUnavailables = async (req,res,next) =>{
     }
 }
 export const setUnavailables = async (req,res,next) =>{
-    try{
+    try{       
         const reserve = await Reserve.findOneAndUpdate(
             {'created_at' : 1},
             {$push: {"unavailableDates" :req.body.dates}} )
-
+            console.log("controller dates:" , req.body.dates)
         res.status(200).send(reserve)
     }catch(err){
         next(err)
@@ -93,8 +94,7 @@ export const unSetUnavailables = async (req,res,next) =>{
     if(!req.isGert) return next(createError(403, "You are not Gertje"))
         const reserve = await Reserve.findOneAndUpdate(
             {'created_at' : 1},
-            {$pull: {"unavailableDates" :req.body.dates}} )
-            console.log(req.body.dates)
+            {$pull: {"unavailableDates" : {$in: req.body.dates}}})
         res.status(200).send(reserve)
     }catch(err){
         next(err)
@@ -109,9 +109,9 @@ export const confirm = async (req,res,next) => {
         const dates = await Reserve.findOneAndUpdate(
             {'created_at' : 1}, 
             {$push: {"unavailableDates": req.body.newDates}})
-        res.status(200).send(reserve, dates)
+        res.status(200).send(reserve)
     }catch(err){
-        console.log(err)
+        next(err)
     }
 }
 export const deleteReserve = async (req,res,next) => {
@@ -124,6 +124,6 @@ export const deleteReserve = async (req,res,next) => {
         res.status(200).send(reserve)
 
     }catch(err){
-        
+        next(err)
     }
 }

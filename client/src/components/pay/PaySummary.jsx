@@ -6,7 +6,7 @@ import newRequest from "../../functions/newRequest.js"
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./Checkout.jsx"
-
+import moment from 'moment'
 
 const Main = styled.main`
   
@@ -70,8 +70,6 @@ const Bottom = styled.div`
 
 const stripePromise = loadStripe("pk_test_51Mla1bLbsEaFtLUIDOIf7b6IlnK65iLS88NgQbymTY3BMVbZv7GYpn6BCiStvrClCbhW5GeGP4s8X3UgQTsb9WsH0015EUMJmm");
 
-
-
 const PaySummary = () => {
 // LOCATION VARIABLES FROM PREVIOUS PAGE
   const location = useLocation()
@@ -98,20 +96,37 @@ const handleSubmit = (event) =>{
 }
 // CALCULATE NUMBER OF DAYS FOR PRICE CALCULATION
 const getDatesInRange = (startDate, endDate) => {
-  const start = new Date(startDate)
-  const end = new Date(endDate)
+  let start = new Date(startDate)
+   start.setDate(start.getDate() +1)
+  let end = new Date(endDate)
+    end.setDate(end.getDate() +1)
   const date = new Date(start)
   const dates =[]
 
   while(date <= end){
       dates.push(new Date(date));
-      date.setDate(date.getDate() + 1)
+      date.setDate(date.getDate() +1)
   }
 
   return dates;
 }
+const getUnavailables = (startDate, endDate) => {
+  let start = new Date(startDate)
+  let end = new Date(endDate)
+  const date = new Date(start)
+  const dates =[]
+
+  while(date <= end){
+      dates.push(new Date(date));
+      date.setDate(date.getDate() +1)
+  }
+
+  return dates;
+}
+const unAvailableDays = getUnavailables( date[0].startDate ,date[0].endDate)
+
 // PRICE CALCULATIONS
-const allDays = getDatesInRange(date[0].startDate, date[0].endDate)
+const allDays = getDatesInRange( date[0].startDate ,date[0].endDate)
 const priceChildren = allDays.length * 35 * numGuests.children
 const priceAdults =  allDays.length * 45 * numGuests.adult
 const total = priceChildren + priceAdults
@@ -123,11 +138,14 @@ const [message, setMessage] = useState('')
 const handleMessage = (e) => {
   setMessage(e.target.value)
 }
-console.log("message:",message)
+
+console.log("alldays:" , allDays)
+
 const handleClick = async (e) =>{
   try{  
-  
-   const res =  await newRequest.post("/reserve/create-payment-intent", {
+   
+
+   const res =  await newRequest.post("/reserve/create-payment-intent", JSON.stringify({
       firstname: guest.firstname,
       lastname: guest.lastname,
       email: guest.email,
@@ -138,9 +156,7 @@ const handleClick = async (e) =>{
       desc:message, 
       price: total,
       days: allDays.length,
-    })
-
- 
+    }))
 
   setClientSecret(res.data.clientSecret)
   
@@ -214,7 +230,7 @@ const options = {
     <Bottom>
     {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm dates={allDays}/>
+          <CheckoutForm dates={unAvailableDays}/>
         </Elements>
         )}
     </Bottom>

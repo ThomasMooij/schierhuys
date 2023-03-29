@@ -31,6 +31,8 @@ import Surrounding from './ENG/components/home/omgevingENG/Omgeving'
 import ChildrenENG from './ENG/components/home/omgevingENG/Children'
 import TourismENG from './ENG/components/home/omgevingENG/Tourism'
 import ReviewsENG from './ENG/components/home/ReviewComponent'
+import DatumComponent from "./components/admin/DatumComponent";
+import ReleaseDate from "./components/admin/ReleaseDate";
 
 function App() {
  
@@ -64,7 +66,10 @@ function App() {
           <Route exact path="/admin" element={<Admin />}>
             <Route path="" element={<Register />}/>
             <Route exact path="costumers" element={<Costumers  />}/>
-            <Route exact path="datum" element={<Datum  />}/>
+            <Route exact path="datum" element={<DatumComponent  />}>
+              <Route path="" element={<Datum />} />
+              <Route path="release" element={<ReleaseDate />} />
+            </Route>
             <Route exact path="Reserve" element={<Reserves  />}/>
           </Route>
         </Route>
