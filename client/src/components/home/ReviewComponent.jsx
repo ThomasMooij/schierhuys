@@ -3,7 +3,7 @@ import styled from "styled-components"
 import useFetch from "../../functions/useFetch.js"
 import SingleReview from "./SingleReview.jsx"
 import newRequest from "../../functions/newRequest.js"
-import {  useState,useEffect} from "react"
+import {  useState,useEffect, Suspense, lazy} from "react"
 import ReactPaginate from 'react-paginate';
 import './pagination.css'
 
@@ -134,13 +134,18 @@ const BottomBtn = styled.button`
   font-weight: 700;
   border-radius: 5px;
 `
+
+const LazyReview = lazy(() => import('./SingleReview'))
+
 function Items({ currentItems }) {
   return (
     <>
       {currentItems &&
         currentItems.map((review, i) => (
           <ReviewBox>
-            <SingleReview key={i} review={review} /> 
+            <Suspense fallback={<p>Loading..</p>} >
+              <LazyReview review={review} key={review.id}/>
+            </Suspense>
           </ReviewBox>
         ))}
     </>
@@ -221,6 +226,7 @@ const ReviewComponent = () => {
         </BodyNav>
       { loading ? "loading" : error ? "something went horribly wrong" : 
        <>
+        <Suspense fallback={<p>Loading..</p>} ></Suspense>
        <Items currentItems={currentItems} />
         <ReactPaginate
           breakLabel="..."

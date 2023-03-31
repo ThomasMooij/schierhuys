@@ -1,6 +1,8 @@
+import { useContext } from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import { AuthContext } from "../context/AuthContext"
 import newRequest from "../functions/newRequest"
 
 const Main = styled.main`
@@ -43,15 +45,24 @@ const Login = () => {
 
     const navigate = useNavigate()
 
+    const {loading, err, dispatch} = useContext(AuthContext)
+
     const handleSubmit = async (e) =>{
         e.preventDefault()
+        dispatch({ type: "LOGIN_START" });
         try{
             const guestname = guestName.toLowerCase()
-            console.log("name:" , guestname)
             const res = await newRequest.post("/auth/login", {guestname, password})
-            localStorage.setItem("currentUser" , JSON.stringify(res.data))
-           
+            if(res.data.isGert){
+                dispatch({type: "LOGIN_SUCCESS", payload: res.data.details})
+                const isGert = true
+                navigate("/admin", {state: {isGert}})
+            }else
+          {  
+            dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
             navigate("/")
+        }
+            
         }catch(err){
             console.log("error log")
             setError(err.response)

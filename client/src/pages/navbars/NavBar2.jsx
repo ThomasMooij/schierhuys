@@ -70,12 +70,13 @@ justify-content: space-evenly;
 const NavBar2 = ({selectedPage, setSelectedPage}) => {
 
   const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+  const admin = JSON.parse(localStorage.getItem('deEchteGertGeheim'))
 
   const navigate = useNavigate()
 
   const handleLogout = async () =>  {
     await newRequest.post('/auth/logout')
-    localStorage.setItem("currentUser" , null)
+    localStorage.clear();
     navigate('/')
   }
 
@@ -101,8 +102,8 @@ const NavBar2 = ({selectedPage, setSelectedPage}) => {
                 Home
               </Link>
                   
-                {currentUser?._doc?.isGert ? <Link to="/admin">Admin</Link> : null }
-                {currentUser ? <Link onClick={handleLogout}>logout</Link> : null}
+                {admin ?  <Link to="/admin">Admin</Link> : null }
+                {currentUser || admin ? <Link onClick={handleLogout}>logout</Link> : null}
 
                 </LeftSide>
             

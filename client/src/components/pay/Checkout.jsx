@@ -6,15 +6,20 @@ import {
   useElements
 } from "@stripe/react-stripe-js";
 import { useNavigate } from "react-router-dom";
+import emailjs from '@emailjs/browser';
 
 
-const CheckoutForm = ({dates}) => {
+const CheckoutForm = ({dates, guestEmail, formattedDates}) => {
     const stripe = useStripe();
     const elements = useElements();
-  
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+
+    const [values, setValues] = useState({
+      email: email,
+      dates: dates
+    })
 
     const navigate = useNavigate()
 
@@ -48,7 +53,7 @@ const CheckoutForm = ({dates}) => {
           }
         });
       }, [stripe]);
-      const handleSubmit = async (e) => {
+      const stripeSubmit = async (e) => {
         e.preventDefault();
     
         if (!stripe || !elements) {
@@ -67,11 +72,6 @@ const CheckoutForm = ({dates}) => {
           },
         });
     
-        // This point will only be reached if there is an immediate error when
-        // confirming the payment. Otherwise, your customer will be redirected to
-        // your `return_url`. For some payment methods like iDEAL, your customer will
-        // be redirected to an intermediate site first to authorize the payment, then
-        // redirected to the `return_url`.
         if (error.type === "card_error" || error.type === "validation_error") {
           setMessage(error.message);
         } else {
@@ -80,11 +80,30 @@ const CheckoutForm = ({dates}) => {
     
         setIsLoading(false);
       };
-    
+
       const paymentElementOptions = {
         layout: "tabs"
       }
 
+      const sendEmail = (e) => {
+        e.preventDefault();
+    
+        emailjs.sendForm('service_qxjnhra', 'template_r675kfb', e.target, 'LTlQv0sg7RiYlKMB4' )
+          .then((result) => {
+              console.log(result.text);
+              {e.target}
+          }, (error) => {
+              console.log(error.text);
+          });
+    
+          e.target.reset()
+      };
+
+      const handleSubmit = (e) =>{
+        sendEmail(e)
+        stripeSubmit(e)
+      }
+   
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
     <LinkAuthenticationElement
@@ -94,6 +113,8 @@ const CheckoutForm = ({dates}) => {
     <PaymentElement id="payment-element" options={paymentElementOptions} />
     <button disabled={isLoading || !stripe || !elements} id="submit">
       <span id="button-text">
+        <input name="dates" value={formattedDates} type="hidden"/>
+        <input name="email" value={guestEmail} type="hidden"/>
         {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
       </span>
     </button>

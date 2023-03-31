@@ -18,7 +18,6 @@ const SideBar = styled.div`
   box-shadow: 0px 1px 10px #999;
 `
 const Article = styled.article`
-  
 `
 const Body = styled.div`
   flex:3;
@@ -26,7 +25,6 @@ const Body = styled.div`
   align-items: flex-start;
   justify-content: center;
 `
-
 const Admin = () => {
   return (
     <Main>

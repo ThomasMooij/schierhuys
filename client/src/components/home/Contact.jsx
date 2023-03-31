@@ -1,4 +1,6 @@
+import { useRef } from "react"
 import styled from "styled-components"
+import emailjs from '@emailjs/browser';
 
 const Main = styled.main`
   width: 100vw;
@@ -35,18 +37,38 @@ const TextArea = styled.textarea`
 ` 
 const Contact = () => {
 
+  const form = useRef()
+
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_qxjnhra', 'template_hiwr4pd', e.target, 'LTlQv0sg7RiYlKMB4' )
+      .then((result) => {
+          console.log(result.text);
+          {e.target}
+      }, (error) => {
+          console.log(error.text);
+      });
+
+      e.target.reset()
+  };
+
   return (
     <Main id="Contact">
       <Wrapper>
          <Title>Heeft u vragen? </Title>
          <Title>Neem contact met ons op!</Title>
-         <Form>
-            <Label></Label>
-            <Input></Input>
-            <Label></Label>
-            <Input></Input>
-            <Label></Label>
-            <TextArea></TextArea>
+         <Form ref={form} onSubmit={sendEmail}>
+            <Label>Naam</Label>
+            <Input type="text" name="name"></Input>
+            <Label>Waar gaat uw vraag over</Label>
+            <Input type="text" name="subject"></Input>
+            <Label>Email</Label>
+            <Input type="email" name="email"></Input>
+            <Label>message</Label>
+            <TextArea name="message"></TextArea>
+            <input type="submit" value="Send" />
          </Form>
       </Wrapper>
     </Main>

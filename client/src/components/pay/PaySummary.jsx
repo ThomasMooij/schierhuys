@@ -173,6 +173,8 @@ const options = {
   appearance,
 };
 
+const formattedDates = `${format(date[0].startDate, "dd/MM/yyyy")} tot ${format(date[0].endDate, "dd/MM/yyyy")}`
+
   return (
    <Main>
     <Top>
@@ -182,7 +184,7 @@ const options = {
         <Options>
           <Adult>aantaal volwassenen: {numGuests.adult}</Adult>
           <Children>aantal kinderen: {numGuests.children}</Children>
-          <span>{`${format(date[0].startDate, "dd/MM/yyyy")} tot ${format(date[0].endDate, "dd/MM/yyyy")} `}</span>
+          <span>{formattedDates}</span>
           <span>Prijs: {total}</span>
           {children.map((item)=> (
             <Form>
@@ -230,7 +232,7 @@ const options = {
     <Bottom>
     {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm dates={unAvailableDays}/>
+          <CheckoutForm dates={unAvailableDays} guestEmail={guest.email} formattedDates={formattedDates}/>
         </Elements>
         )}
     </Bottom>

@@ -12,8 +12,7 @@ const Nav = styled.nav`
    position: sticky;
    top: 0px;
     z-index: 999;
-    box-shadow: 0px 1px 10px #999;
-    
+    box-shadow: 0px 1px 10px #999; 
 `
 const NavContainer = styled.div`
   background-color: #5d8238;
@@ -113,22 +112,21 @@ display: none;
 const NavBar1 = ({selectedPage, setSelectedPage}) => {
 
   const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+  const admin = JSON.parse(localStorage.getItem('deEchteGertGeheim'))
 
   const navigate = useNavigate()
 
   const handleLogout = async () =>  {
     await newRequest.post('/auth/logout')
-    localStorage.setItem("currentUser" , null)
+    localStorage.clear();
     navigate('/')
   }
-console.log(currentUser)
   const {lang, setLang} = useContext(langContext)
 
   const changeLang = () =>{
     localStorage.setItem("lang" , "ENG")
     setLang("ENG")
   }
-
 
   return (
     <Nav>
@@ -140,7 +138,7 @@ console.log(currentUser)
                   <ContactLogo><LocalPhoneIcon /></ContactLogo>
                   <ContactLogo><HouseIcon /></ContactLogo>
                 </IconDiv>
-               
+                               
                 <TextDiv>
                   <ContactText>06000006</ContactText>
                   <ContactText>Berkenlaan 10, 1800PX</ContactText>
@@ -158,12 +156,10 @@ console.log(currentUser)
                       selectedPage={selectedPage}
                       setSelectedPage={setSelectedPage}  
                     />
-
                     <LogoContainer>
                       <Logo>Schierhuys</Logo>
                       <LogoText>Vakanties in Drenthe</LogoText>
                     </LogoContainer>
-
                     <NavLink 
                       page="Reserve" 
                       selectedPage={selectedPage}
@@ -174,15 +170,14 @@ console.log(currentUser)
                       selectedPage={selectedPage}
                       setSelectedPage={setSelectedPage}  
                     />
-
                      <NavLink 
                       page="Contact" 
                       selectedPage={selectedPage}
                       setSelectedPage={setSelectedPage} 
                     />
                   
-                {currentUser?.isGert ? <Link to="/admin">Admin</Link> : null }
-                {currentUser ? <Link onClick={handleLogout}>logout</Link> : null}
+                {admin ?  <Link to="/admin">Admin</Link> : null }
+                {currentUser || admin ? <Link onClick={handleLogout}>logout</Link> : null}
 
                 </LeftSide>
                 <RightSide>           
