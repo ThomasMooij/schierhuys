@@ -61,7 +61,9 @@ for(let i = 0; i < reserve.dates.length ; i++){
         <br></br>
         <Adults> aantal volwassenen: <b>{reserve.adults}</b></Adults>
         <br></br>
-        <Children>Aantal kinderen: <b>{reserve.Children}</b>, leeftijden: <b>{array.map((item) => (` -${item}`))} </b></Children>
+        <Adults> klant email: <b>{reserve.email}</b></Adults>
+        <br></br>
+        <Children>Aantal kinderen: <b>{reserve.Children}</b>, {reserve.Children !== 0 ? 'leeftijden:' : "" } <b>{array.map((item) => (` -${item}`))} </b></Children>
         <br></br>
         <Dates>Data verblijf: <b>{`van ${reserve.dates[0].split('T')[0]} tot ${reserve.dates[datesLength -1].split("T")[0]}`}</b> </Dates>
         <div>{reserve.desc}</div>

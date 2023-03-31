@@ -42,13 +42,8 @@ const Desc = styled.p`
 `
 const SingleReview = ({review}) => {
 
- 
-
-
     const {data,loading, error} = useFetch(`http://localhost:8080/api/users/${review.userId}`)
     const date = new Date(review.createdAt)
-
-
 
   return (
   <Review>

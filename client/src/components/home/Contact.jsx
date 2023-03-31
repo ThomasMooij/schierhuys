@@ -6,6 +6,7 @@ const Main = styled.main`
   width: 100vw;
   height: 70vh;
   max-width: 100%;
+  background-color: whitesmoke;
 `
 const Wrapper = styled.div`
   display: flex;
@@ -14,6 +15,14 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding: 25px;
 `
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: beige;
+  width: 100vw;
+  max-width: 100%;
+`
 const Title = styled.h2`
   font-weight: 600;
 
@@ -21,9 +30,20 @@ const Title = styled.h2`
     font-weight: 400;
   }
 ` 
+const FormWrapper = styled.div`
+
+align-items: flex-start;
+background-color: #F9FBFF;
+box-shadow: 0px 1px 10px #999;
+margin-top: 25px;
+padding: 100px 350px;
+border-radius: 25px;
+`
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content:flex-start;
   gap: 6px;
 ` 
 const Label = styled.label`
@@ -35,10 +55,14 @@ const Input = styled.input`
 const TextArea = styled.textarea`
   
 ` 
+const InputBtn = styled.input`
+  background-color: lightblue;
+  padding: 7px;
+  width: 40%;
+`
 const Contact = () => {
 
   const form = useRef()
-
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -57,19 +81,23 @@ const Contact = () => {
   return (
     <Main id="Contact">
       <Wrapper>
+        <TitleWrapper>
          <Title>Heeft u vragen? </Title>
          <Title>Neem contact met ons op!</Title>
+        </TitleWrapper>
+        <FormWrapper>
          <Form ref={form} onSubmit={sendEmail}>
             <Label>Naam</Label>
-            <Input type="text" name="name"></Input>
+            <Input type="text" name="name" placeholder="jan smit"></Input>
             <Label>Waar gaat uw vraag over</Label>
-            <Input type="text" name="subject"></Input>
+            <Input type="text" name="subject" placeholder="beschikbare faceliteiten"></Input>
             <Label>Email</Label>
-            <Input type="email" name="email"></Input>
-            <Label>message</Label>
-            <TextArea name="message"></TextArea>
-            <input type="submit" value="Send" />
+            <Input type="email" name="email" placeholder="jansmit@gmail.com"></Input>
+            <Label >message</Label>
+            <TextArea placeholder="uw vraag...." name="message" cols={50} rows={10}></TextArea>
+            <InputBtn type="submit" value="Send" />
          </Form>
+        </FormWrapper>
       </Wrapper>
     </Main>
   )

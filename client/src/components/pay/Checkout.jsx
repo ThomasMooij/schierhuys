@@ -8,18 +8,12 @@ import {
 import { useNavigate } from "react-router-dom";
 import emailjs from '@emailjs/browser';
 
-
 const CheckoutForm = ({dates, guestEmail, formattedDates}) => {
     const stripe = useStripe();
     const elements = useElements();
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-
-    const [values, setValues] = useState({
-      email: email,
-      dates: dates
-    })
 
     const navigate = useNavigate()
 

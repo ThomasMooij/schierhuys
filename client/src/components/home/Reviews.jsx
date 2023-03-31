@@ -16,6 +16,7 @@ const SideBar = styled.div`
   align-items: center;
   background-color: #F9FBFF;
   box-shadow: 0px 1px 10px #999;
+  border-radius: 15px;
 `
 const Btn = styled(Link)`
 	padding: 0;
@@ -52,11 +53,8 @@ display: flex;
 align-items: flex-start;
 justify-content: center;
 background-color: whitesmoke;
-  flex: 3;
+flex: 3;
 `
-
-
-
 const Reviews = () => {
   
   const [selectedPage, setSelectedPage] = useState("Review")

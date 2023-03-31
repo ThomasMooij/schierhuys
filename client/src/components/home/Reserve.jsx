@@ -51,7 +51,7 @@ const Top = styled.div`
   padding: 15px;
   background-color: #F9FBFF;
   box-shadow: 0px 1px 10px #999;
-  border-radius: 15px;
+  border-radius: 35px;
 `
 const LeftTitle = styled.h1`
   color: #383333;
@@ -125,7 +125,7 @@ align-items: center;
 justify-content: center;
 padding: 15px;
 box-shadow: 0px 1px 10px #999;
-border-radius: 15px;
+border-radius: 35px;
 `
 const CalendarTitle = styled.h2`
   color: #383333;

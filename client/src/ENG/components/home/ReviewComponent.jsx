@@ -160,7 +160,7 @@ const ReviewComponent = () => {
   }
   const [itemOffset, setItemOffset] = useState(0);
 
-  let itemsPerPage = 5
+  let itemsPerPage = 3
 
   const endOffset = itemOffset + itemsPerPage;
   console.log(`Loading items from ${itemOffset} to ${endOffset}`);
@@ -229,8 +229,8 @@ const ReviewComponent = () => {
       
     {currentUser ?      
           <Bottom>
-            <Title>Laat ons weten wat u ervan vond </Title>
-            <Title>U kunt een resencie achterlaten per bezoek</Title>
+            <Title>Let us know about your experience! </Title>
+            <Title>You can leave only one review per visit</Title>
             <Input
               type="text"
               placeholder ="Schrijf uw recensie"
