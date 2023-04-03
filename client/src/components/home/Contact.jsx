@@ -14,6 +14,9 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 25px;
+  @media(max-width: 780px){
+    padding: 5px;
+  }
 `
 const TitleWrapper = styled.div`
   display: flex;

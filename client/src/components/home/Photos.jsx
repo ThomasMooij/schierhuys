@@ -43,11 +43,14 @@ const Slider = styled.div`
   display: flex;
   align-items: center;
 
-  @media (max-width: 780px){
+  @media (max-width: 580px){
            background-color: whitesmoke;
-          width: 350px; 
-          height: 360px;
+           height: 350px;
         }
+        @media (min-width: 580px) and (max-width: 1280px){
+          background-color: whitesmoke;
+          height: 450px;
+        } 
 `
 const SlideWrapper = styled.div`
   width: 100%;
@@ -78,9 +81,17 @@ const Arrow = styled.article`
 `
 const SlideImg = styled.img`
   
-  @media (max-width: 1380px){
-           width: 250px;
+ 
+  @media (max-width: 580px){
+           width: 350px;
+           height: 350px;
         }
+
+  @media (min-width: 580px) and (max-width: 1380px){
+           width: 450px;
+        }
+      
+      
 `
 const ImageContainer = styled.div`
   display: flex;

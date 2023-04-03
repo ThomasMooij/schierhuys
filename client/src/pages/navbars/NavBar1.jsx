@@ -108,7 +108,7 @@ border-radius: 50%;
 padding: 15px;
 outline: inherit;
 border: none;
-@media (max-width: 1280px){
+@media (max-width: 1380px){
            display: none;
         }
 
@@ -183,6 +183,8 @@ const NavBar1 = ({selectedPage, setSelectedPage}) => {
                   
                 {admin ?  <Link to="/admin">Admin</Link> : null }
                 {currentUser || admin ? <Link onClick={handleLogout}>logout</Link> : null}
+
+                {/* MOBILE */}
 
                 </LeftSide>
                 <RightSide>           

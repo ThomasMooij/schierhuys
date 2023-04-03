@@ -30,7 +30,7 @@ const Btn = styled(Link)`
  
 `
 const Anchor = styled(AnchorLink)`
-  @media (max-width: 1280px){
+  @media (max-width: 1380px){
            display: none;
         }
 `

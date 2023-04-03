@@ -8,6 +8,7 @@ align-items: center;
   height: 20vh;
   max-width: 100%;
   background-color: #5d8238;;
+
 `
 const Wrapper = styled.div`
     display: flex;

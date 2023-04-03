@@ -152,7 +152,7 @@ function Items({ currentItems }) {
         currentItems.map((review, i) => (
           <ReviewBox>
             <Suspense fallback={<p>Loading..</p>} >
-              <LazyReview review={review} key={review.id}/>
+              <LazyReview review={review} key={review._id}/>
             </Suspense>
           </ReviewBox>
         ))}
