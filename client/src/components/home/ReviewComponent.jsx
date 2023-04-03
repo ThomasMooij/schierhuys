@@ -13,6 +13,7 @@ const Main = styled.main`
     align-items: flex-start;
     justify-content: center;
     width: 100%;
+    max-width: 100%;
     gap: 35px;
 `
 const Nav = styled.nav`
@@ -22,6 +23,7 @@ const Nav = styled.nav`
     margin: auto;
     background-color: beige;
     width: 100%;
+    max-width: 100%;
     min-height: 85px;
 `
 const Left = styled.span`
@@ -37,10 +39,11 @@ const Right = styled.div`
     align-items: center;
     margin: auto;
     gap: 15px;
+   
 `
 const Body = styled.div`
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     margin: auto;
     flex-direction: column;
     padding-left:5px;
@@ -101,6 +104,11 @@ box-shadow: 0px 1px 10px #999;
  display: flex;
  align-items: center;
  gap: 15px;
+
+ @media (max-width: 1380px){
+        width: 260px;
+      height: 160px;
+        }
 
 `
 const Input = styled.input`

@@ -34,6 +34,9 @@ const Form = styled.form`
   height: 80%;
   align-items: center;
   gap: 20px;
+  @media (max-width: 1280px){
+           flex-direction: column;
+        }
 `
 const Left = styled.div`
 display: flex;
@@ -184,10 +187,12 @@ const ReserveBtn = styled.button`
     transform: translateY(-17px);
     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
   }
+  @media (max-width: 1280px){
+           margin-bottom: 15px;
+        }
 `
 
 const Reserve = () => {
-
   const navigate = useNavigate()
 
   const handleChange = (e) =>{

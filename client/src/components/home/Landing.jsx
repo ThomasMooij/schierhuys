@@ -9,12 +9,16 @@ max-width: 100%;
 display:flex;
 position:relative;
 overflow:hidden;
+
+@media (max-width: 1380px){
+           display: none;
+        }
 `
 const Wrapper = styled.div`
 height: 100%;
 display: flex;
-`
 
+`
 const Slide = styled.div`
 width: 100%;
 height:100%;
@@ -26,7 +30,6 @@ background-repeat: no-repeat center center fixed;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
-background-size: cover;
 background-size: cover;
 `
 const SlideContainer = styled.div`
@@ -45,7 +48,6 @@ flex-direction: column;
 top: 800px;
 left: -25px;
 `
-
 const Button = styled.button`
 padding:10px 35px;
 font-size:20px;
@@ -59,8 +61,6 @@ cursor:pointer;
   transform: translateY(-17px);
   box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
 }
-// springt niet naar boven zoals de bedoeling is
-
 `
 const ArrowDown = styled.div`
 width:50px;
@@ -78,7 +78,6 @@ transform: translateY(-7px);
 `;
 
 const Landing = ({setSelectedPage}) => {
-
   return (
     <>
       <Container id="Home">
@@ -100,7 +99,6 @@ const Landing = ({setSelectedPage}) => {
         </Wrapper>
       </Container>
     </>
-
   )
 }
 

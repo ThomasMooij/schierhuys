@@ -3,8 +3,8 @@ import styled from "styled-components"
 import emailjs from '@emailjs/browser';
 
 const Main = styled.main`
-  width: 100vw;
-  height: 70vh;
+  width: 100%;
+  height: 90%;
   max-width: 100%;
   background-color: whitesmoke;
 `
@@ -31,15 +31,16 @@ const Title = styled.h2`
   }
 ` 
 const FormWrapper = styled.div`
-
 align-items: flex-start;
 background-color: #F9FBFF;
 box-shadow: 0px 1px 10px #999;
 margin-top: 25px;
 padding: 100px 350px;
 border-radius: 25px;
+@media (max-width: 1280px){
+           padding: 15px;
+        }
 `
-
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -59,6 +60,13 @@ const InputBtn = styled.input`
   background-color: lightblue;
   padding: 7px;
   width: 40%;
+  margin: auto;
+  border-radius: 15px;
+  border: none;
+
+  &:hover{
+    background-color: white;
+  }
 `
 const Contact = () => {
 
@@ -74,7 +82,6 @@ const Contact = () => {
       }, (error) => {
           console.log(error.text);
       });
-
       e.target.reset()
   };
 

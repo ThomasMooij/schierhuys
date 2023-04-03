@@ -1,6 +1,7 @@
 import AnchorLink from "react-anchor-link-smooth-scroll"
 import styled from "styled-components"
 import {Link} from 'react-scroll';
+import { mobile } from "../../responsive.js";
 
 
 const Btn = styled(Link)`
@@ -15,14 +16,26 @@ const Btn = styled(Link)`
     font-weight: 700;
     background-color: transparent;
     border-spacing: 13px;
+
+  
+    @media (max-width: 1380px){
+           display: none;
+        }
     &:hover{
         border-bottom: 3px solid;
     }
     &.active{
        border-bottom: 3px solid;
     }
-
+ 
 `
+const Anchor = styled(AnchorLink)`
+  @media (max-width: 1280px){
+           display: none;
+        }
+`
+
+
   const NavLink = ({page, selectedPage, setSelectedPage}) => {
 
   return (
@@ -37,7 +50,7 @@ const Btn = styled(Link)`
     duration={500}
     spy={true}
     >
-      <AnchorLink >{page}</AnchorLink>
+      <Anchor >{page}</Anchor>
     </Btn>
   )
 }

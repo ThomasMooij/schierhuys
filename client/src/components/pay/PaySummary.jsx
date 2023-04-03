@@ -18,10 +18,14 @@ const Left = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  margin: 15px;
   padding:15px;
+  gap: 15px;
+  background-color: #F9FBFF;
+  box-shadow: 0px 1px 10px #999;
 `
 const Title = styled.h2`
-  
+  font-weight: 500;
 `
 const Guest = styled.span`
   
@@ -29,6 +33,7 @@ const Guest = styled.span`
 const Options = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 5px;
 `
 const Adult = styled.span`
   
@@ -42,7 +47,8 @@ const Form = styled.form`
   width: 40%;
 `
 const Label = styled.label`
-  
+  font-size: 20px;
+  font-weight: 700;
 `
 const Select = styled.select`
   
@@ -55,13 +61,27 @@ const Right = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
+  background-color: #F9FBFF;
+  box-shadow: 0px 1px 10px #999;
+  margin: 15px;
+  padding:15px;
 
 `
 const TextArea = styled.textarea`
   
 `
 const Btn = styled.button`
-  width: 30%;
+  width: 20%;
+  padding: 5px;
+  background-color: lightblue;
+  margin: auto;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+
+  &:hover{
+    background-color: white;
+  }
 `
 
 const Bottom = styled.div`
@@ -179,11 +199,11 @@ const formattedDates = `${format(date[0].startDate, "dd/MM/yyyy")} tot ${format(
    <Main>
     <Top>
       <Left>
-        <Title>Neem de gegevens goed door en bevestig deze alstublieft </Title>
-        <Guest>voornaam: {guest.firstname} achternaam: {guest.lastname} email: {guest.email}</Guest>
+        <Title>Neem de gegevens goed door en bevestig deze alstublieft, wilt u ons iets laten weten? schrijf uw bericht hier aan uw rechter hand voordat u uw gegevens bevestigd </Title>
+        <Guest><b>voornaam: </b>{guest.firstname} , <b>achternaam:</b> {guest.lastname} email: {guest.email}</Guest>
         <Options>
-          <Adult>aantaal volwassenen: {numGuests.adult}</Adult>
-          <Children>aantal kinderen: {numGuests.children}</Children>
+          <Adult><b>aantal volwassenen: </b>{numGuests.adult}</Adult>
+          <Children><b>aantal kinderen:</b> {numGuests.children}</Children>
           <span>{formattedDates}</span>
           <span>Prijs: {total}</span>
           {children.map((item)=> (
@@ -217,16 +237,16 @@ const formattedDates = `${format(date[0].startDate, "dd/MM/yyyy")} tot ${format(
         </Options>
       </Left>
       <Right>
-      <Label htmlFor="message">Wilt u ons iets laten weten? Heeft u speciale wensen? schrijf ze hier op of neem contact met ons op via 06000006 en wij accomoderen uw wensen graag</Label>
-      <TextArea
-        rows={6}
-        cols={60}
-        id="message"
-        name="message"
-        value={message}
-        onChange={handleMessage}
-        maxLength={3000}
-      ></TextArea>
+        <Label htmlFor="message">Wilt u ons iets laten weten? Heeft u speciale wensen? schrijf ze hier op of neem contact met ons op via 06000006 en wij accomoderen uw wensen graag</Label>
+        <TextArea
+          rows={6}
+          cols={60}
+          id="message"
+          name="message"
+          value={message}
+          onChange={handleMessage}
+          maxLength={3000}
+        ></TextArea>
       </Right>
     </Top>
     <Bottom>

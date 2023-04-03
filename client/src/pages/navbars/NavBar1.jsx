@@ -7,7 +7,6 @@ import newRequest from '../../functions/newRequest';
 import { useContext } from 'react';
 import { langContext } from '../../context/langContext';
 
-
 const Nav = styled.nav`
    position: sticky;
    top: 0px;
@@ -17,12 +16,12 @@ const Nav = styled.nav`
 const NavContainer = styled.div`
   background-color: #5d8238;
   width:100%;
+  max-width: 100%;
   z-index: 30;
   height: 105px;
   justify-content: center;
   display: flex;
   justify-content: space-evenly;
-
 `
 const InnerContainer = styled.div`
  margin: auto;
@@ -43,6 +42,9 @@ const IconDiv = styled.div`
   align-items: center;
   justify-content: center;
   gap: 5px;
+  @media (max-width: 780px){
+           display: none;
+        }
 `
 const TextDiv = styled.div`
   display: flex;
@@ -50,6 +52,9 @@ const TextDiv = styled.div`
   align-items: center;
   justify-content: center;
   gap: 11px;
+  @media (max-width: 780px){
+           display: none;
+        }
 `
 const ContactLogo = styled.div`
   background-color: whitesmoke;
@@ -59,6 +64,7 @@ const ContactLogo = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  
 `
 const ContactText = styled.p`
   color: white;
@@ -91,9 +97,7 @@ const RightSide = styled.div`
 display: flex;
 align-items: center;
 `
-const LangDiv = styled.div`
 
-`
 const LangBtn = styled.button`
 cursor: pointer;
 background-color:inherit;
@@ -104,11 +108,12 @@ border-radius: 50%;
 padding: 15px;
 outline: inherit;
 border: none;
+@media (max-width: 1280px){
+           display: none;
+        }
 
 `
-const LangOption = styled.button`
-display: none;
-`
+
 const NavBar1 = ({selectedPage, setSelectedPage}) => {
 
   const currentUser = JSON.parse(localStorage.getItem('currentUser'))

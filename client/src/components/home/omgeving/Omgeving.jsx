@@ -7,7 +7,7 @@ const Section = styled.section`
 const Omgeving = () => {
   return (
    <Section>
-        omgeving
+        omgeving(verhaaltje over Drenthe)
    </Section>
   )
 }
