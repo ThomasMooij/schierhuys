@@ -4,9 +4,13 @@ import emailjs from '@emailjs/browser';
 
 const Main = styled.main`
   width: 100%;
-  height: 90%;
+  height: 90vh;
   max-width: 100%;
   background-color: whitesmoke;
+
+  @media(max-width: 1280px ){
+      padding-top:55px
+    }
 `
 const Wrapper = styled.div`
   display: flex;
@@ -40,8 +44,9 @@ box-shadow: 0px 1px 10px #999;
 margin-top: 25px;
 padding: 100px 350px;
 border-radius: 25px;
-@media (max-width: 1280px){
+@media (max-width: 1080px){
            padding: 15px;
+           max-width: 280px;
         }
 `
 const Form = styled.form`

@@ -2,10 +2,13 @@ import styled from 'styled-components'
 import NavLink from '../../components/home/Link'
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import HouseIcon from '@mui/icons-material/House';
-import { Link, useNavigate } from 'react-router-dom';
+import {Link as MobileLink} from 'react-scroll';
+import {Link, useNavigate } from 'react-router-dom';
 import newRequest from '../../functions/newRequest';
-import { useContext } from 'react';
+import {  useContext, useState } from 'react';
 import { langContext } from '../../context/langContext';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Nav = styled.nav`
    position: sticky;
@@ -111,7 +114,69 @@ border: none;
 @media (max-width: 1380px){
            display: none;
         }
+`
+const AdminLinks = styled.article`
+display: flex;
+align-items: center;
+gap: 15px;
+color: white;
+  
+  @media (max-width: 780px){
+    display: none;
+  }
+`
+const MobileIcon = styled.article`
+  display: flex;
+  justify-content:flex-end;
+  color: white;
+  align-items: center;
+  transform: scale(1.3);
+  cursor: pointer;
 
+  &:hover{
+    color: yellowgreen;
+  }
+
+  @media (min-width: 1380px){
+           display: none;
+        }
+`
+const Close = styled.article`
+   transform: scale(1.8);
+   color: red;
+   cursor: pointer;
+   &:hover{
+    color: yellowgreen;
+   }
+`
+const MobileMenu = styled.ul`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  max-width: 100%;
+  height: 100vh;
+  background-color: lightgreen;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  justify-content: flex-start;
+  padding-top: 80px;
+  gap: 55px;
+`
+const MobileItem = styled.li`
+  padding: 6px 0px;
+  text-decoration: none;
+  list-style-type: none;
+  font-size: 19px;
+  color: white;
+  font-weight: 700;
+
+  &:hover{
+    border-bottom: 1px solid blue;
+  }
 `
 
 const NavBar1 = ({selectedPage, setSelectedPage}) => {
@@ -132,6 +197,8 @@ const NavBar1 = ({selectedPage, setSelectedPage}) => {
     localStorage.setItem("lang" , "ENG")
     setLang("ENG")
   }
+
+  const [openMobile, setOpenMobile] = useState(false)
 
   return (
     <Nav>
@@ -180,12 +247,35 @@ const NavBar1 = ({selectedPage, setSelectedPage}) => {
                       selectedPage={selectedPage}
                       setSelectedPage={setSelectedPage} 
                     />
-                  
-                {admin ?  <Link to="/admin">Admin</Link> : null }
-                {currentUser || admin ? <Link onClick={handleLogout}>logout</Link> : null}
+
+                 <AdminLinks>
+                  {admin ?  <Link to="/admin">Admin</Link> : null }
+                  {currentUser || admin ? <Link onClick={handleLogout}>logout</Link> : null}
+                </AdminLinks> 
 
                 {/* MOBILE */}
-
+                <MobileIcon onClick={()=>setOpenMobile(!openMobile)}> {!openMobile ? <MenuIcon /> : <CloseIcon />}</MobileIcon>
+                {openMobile && 
+                <MobileMenu>
+                  <Close onClick={()=>setOpenMobile(false)}><CloseIcon /></Close>
+                  <div>
+                    <MobileLink to="Fotos" smooth={true} offset={-250} duration={500} onClick={()=>setOpenMobile(false)}> 
+                     <MobileItem>Foto's</MobileItem>
+                    </MobileLink>
+                    <MobileLink to="Reserve" smooth={true} offset={-250} duration={500} onClick={()=>setOpenMobile(false)}>
+                      <MobileItem>Reserve</MobileItem>
+                      </MobileLink>
+                    <MobileLink to="Reviews&info" smooth={true} offset={-250} duration={500} onClick={()=>setOpenMobile(false)}> 
+                      <MobileItem>Reviews&info</MobileItem>
+                    </MobileLink>
+                    <MobileLink to="Contact" smooth={true} offset={-250} duration={500} onClick={()=>setOpenMobile(false)}>
+                      <MobileItem>Contact</MobileItem>
+                    </MobileLink>
+                    {admin ?  <MobileItem><Link onClick={()=>setOpenMobile(false)} to="/admin">Admin</Link> </MobileItem>: null }
+                    {currentUser || admin ? <MobileItem><Link onClick={handleLogout} >logout</Link> </MobileItem> : null}
+                  </div>
+                </MobileMenu>
+                                }
                 </LeftSide>
                 <RightSide>           
                       <LangBtn onClick={changeLang}>{lang}</LangBtn>

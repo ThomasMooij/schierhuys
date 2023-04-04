@@ -1,7 +1,7 @@
 import AnchorLink from "react-anchor-link-smooth-scroll"
 import styled from "styled-components"
 import {Link} from 'react-scroll';
-import { mobile } from "../../responsive.js";
+
 
 
 const Btn = styled(Link)`

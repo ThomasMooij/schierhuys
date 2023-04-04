@@ -55,6 +55,10 @@ const Top = styled.div`
   background-color: #F9FBFF;
   box-shadow: 0px 1px 10px #999;
   border-radius: 35px;
+  @media(max-width: 1280px ){
+     max-width: 280px;
+     margin-left: 15px;
+    }
 `
 const LeftTitle = styled.h1`
   color: #383333;
@@ -80,7 +84,7 @@ z-index: 2;
   -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
   box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
   width: 60%;
-  
+ 
 `
 const OptionsTitle = styled.h2`
   color: #383333;
@@ -129,6 +133,13 @@ justify-content: center;
 padding: 15px;
 box-shadow: 0px 1px 10px #999;
 border-radius: 35px;
+@media(max-width: 1280px ){
+     max-width: 280px;
+     margin-left: 15px;
+     border: none;
+     box-shadow: none;
+     background-color: whitesmoke;
+    }
 `
 const CalendarTitle = styled.h2`
   color: #383333;

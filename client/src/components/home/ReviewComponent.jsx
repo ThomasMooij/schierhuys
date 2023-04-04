@@ -25,6 +25,10 @@ const Nav = styled.nav`
     width: 100%;
     max-width: 100%;
     min-height: 85px;
+    @media(max-width: 680px ){
+    display: none;
+    }
+   
 `
 const Left = styled.span`
   font-family: "Urbanist";
@@ -36,10 +40,11 @@ const Left = styled.span`
 const Right = styled.div`
     display: flex;
     flex-direction: column;
+    max-width: 100%;
+    width: 100wh;
     align-items: center;
     margin: auto;
     gap: 15px;
-   
 `
 const Body = styled.div`
     display: flex;
@@ -90,10 +95,16 @@ const Btn = styled.button`
 const Title = styled.h3`
     font-size: 22px;
     font-weight: 700;
+    @media(max-width: 1280px ){
+     display: none;
+    }
 `
 const SubTitle = styled.h3`
     font-size: 22px;
     font-weight: 400;
+    @media(max-width: 1280px ){
+     display: none;
+    }
 `
 const ReviewBox = styled.div`
  background-color: #F9FBFF;
@@ -109,12 +120,15 @@ box-shadow: 0px 1px 10px #999;
         width: 260px;
       height: 160px;
         }
-
 `
 const Input = styled.input`
     padding: 35px;
     width: 550px;
     height:70px;
+    @media(max-width: 1280px ){
+     width:155px;
+     height:15px;
+    }
 `
 const Text = styled.span`
     
@@ -125,7 +139,9 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 margin: auto;
-  
+@media(max-width: 680px ){
+    display: none;
+    }
 `
 const SelectDiv = styled.div`
   display: flex;
@@ -134,7 +150,6 @@ const SelectDiv = styled.div`
   margin: 15px;
 `
 const BottomBtn = styled.button`
-
   padding: 8px;
   background-color: #6565e7;
   text-decoration: none;

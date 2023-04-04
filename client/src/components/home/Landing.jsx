@@ -45,22 +45,24 @@ display: flex;
 align-items: center;
 justify-content: flex-end;
 flex-direction: column;
-top: 800px;
+top: 700px;
 left: -25px;
 `
 const Button = styled.button`
 padding:10px 35px;
 font-size:20px;
-font-weight: 700;
+font-weight: 500;
 color: white;
 background-color:#5d8238;
 border-radius: 10px;
+border: none;
 cursor:pointer;
 &:hover{
   background-color:#93ad78;
   transform: translateY(-17px);
   box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
 }
+
 `
 const ArrowDown = styled.div`
 width:50px;

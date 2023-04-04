@@ -42,12 +42,17 @@ const Slider = styled.div`
   z-index: 999;
   display: flex;
   align-items: center;
+  @media (max-width: 450px){
+           background-color: whitesmoke;
+           height: 350px;
+           width: 350px;
+        }
 
   @media (max-width: 580px){
            background-color: whitesmoke;
            height: 350px;
         }
-        @media (min-width: 580px) and (max-width: 1280px){
+  @media (min-width: 580px) and (max-width: 1280px){
           background-color: whitesmoke;
           height: 450px;
         } 
@@ -81,10 +86,9 @@ const Arrow = styled.article`
 `
 const SlideImg = styled.img`
   
- 
   @media (max-width: 580px){
-           width: 350px;
-           height: 350px;
+           width: 250px;
+           height: 250px;
         }
 
   @media (min-width: 580px) and (max-width: 1380px){
@@ -97,6 +101,7 @@ const ImageContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
 `
 const ImageWrapper = styled.div`
   width: 33%;

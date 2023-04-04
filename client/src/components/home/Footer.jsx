@@ -8,7 +8,9 @@ align-items: center;
   height: 20vh;
   max-width: 100%;
   background-color: #5d8238;;
-
+  @media(max-width: 780px ){
+     display: none;
+    }
 `
 const Wrapper = styled.div`
     display: flex;
