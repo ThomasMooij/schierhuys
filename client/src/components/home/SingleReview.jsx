@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import useFetch from '../../functions/useFetch'
 import { format } from "date-fns"
+import star from "../../assets/star.jpg"
 
 const Review = styled.main`
     display: flex;
@@ -13,6 +14,11 @@ const Review = styled.main`
 const UserInfo = styled.div`
    display: flex ;
    gap: 35px;
+
+  @media (max-width: 1380px){
+    gap: 2px;
+    flex-direction: column;
+  }
 `
 const User = styled.div`
     
@@ -29,10 +35,12 @@ const TimeStamp = styled.main`
 `
 const Stars = styled.div`
     display: flex;
-    gap: 3px;
+    gap: 7px;
+    align-items: center;
+  
 `
 const Img = styled.img`
-    
+    width: 12px;
 `
 const Star = styled.span`
     
@@ -54,9 +62,9 @@ const SingleReview = ({review}) => {
       <Stars>
           {Array(review.star).fill().map((item, i) => (
             
-            <div>*</div>
+            <Img src={star}></Img>
             
-            ))}
+          ))}
           <Star>{review.star}</Star>
       </Stars>
     </UserInfo>
