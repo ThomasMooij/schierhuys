@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../functions/useFetch"
 
@@ -204,6 +204,7 @@ const ReserveBtn = styled.button`
 `
 
 const Reserve = () => {
+
   const navigate = useNavigate()
 
   const handleChange = (e) =>{
@@ -211,7 +212,7 @@ const Reserve = () => {
       return {...prev, [e.target.name]: e.target.value}
     })
   }
-
+// STATE VARIABLES
   const [guest , setGuest] = useState({
     firstname: "",
     lastname: "",
@@ -228,24 +229,35 @@ const Reserve = () => {
     adult: 1,
     children: 0,
   });
-
+  const topRef = useRef();
+  // CHECK TOTAL TO NOT ALLOW MORE THAN 8 PEOPLE 
   const totaal = options.adult + options.children
-
+  // SET ADULT AND CHILDREN 
   const handleOptions = (name, operation) => {
     setOptions((prev) => {
       return {  ...prev, [name]: operation === "i" ? options[name] + 1 : options[name] - 1,};
     });
   };
-
+// SEARCH AND MISSING INFO FUNCTIONALITY
   const [firstName , setFirstName] = useState(false)
   const [lastName , setLastName] = useState(false)
   const [email , setEmail] = useState(false)
 
+  const goToTop = () =>{
+
+    const top = topRef.current.offsetTop
+
+    window.scrollTo({
+        top: top,
+        behavior:"smooth"
+    })
+  }
+
   const handleSearch = (e) =>{
     e.preventDefault()
-    !guest.firstname ? setFirstName(!firstName)
-    : !guest.lastname ? setLastName(!lastName)
-    : !guest.email ? setEmail(!email) :
+    !guest.firstname ? setFirstName(!firstName) & goToTop()
+    : !guest.lastname ? setLastName(!lastName) & goToTop()
+    : !guest.email ? setEmail(!email) & goToTop():
       navigate("/paysummary" , {state: {guest, date, options, }})
      }
   
@@ -261,7 +273,7 @@ const Reserve = () => {
        }
        
   return (
-    <Container id="Reserve">
+    <Container ref={topRef} id="Reserve">
         <Wrapper>
           <TitleDiv><Title>Boek uw verblijf !</Title></TitleDiv>
         

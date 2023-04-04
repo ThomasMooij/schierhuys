@@ -173,12 +173,12 @@ const MobileItem = styled.li`
   font-size: 19px;
   color: white;
   font-weight: 700;
+  cursor: pointer;
 
   &:hover{
     border-bottom: 1px solid blue;
   }
 `
-
 const NavBar1 = ({selectedPage, setSelectedPage}) => {
 
   const currentUser = JSON.parse(localStorage.getItem('currentUser'))
