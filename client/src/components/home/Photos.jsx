@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import photos from "../../assets/photos.js"
 import styled from "styled-components";
 
 const Container = styled.main`
@@ -25,7 +26,7 @@ const Title = styled.div`
   width: 100vw;
   max-width: 100%;
   height: 8vh;
- justify-content: center;
+  justify-content: center;
  margin-bottom: 15px;
 `
 const TitleH1 = styled.h1`
@@ -46,8 +47,7 @@ const Slider = styled.div`
            background-color: whitesmoke;
            height: 350px;
            width: 350px;
-        }
-
+        }     
   @media (max-width: 580px){
            background-color: whitesmoke;
            height: 350px;
@@ -93,15 +93,13 @@ const SlideImg = styled.img`
 
   @media (min-width: 580px) and (max-width: 1380px){
            width: 450px;
-        }
-      
-      
+        }    
 `
 const ImageContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-
+  
 `
 const ImageWrapper = styled.div`
   width: 33%;
@@ -115,122 +113,25 @@ const Image = styled.img`
   &:hover{
     transform: translateY(-17px);
     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+ 
   }
 `
 const Photos = () => {
 
-  const photos = [
-    //living
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/276324943.jpg?k=dfbf091ef9e466b977c8e38313e4e8fe680740672f3604714bb88d1f0f1ee14a&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/276324943.jpg?k=dfbf091ef9e466b977c8e38313e4e8fe680740672f3604714bb88d1f0f1ee14a&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/276324943.jpg?k=dfbf091ef9e466b977c8e38313e4e8fe680740672f3604714bb88d1f0f1ee14a&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/276324943.jpg?k=dfbf091ef9e466b977c8e38313e4e8fe680740672f3604714bb88d1f0f1ee14a&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/276324943.jpg?k=dfbf091ef9e466b977c8e38313e4e8fe680740672f3604714bb88d1f0f1ee14a&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/276324943.jpg?k=dfbf091ef9e466b977c8e38313e4e8fe680740672f3604714bb88d1f0f1ee14a&o=&hp=1",
-    },
-     // bathroom
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360142941.jpg?k=f81916c746e7551915c1ec430f6f19e7466227b93d742c42c6a605b012a6a4c9&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360142941.jpg?k=f81916c746e7551915c1ec430f6f19e7466227b93d742c42c6a605b012a6a4c9&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360142941.jpg?k=f81916c746e7551915c1ec430f6f19e7466227b93d742c42c6a605b012a6a4c9&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360142941.jpg?k=f81916c746e7551915c1ec430f6f19e7466227b93d742c42c6a605b012a6a4c9&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360142941.jpg?k=f81916c746e7551915c1ec430f6f19e7466227b93d742c42c6a605b012a6a4c9&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360142941.jpg?k=f81916c746e7551915c1ec430f6f19e7466227b93d742c42c6a605b012a6a4c9&o=&hp=1",
-    },
-  // bedrooms
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360139733.jpg?k=7e694d8f4a8c3a89b449f369e97a09283c9958cd90c790a0a9727c2b13817420&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360139733.jpg?k=7e694d8f4a8c3a89b449f369e97a09283c9958cd90c790a0a9727c2b13817420&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360139733.jpg?k=7e694d8f4a8c3a89b449f369e97a09283c9958cd90c790a0a9727c2b13817420&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360139733.jpg?k=7e694d8f4a8c3a89b449f369e97a09283c9958cd90c790a0a9727c2b13817420&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360139733.jpg?k=7e694d8f4a8c3a89b449f369e97a09283c9958cd90c790a0a9727c2b13817420&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360139733.jpg?k=7e694d8f4a8c3a89b449f369e97a09283c9958cd90c790a0a9727c2b13817420&o=&hp=1",
-    },
-     // garden 
-     {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360146980.jpg?k=9f4a1631d64d7be498226341b4493604f05e121af8ccf7d5fa9b80aef8b70e81&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360146980.jpg?k=9f4a1631d64d7be498226341b4493604f05e121af8ccf7d5fa9b80aef8b70e81&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360146980.jpg?k=9f4a1631d64d7be498226341b4493604f05e121af8ccf7d5fa9b80aef8b70e81&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360146980.jpg?k=9f4a1631d64d7be498226341b4493604f05e121af8ccf7d5fa9b80aef8b70e81&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360146980.jpg?k=9f4a1631d64d7be498226341b4493604f05e121af8ccf7d5fa9b80aef8b70e81&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360146980.jpg?k=9f4a1631d64d7be498226341b4493604f05e121af8ccf7d5fa9b80aef8b70e81&o=&hp=1",
-    },
-    // area
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360153226.jpg?k=957b821d873f4d60f8373e61812eee3a0a4494b3676bda584ef5510513e87e4e&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360153226.jpg?k=957b821d873f4d60f8373e61812eee3a0a4494b3676bda584ef5510513e87e4e&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360153226.jpg?k=957b821d873f4d60f8373e61812eee3a0a4494b3676bda584ef5510513e87e4e&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360153226.jpg?k=957b821d873f4d60f8373e61812eee3a0a4494b3676bda584ef5510513e87e4e&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360153226.jpg?k=957b821d873f4d60f8373e61812eee3a0a4494b3676bda584ef5510513e87e4e&o=&hp=1",
-    },
-    {
-      src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/360153226.jpg?k=957b821d873f4d60f8373e61812eee3a0a4494b3676bda584ef5510513e87e4e&o=&hp=1",
-    },
-  ];
-// state variables
-const [open,setOpen] = useState(false)
+  // state variables
+  const [open,setOpen] = useState(false)
 const [slideNumber, setSlideNumber] = useState(0)
 const [arrayNum, setArrayNum] = useState(0)
 const [arrayName, setArrayName] = useState("woonkamer")
 // handle move open slider
 const handleMove = (direction) =>{
   let newSlide;
-
+  
   if(direction === "left"){
     newSlide = slideNumber === 0 ? 29 : slideNumber - 1
   }else{
     newSlide = slideNumber === 29 ? 0 : slideNumber + 1
   }
-
   setSlideNumber(newSlide)
   if (newSlide <= 6 ){
     setArrayName("woonkamer")
@@ -252,17 +153,17 @@ const handleMove = (direction) =>{
 const handleClose = () =>{
   setOpen(false)
   
-    slideNumber <= 5 ? setArrayName("woonkamer") & setArrayNum(0) :
-    slideNumber >= 6 & slideNumber <= 11 ? setArrayName( "badkamer") & setArrayNum(1)  & setSlideNumber(0) :
-    slideNumber >= 12 & slideNumber <=17 ? setArrayName( "slaapkamer") & setArrayNum(2)  & setSlideNumber(0):
-    slideNumber >= 18  & slideNumber <=23 ? setArrayName( "tuin") & setArrayNum(3)  & setSlideNumber(0):
-    slideNumber >= 24 & slideNumber <=29 ? setArrayName( "omgeving") & setArrayNum(4)  & setSlideNumber(0) 
-    : setArrayName( "woonkamer") & setSlideNumber(0)
+  slideNumber <= 5 ? setArrayName("woonkamer") & setArrayNum(0) :
+  slideNumber >= 6 & slideNumber <= 11 ? setArrayName("badkamer") & setArrayNum(1)  & setSlideNumber(0) :
+  slideNumber >= 12 & slideNumber <=17 ? setArrayName("slaapkamer") & setArrayNum(2)  & setSlideNumber(0):
+  slideNumber >= 18  & slideNumber <=23 ? setArrayName("tuin") & setArrayNum(3)  & setSlideNumber(0):
+  slideNumber >= 24 & slideNumber <=29 ? setArrayName("omgeving") & setArrayNum(4)  & setSlideNumber(0) 
+  : setArrayName( "woonkamer") & setSlideNumber(0)
 }
 //handle slides main slider
 const handleSlide = (direction) => {
   let newArrayNum 
-
+  
   if(direction === "left"){
     newArrayNum = arrayNum === 0 ? 4 : arrayNum - 1 
   }else{
@@ -273,7 +174,7 @@ const handleSlide = (direction) => {
   newArrayNum === 2 ? setArrayName("slaapkamer") :
   newArrayNum === 3 ? setArrayName("tuin") :
   newArrayNum === 4 ? setArrayName("omgeving") : null
-
+  
   setArrayNum(newArrayNum)
 }
 // open specific images
@@ -288,14 +189,14 @@ const bedroom = photos.slice(12, 18)
 const garden = photos.slice(18, 24)
 const area = photos.slice(24, 30)
 
-  return (
-    <>
+return (
+  <>
       <Container id="Fotos"> 
       <Title>   
                 {!open &&  
                 <Arrow
-                  onClick={()=> handleSlide('left') }
-                  ><KeyboardArrowLeftIcon />
+                onClick={()=> handleSlide('left') }
+                ><KeyboardArrowLeftIcon />
                 </Arrow> }
                
                 <TitleH1>{arrayName}</TitleH1>
@@ -332,10 +233,12 @@ const area = photos.slice(24, 30)
         <ImageContainer>
 
         { !open&&  arrayNum == 0 & slideNumber <= 6 ? living.map((photo, i) => (
-            <ImageWrapper key={i}>
+          <ImageWrapper key={i}>
                 <Image 
                   onClick={()=> openImage(i)}
                   src={photo.src}
+                  onMouseEnter={(()=>setArrayName(photo.desc))}
+                  onMouseLeave={(()=> setArrayName("woonkamer"))}
                   ></Image>
             </ImageWrapper>
           ))
@@ -344,6 +247,8 @@ const area = photos.slice(24, 30)
                 <Image 
                   onClick={()=> openImage(i + 6)}
                   src={photo.src}
+                  onMouseEnter={(()=>setArrayName(photo.desc))}
+                  onMouseLeave={(()=> setArrayName("badkamer"))}
                   ></Image>
             </ImageWrapper> )) :
             !open&& arrayNum == 2 ? bedroom.map((photo, i) => (
@@ -351,6 +256,8 @@ const area = photos.slice(24, 30)
                 <Image 
                   onClick={()=> openImage(i + 12)}
                   src={photo.src}
+                  onMouseEnter={(()=>setArrayName(photo.desc))}
+                  onMouseLeave={(()=> setArrayName("slaapkamers"))}
                   ></Image>
             </ImageWrapper> )) :
             !open&& arrayNum == 3  ? garden.map((photo, i) => (
@@ -358,13 +265,17 @@ const area = photos.slice(24, 30)
                   <Image 
                     onClick={()=> openImage(i + 18)}
                     src={photo.src}
+                    onMouseEnter={(()=>setArrayName(photo.desc))}
+                    onMouseLeave={(()=> setArrayName("tuin"))}
                     ></Image>
               </ImageWrapper> )) :
              !open&&  arrayNum == 4  ? area.map((photo, i) => (
-                <ImageWrapper key={i}>
+               <ImageWrapper key={i}>
                     <Image 
                       onClick={()=> openImage(i + 24)}
                       src={photo.src}
+                      onMouseEnter={(()=>setArrayName(photo.desc))}
+                      onMouseLeave={(()=> setArrayName("omgeving"))}
                       ></Image>
                 </ImageWrapper> )) : ""  }
 
@@ -374,5 +285,6 @@ const area = photos.slice(24, 30)
     </>
   )
 }
+
 
 export default Photos

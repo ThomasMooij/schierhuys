@@ -2,8 +2,6 @@ import AnchorLink from "react-anchor-link-smooth-scroll"
 import styled from "styled-components"
 import {Link} from 'react-scroll';
 
-
-
 const Btn = styled(Link)`
    margin-left: 15px;
     border: none;
@@ -16,8 +14,7 @@ const Btn = styled(Link)`
     font-weight: 700;
     background-color: transparent;
     border-spacing: 13px;
-
-  
+ 
     @media (max-width: 1380px){
            display: none;
         }
@@ -27,17 +24,13 @@ const Btn = styled(Link)`
     &.active{
        border-bottom: 3px solid;
     }
- 
 `
 const Anchor = styled(AnchorLink)`
   @media (max-width: 1380px){
            display: none;
         }
 `
-
-
   const NavLink = ({page, selectedPage, setSelectedPage}) => {
-
   return (
    
     <Btn 
