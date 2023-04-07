@@ -28,7 +28,6 @@ const Nav = styled.nav`
     @media(max-width: 680px ){
     display: none;
     }
-   
 `
 const Left = styled.span`
   font-family: "Urbanist";
@@ -247,7 +246,7 @@ const ReviewComponent = () => {
            {reviews && <ReviewBtn onClick={() => {setFilter(''); setReviews(false)}}>Alle reviews</ReviewBtn>}
           </BodyFilter>
         </BodyNav>
-      { loading ? "loading" : error ? "something went horribly wrong" : 
+      { loading ? "loading" : error ? "something went wrong" : 
        <>
         <Suspense fallback={<p>Loading..</p>} ></Suspense>
        <Items currentItems={currentItems} />
