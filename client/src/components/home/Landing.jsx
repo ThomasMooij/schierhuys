@@ -104,7 +104,7 @@ const Landing = ({ setSelectedPage }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setSlide(true);
-    }, 1100);
+    }, 800);
     return () => clearTimeout(timer);
   }, []);
 
