@@ -37,7 +37,7 @@ const Title = styled.h2`
     font-weight: 400;
   }
 ` 
-const FormWrapper = styled.div`
+const FormWrapper = styled.section`
 align-items: flex-start;
 background-color: #F9FBFF;
 box-shadow: 0px 1px 10px #999;

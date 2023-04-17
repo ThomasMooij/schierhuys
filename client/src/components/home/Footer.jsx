@@ -12,28 +12,28 @@ align-items: center;
      display: none;
     }
 `
-const Wrapper = styled.div`
+const Wrapper = styled.footer`
     display: flex;
     gap: 65px;
     
 `
-const Left = styled.div`
+const Left = styled.section`
     display: flex;
     flex-direction: column;
 `
-const Name = styled.span`
+const Name = styled.article`
     
 `
-const Address = styled.span`
+const Address = styled.article`
     
 `
-const Email = styled.span`
+const Email = styled.article`
     
 `
-const Phone = styled.span`
+const Phone = styled.article`
     
 `
-const Right = styled.div`
+const Right = styled.section`
     display: flex;
     flex-direction: column;
 `   
