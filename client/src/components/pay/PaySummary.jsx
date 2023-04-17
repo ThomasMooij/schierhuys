@@ -6,7 +6,7 @@ import newRequest from "../../functions/newRequest.js"
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./Checkout.jsx"
-import moment from 'moment'
+import { Helmet } from 'react-helmet';
 
 const Main = styled.main`
   
@@ -197,6 +197,9 @@ const formattedDates = `${format(date[0].startDate, "dd/MM/yyyy")} tot ${format(
 
   return (
    <Main>
+       <Helmet>
+        <title>Schierhuys | Betaaloverzicht</title>
+      </Helmet>
     <Top>
       <Left>
         <Title>Neem de gegevens goed door en bevestig deze alstublieft, wilt u ons iets laten weten? schrijf uw bericht hier aan uw rechter hand voordat u uw gegevens bevestigd </Title>
