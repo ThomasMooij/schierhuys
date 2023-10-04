@@ -22,7 +22,6 @@ const Wrapper = styled.div`
 const Title = styled.div`
   display: flex;
   align-items: center;
-  background-color: beige;
   width: 100vw;
   max-width: 100%;
   height: 8vh;

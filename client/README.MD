@@ -6,3 +6,7 @@ Reviews&info (aparte pagina?), met outlet:
 gastenboek(Klanten inloggen, credentials via email?)
 Huis regels.
 Omgegeving
+
+suggestions:
+Automation of costumer registration. 
+

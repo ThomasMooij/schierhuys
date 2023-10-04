@@ -205,7 +205,7 @@ const ReviewComponent = () => {
   }
   const [itemOffset, setItemOffset] = useState(0);
 
-  let itemsPerPage = 3;
+  let itemsPerPage = 2;
 
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = data.slice(itemOffset, endOffset);

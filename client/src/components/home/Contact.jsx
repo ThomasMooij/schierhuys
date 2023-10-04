@@ -26,7 +26,6 @@ const TitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: beige;
   width: 100vw;
   max-width: 100%;
 `
@@ -42,7 +41,7 @@ align-items: flex-start;
 background-color: #F9FBFF;
 box-shadow: 0px 1px 10px #999;
 margin-top: 25px;
-padding: 100px 350px;
+padding: 35px 250px;
 border-radius: 25px;
 @media (max-width: 1080px){
            padding: 15px;
@@ -96,11 +95,13 @@ const Contact = () => {
   return (
     <Main id="Contact">
       <Wrapper>
-        <TitleWrapper>
+   
+        <FormWrapper>
+       
          <Title>Heeft u vragen? </Title>
          <Title>Neem contact met ons op!</Title>
-        </TitleWrapper>
-        <FormWrapper>
+       
+
          <Form ref={form} onSubmit={sendEmail}>
             <Label>Naam</Label>
             <Input type="text" name="name" placeholder="jan smit"></Input>
