@@ -15,7 +15,6 @@ gap: 25px;
   
 `
 const Costumers = () => {
-
   const {data, loading, error} = useFetch('http://localhost:8080/api/users/')
 
   return (

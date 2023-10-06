@@ -26,6 +26,6 @@ export const deleteUser = async (req, res, next) => {
       return next(createError(404, "alleen Gert mag gebruikers verwijderen"));
     const deleteUser = await User.findByIdAndDelete(req.params.id);
 
-    res.status(200).send("gebruiker verwijderd");
+    res.status(200).send(`gebruiker ${deleteUser} verwijderd`);
   } catch (err) {}
 };
