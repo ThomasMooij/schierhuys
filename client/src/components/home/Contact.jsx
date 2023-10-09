@@ -3,6 +3,7 @@ import styled from "styled-components"
 import emailjs from '@emailjs/browser';
 
 const Main = styled.main`
+padding: 0.25rem;
   width: 100%;
   height: 90vh;
   max-width: 100%;
@@ -37,12 +38,12 @@ const Title = styled.h2`
   }
 ` 
 const FormWrapper = styled.section`
-align-items: flex-start;
-background-color: #F9FBFF;
-box-shadow: 0px 1px 10px #999;
-margin-top: 25px;
-padding: 35px 250px;
-border-radius: 25px;
+  align-items: flex-start;
+  background-color: #F9FBFF;
+  box-shadow: 0px 1px 10px #999;
+  margin-top: 25px;
+  padding: 35px 250px;
+  border-radius: 25px;
 @media (max-width: 1080px){
            padding: 15px;
            max-width: 280px;

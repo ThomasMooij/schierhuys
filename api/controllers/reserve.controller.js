@@ -13,7 +13,7 @@ export const intent = async (req,res,next) => {
 
             return childPrice + adultPrice
         }
-        console.log("dates in controller:" , req.body.dates)
+        // console.log("dates in controller:" , req.body.dates)
         
         const paymentIntent = await stripe.paymentIntents.create({
             amount: calculatePrice(

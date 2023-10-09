@@ -9,7 +9,10 @@ import CheckoutForm from "./Checkout.jsx"
 import { Helmet } from 'react-helmet';
 
 const Main = styled.main`
-  
+display: flex;
+    justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `
 const Top = styled.div`
   display: flex;
@@ -56,8 +59,7 @@ const Select = styled.select`
 const Option = styled.option`
   
 `
-const Right = styled.div`
-  flex: 1;
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -65,7 +67,6 @@ const Right = styled.div`
   box-shadow: 0px 1px 10px #999;
   margin: 15px;
   padding:15px;
-
 `
 const TextArea = styled.textarea`
   
@@ -91,6 +92,7 @@ const Bottom = styled.div`
 const stripePromise = loadStripe("pk_test_51Mla1bLbsEaFtLUIDOIf7b6IlnK65iLS88NgQbymTY3BMVbZv7GYpn6BCiStvrClCbhW5GeGP4s8X3UgQTsb9WsH0015EUMJmm");
 
 const PaySummary = () => {
+  const [notification, setNotification] = useState(true)
 // LOCATION VARIABLES FROM PREVIOUS PAGE
   const location = useLocation()
   const [date, setDate] = useState(location.state.date)
@@ -164,7 +166,6 @@ console.log("alldays:" , allDays)
 const handleClick = async (e) =>{
   try{  
    
-
    const res =  await newRequest.post("/reserve/create-payment-intent", JSON.stringify({
       firstname: guest.firstname,
       lastname: guest.lastname,
@@ -201,9 +202,31 @@ const formattedDates = `${format(date[0].startDate, "dd/MM/yyyy")} tot ${format(
         <title>Schierhuys | Betaaloverzicht</title>
       </Helmet>
     <Top>
-      <Left>
-        <Title>Neem de gegevens goed door en bevestig deze alstublieft, wilt u ons iets laten weten? schrijf uw bericht hier aan uw rechter hand voordat u uw gegevens bevestigd </Title>
-        <Guest><b>voornaam: </b>{guest.firstname} , <b>achternaam:</b> {guest.lastname} email: {guest.email}</Guest>
+
+   
+<Container>
+     
+   { notification &&    
+   <>
+   <Label htmlFor="message">Wilt u ons iets laten weten? Heeft u speciale wensen? schrijf ze hier op of neem contact met ons op via 06000006 en wij accomoderen uw wensen graag</Label>
+        <TextArea
+          rows={6}
+          cols={60}
+          id="message"
+          name="message"
+          value={message}
+          onChange={handleMessage}
+          maxLength={3000}
+          >
+        </TextArea>  
+        <Btn onClick={(()=> setNotification(false))}>Volgende!</Btn>
+      </> 
+        }
+      
+{ !notification & !clientSecret &&
+  <>
+        <Title>Neem de gegevens goed door! </Title>
+        <Guest><b>voornaam: </b>{guest.firstname} , <b>achternaam:</b> {guest.lastname} <b>email:</b>{guest.email}</Guest>
         <Options>
           <Adult><b>aantal volwassenen: </b>{numGuests.adult}</Adult>
           <Children><b>aantal kinderen:</b> {numGuests.children}</Children>
@@ -233,32 +256,25 @@ const formattedDates = `${format(date[0].startDate, "dd/MM/yyyy")} tot ${format(
                 <Option value="17">17</Option>
               </Select>         
             </Form>  
-          ))}
+
+))}
           {childAges.length >= children.length ?   
           <Btn onClick={handleClick}>Bevestig gegevens</Btn> :
           <span>gelieve alle leeftijden in te vullen</span>}  
         </Options>
-      </Left>
-      <Right>
-        <Label htmlFor="message">Wilt u ons iets laten weten? Heeft u speciale wensen? schrijf ze hier op of neem contact met ons op via 06000006 en wij accomoderen uw wensen graag</Label>
-        <TextArea
-          rows={6}
-          cols={60}
-          id="message"
-          name="message"
-          value={message}
-          onChange={handleMessage}
-          maxLength={3000}
-        ></TextArea>
-      </Right>
+    </>
+        }
+    </Container>
+  
     </Top>
     <Bottom>
     {clientSecret && (
-        <Elements options={options} stripe={stripePromise}>
+      <Elements options={options} stripe={stripePromise}>
           <CheckoutForm dates={unAvailableDays} guestEmail={guest.email} formattedDates={formattedDates}/>
         </Elements>
         )}
     </Bottom>
+
    </Main>
   )
 }

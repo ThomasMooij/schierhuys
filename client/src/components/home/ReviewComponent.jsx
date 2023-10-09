@@ -225,7 +225,7 @@ const ReviewComponent = () => {
           { !currentUser ?   
             <>
             <p style={{fontWeight: "600"}}>Heeft u bij ons verbleven? </p>
-            <p>login met de gegevens die u ontvangen heeft in de bedankt email en laat een recensie achter </p>
+            <p>Via de email heeft u inlog gegevens ontvangen om een review achter te laten! </p>
                   <Link to="login"><Btn>Login</Btn></Link> 
             </> 
           : <p>Hartelijk bedankt en hopelijk tot snel</p>}    

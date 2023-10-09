@@ -1,7 +1,7 @@
-import { format } from "date-fns";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import newRequest from "../../functions/newRequest.js";
+import { Helmet } from "react-helmet";
 
 const Success = () => {
   const { search } = useLocation();
@@ -13,7 +13,18 @@ const Success = () => {
   let newDates = [];
 
   for (let i = 0; i < dates.split(",").length; i++) {
-    newDates.push(format(new Date(dates.split(",")[i]), "yyyy-MM-dd"));
+    const dateParts = dates.split(",")[i].split(" ");
+    const formattedDate = `${dateParts[3]}-${getMonthNumber(dateParts[1])}-${dateParts[2]}`;
+    newDates.push(formattedDate);
+  }
+
+  function getMonthNumber(month) {
+    const months = {
+      Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
+      Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'
+    };
+
+    return months[month];
   }
 
   useEffect(() => {
@@ -36,7 +47,7 @@ const Success = () => {
         <title>Schierhuys | Betaling gelukt!</title>
       </Helmet>
       Hartelijk bedankt voor uw bestelling, u krijgt per email een bevestiging
-      en wordt binnen enkele seconden door verwezen
+      en wordt binnen enkele seconden doorverwezen
     </div>
   );
 };

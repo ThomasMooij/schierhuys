@@ -188,6 +188,7 @@ const NavBar1 = ({ selectedPage, setSelectedPage }) => {
     await newRequest.post("/auth/logout");
     localStorage.clear();
     navigate("/");
+    window.location.reload();
   };
   const { lang, setLang } = useContext(langContext);
 

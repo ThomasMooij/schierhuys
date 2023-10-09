@@ -4,8 +4,7 @@ import { Link } from "react-scroll";
 import { useEffect, useState } from "react";
 
 const Container = styled.main`
-  width: 100vw;
-  height: 100vh;
+
   max-width: 100%;
   display: flex;
   position: relative;
@@ -18,12 +17,18 @@ const Container = styled.main`
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
 `;
 const Slide = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
+  background-position: center;
+  margin: auto;
   background-image: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.01) 50%,
@@ -62,10 +67,9 @@ const TextContainer = styled.div`
   display: flex;
   gap: 25px;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-direction: column;
-  top: 700px;
-  left: -25px;
+
 `;
 const Button = styled.button`
   padding: 10px 35px;
@@ -112,17 +116,7 @@ const Landing = ({ setSelectedPage }) => {
     <>
       <Container id="Home">
         <Wrapper>
-          <SlideContainer>
-            <Slide
-              slide={slide}
-              onMouseEnter={() => setSlide(false)}
-              onMouseLeave={() => setSlide(true)}
-            />
-            <TextContainer>
-              <Text slide={slide}>
-                Welkom! Reserveer direct of bekijk de foto's!
-              </Text>
-              <Link
+        <Link
                 onClick={() => setSelectedPage("Reserve")}
                 to="Reserve"
                 smooth={true}
@@ -135,7 +129,13 @@ const Landing = ({ setSelectedPage }) => {
               <ArrowDown>
                 <ArrowCircleDownIcon />
               </ArrowDown>
-            </TextContainer>
+          <SlideContainer>
+            <Slide
+              slide={slide}
+              onMouseEnter={() => setSlide(false)}
+              onMouseLeave={() => setSlide(true)}
+            />
+            
           </SlideContainer>
         </Wrapper>
       </Container>
