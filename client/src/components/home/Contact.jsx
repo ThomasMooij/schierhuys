@@ -3,10 +3,8 @@ import styled from "styled-components"
 import emailjs from '@emailjs/browser';
 
 const Main = styled.main`
-padding: 0.25rem;
-  width: 100%;
-  height: 90vh;
-  max-width: 100%;
+  padding: 0.25rem;
+
   background-color: whitesmoke;
 
   @media(max-width: 1280px ){
@@ -23,13 +21,7 @@ const Wrapper = styled.div`
     padding: 5px;
   }
 `
-const TitleWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100vw;
-  max-width: 100%;
-`
+
 const Title = styled.h2`
   font-weight: 600;
 
@@ -101,8 +93,6 @@ const Contact = () => {
        
          <Title>Heeft u vragen? </Title>
          <Title>Neem contact met ons op!</Title>
-       
-
          <Form ref={form} onSubmit={sendEmail}>
             <Label>Naam</Label>
             <Input type="text" name="name" placeholder="jan smit"></Input>

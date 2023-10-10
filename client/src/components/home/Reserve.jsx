@@ -5,6 +5,7 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../functions/useFetch"
+import { useEffect } from "react";
 
 const Container = styled.main`
 width: 100%;
@@ -243,6 +244,8 @@ const Reserve = () => {
   const [lastName , setLastName] = useState(false)
   const [email , setEmail] = useState(false)
 
+
+
   const goToTop = () =>{
 
     const top = topRef.current.offsetTop
@@ -253,13 +256,33 @@ const Reserve = () => {
     })
   }
 
-  const handleSearch = (e) =>{
-    e.preventDefault()
-    !guest.firstname ? setFirstName(!firstName) & goToTop()
-    : !guest.lastname ? setLastName(!lastName) & goToTop()
-    : !guest.email ? setEmail(!email) & goToTop():
-      navigate("/paysummary" , {state: {guest, date, options, }})
-     }
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    setFirstName(false);
+    setLastName(false);
+    setEmail(false);
+  
+    if (!guest.firstname) {
+      setFirstName(true);
+      goToTop();
+    }
+  
+    if (!guest.lastname) {
+      setLastName(true);
+      goToTop();
+    }
+  
+    if (!guest.email) {
+      setEmail(true);
+      goToTop();
+    }
+  
+    if (guest.firstname && guest.lastname && guest.email) {
+      navigate("/paysummary", {state: {guest, date, options}});
+    }
+  }
+  
   
   // DISABLED DATES
        let disabled_dates =[]    
@@ -276,7 +299,6 @@ const Reserve = () => {
     <Container ref={topRef} id="Reserve">
         <Wrapper>
           <TitleDiv><Title>Boek uw verblijf !</Title></TitleDiv>
-        
             <Form>
               <Left>
                 <Top>
@@ -308,7 +330,7 @@ const Reserve = () => {
                   <Options>
                     <OptionsTitle>Gelieve het aantal gasten aan te geven</OptionsTitle>
                     <OptionsItem>
-                        <OptionsText>Volwassenen   </OptionsText>
+                        <OptionsText>Volwassenen</OptionsText>
                             <OptionsCounter>
                             <CounterBtn
                              disabled={options.adult <= 1}

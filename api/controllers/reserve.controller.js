@@ -13,8 +13,7 @@ export const intent = async (req,res,next) => {
 
             return childPrice + adultPrice
         }
-        // console.log("dates in controller:" , req.body.dates)
-        
+        // console.log("dates in controller:" , req.body.dates)    
         const paymentIntent = await stripe.paymentIntents.create({
             amount: calculatePrice(
                 req.body.children,
@@ -50,8 +49,10 @@ export const getReserves = async (req,res,next) => {
     try{
    
         if(!req.isGert) return next(createError(403, "You are not Gertje"))
+
         const reserves = await Reserve.find({isCompleted: true})
         .select('-unavailableDates -payment_intent -updatedAt').sort(({createdAt: -1}))
+
         res.status(200).send(reserves)
     }catch(err){
         next(err)

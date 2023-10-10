@@ -160,7 +160,8 @@ const NavBar1 = ({selectedPage, setSelectedPage}) => {
 
                     <LogoContainer>
                       <Logo>Schierhuys</Logo>
-                      <LogoText>Explore the eastern Netherlands</LogoText>
+                      <LogoText>Eastern Netherlands</LogoText>
+                      <LogoText>holidays</LogoText>
                     </LogoContainer>
 
                     <NavLink 

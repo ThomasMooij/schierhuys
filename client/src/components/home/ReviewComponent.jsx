@@ -13,8 +13,7 @@ const Main = styled.main`
     align-items: flex-start;
     justify-content: center;
     width: 100%;
-    max-width: 100%;
-    gap: 35px;
+
 `
 const Nav = styled.nav`
     display: flex;
@@ -91,20 +90,6 @@ const Btn = styled.button`
     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
   }
 `
-const Title = styled.h3`
-    font-size: 22px;
-    font-weight: 700;
-    @media(max-width: 1280px ){
-     display: none;
-    }
-`
-const SubTitle = styled.h3`
-    font-size: 22px;
-    font-weight: 400;
-    @media(max-width: 1280px ){
-     display: none;
-    }
-`
 const ReviewBox = styled.div`
  background-color: #F9FBFF;
 box-shadow: 0px 1px 10px #999;
@@ -121,6 +106,7 @@ box-shadow: 0px 1px 10px #999;
         }
 `
 const Input = styled.input`
+  margin: 15px;
     padding: 35px;
     width: 550px;
     height:70px;
@@ -269,8 +255,6 @@ const ReviewComponent = () => {
     </Body>
     {currentUser ?      
           <Bottom>
-            <Title>Laat ons weten wat u ervan vond </Title>
-            <SubTitle>U kunt <b>één</b> resencie achterlaten per bezoek</SubTitle>
             <Input
               type="text"
               placeholder ="Schrijf uw recensie"
