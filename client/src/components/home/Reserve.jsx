@@ -205,7 +205,6 @@ const ReserveBtn = styled.button`
 `
 
 const Reserve = () => {
-
   const navigate = useNavigate()
 
   const handleChange = (e) =>{
@@ -222,10 +221,17 @@ const Reserve = () => {
   const [date, setDate] = useState([
     {
       startDate: new Date(),
-      endDate: new Date(),
+      endDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
       key: "selection",
     },
   ]);
+
+  //testeffect
+  useEffect(()=> {
+    setDateError(date[0].startDate === date[0].endDate);
+  }, [date])
+
+
   const [options, setOptions] = useState({
     adult: 1,
     children: 0,
@@ -239,17 +245,14 @@ const Reserve = () => {
       return {  ...prev, [name]: operation === "i" ? options[name] + 1 : options[name] - 1,};
     });
   };
-// SEARCH AND MISSING INFO FUNCTIONALITY
+// SEARCH AND MISSINGs INFO FUNCTIONALITY
   const [firstName , setFirstName] = useState(false)
   const [lastName , setLastName] = useState(false)
   const [email , setEmail] = useState(false)
-
-
+  const [dateError, setDateError] = useState(false)
 
   const goToTop = () =>{
-
     const top = topRef.current.offsetTop
-
     window.scrollTo({
         top: top,
         behavior:"smooth"
@@ -258,7 +261,7 @@ const Reserve = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-
+  
     setFirstName(false);
     setLastName(false);
     setEmail(false);
@@ -278,11 +281,17 @@ const Reserve = () => {
       goToTop();
     }
   
-    if (guest.firstname && guest.lastname && guest.email) {
+    if (date[0].startDate === date[0].endDate) {
+      setDateError(true);
+      console.log("dateerror:" , dateError)
+      goToTop();
+      
+    }
+  
+    if (guest.firstname && guest.lastname && guest.email && !dateError) {
       navigate("/paysummary", {state: {guest, date, options}});
     }
   }
-  
   
   // DISABLED DATES
        let disabled_dates =[]    
@@ -368,6 +377,7 @@ const Reserve = () => {
                     </OptionsItem>
                   </Options>
                 </Top>
+                {dateError ? <span style={{color:"red", fontSize: "22px"}}><b>U dient minstens voor een nacht te boeken</b></span> : ""}
                   <Calender > 
                     <CalendarTitle>Selecteer de datum van uw verblijf</CalendarTitle>
                     <DateRange

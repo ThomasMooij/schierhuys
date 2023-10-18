@@ -13,7 +13,6 @@ const Main = styled.main`
     align-items: flex-start;
     justify-content: center;
     width: 100%;
-
 `
 const Nav = styled.nav`
     display: flex;
