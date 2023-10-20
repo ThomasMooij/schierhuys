@@ -1,13 +1,15 @@
 import mongoose, { Schema, Types } from "mongoose";
 
 const unavailablesSchema = Schema({
-    userId: {
+    reserveId: {
         type: Schema.Types.ObjectId,
-        ref: 'Users',
+        ref: 'Reserve',
         required: true
         },
     dates: {
-        type: [Date],
+        type: [String],
         required: true
         }
 }, {timestamps: true})  
+
+export default mongoose.model("Unavailables", unavailablesSchema)

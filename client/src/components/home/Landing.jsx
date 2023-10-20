@@ -59,18 +59,6 @@ const Text = styled.span`
   transition: 0.25s all ease-in-out;
   font-weight: 700;
 `;
-
-const TextContainer = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 11%;
-  display: flex;
-  gap: 25px;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-`;
 const Button = styled.button`
   padding: 10px 35px;
   font-size: 20px;

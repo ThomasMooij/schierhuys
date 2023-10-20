@@ -7,9 +7,9 @@ import {
 // NL IMPORTS
 import Home from "./pages/Home";
 import PaySummary from "./components/pay/PaySummary";
-import ReviewComponent from "./components/home/ReviewComponent"
+import ReviewComponent from "./components/home/reviews/ReviewComponent"
 import InfoComponent from "./components/home/InfoComponent"
-import OmgevingComponent from "./components/home/OmgevingComponent"
+import OmgevingComponent from "./components/home/omgeving/OmgevingComponent"
 import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import Protected from "./components/Protected";

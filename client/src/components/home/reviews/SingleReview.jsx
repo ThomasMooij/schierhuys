@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import useFetch from '../../functions/useFetch'
+import useFetch from '../../../functions/useFetch'
 import { format } from "date-fns"
-import star from "../../assets/star.jpg"
+import star from "../../../assets/star.jpg"
 
 const Review = styled.main`
     display: flex;

@@ -30,6 +30,7 @@ const Success = () => {
   useEffect(() => {
     const makeRequest = async () => {
       try {
+        // run confirm function
         await newRequest.put("/reserve", { payment_intent, newDates });
         setTimeout(() => {
           navigate("/");

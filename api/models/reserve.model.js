@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const ReservatieSchema = new Schema({
+const ReserveSchema = new Schema({
 
     firstname:{
         type:String,
@@ -51,4 +51,4 @@ const ReservatieSchema = new Schema({
   }
 );
 
-export default mongoose.model("Reservatie", ReservatieSchema)
+export default mongoose.model("Reserve", ReserveSchema)

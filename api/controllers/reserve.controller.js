@@ -1,6 +1,7 @@
-import Reserve from "../models/reservatie.model.js"
+import Reserve from "../models/reserve.model.js"
 import Stripe from "stripe"
 import createError from "../functions/createError.js"
+import { setUnavailables } from "./unavailables.controller.js"
 
 export const intent = async (req,res,next) => {
     try{
@@ -70,46 +71,21 @@ export const getReserve = async (req,res,next) => {
         next(err)
     }
 }
-export const getUnavailables = async (req,res,next) =>{ 
-    try{
-        const reserve = await Reserve.findOne().sort({'created_at' : 1}).select('unavailableDates -_id')
 
-        res.status(200).send(reserve)
-    }catch(err){
-        next(err)
-    }
-}
-export const setUnavailables = async (req,res,next) =>{
-    try{       
-        const reserve = await Reserve.findOneAndUpdate(
-            {'created_at' : 1},
-            {$push: {"unavailableDates" :req.body.dates}} )
-            console.log("controller dates:" , req.body.dates)
-        res.status(200).send(reserve)
-    }catch(err){
-        next(err)
-    }
-}
-export const unSetUnavailables = async (req,res,next) =>{
-    try{
-    if(!req.isGert) return next(createError(403, "You are not Gertje"))
-        const reserve = await Reserve.findOneAndUpdate(
-            {'created_at' : 1},
-            {$pull: {"unavailableDates" : {$in: req.body.dates}}})
-        res.status(200).send(reserve)
-    }catch(err){
-        next(err)
-    }
-}
 export const confirm = async (req,res,next) => {
     try{
-        //update unavailables
+        
         const reserve = await Reserve.findOneAndUpdate(
             {payment_intent:req.body.payment_intent,} , 
             {$set:{ isCompleted:true,}})
-        const dates = await Reserve.findOneAndUpdate(
-            {'created_at' : 1}, 
-            {$push: {"unavailableDates": req.body.newDates}})
+        //update unavailables
+
+        // const dates = await Reserve.findOneAndUpdate(
+        //     {'created_at' : 1}, 
+        //     {$push: {"unavailableDates": req.body.newDates}})
+ 
+        await setUnavailables(req.body.newDates, reserve._id)
+
         res.status(200).send(reserve)
     }catch(err){
         next(err)

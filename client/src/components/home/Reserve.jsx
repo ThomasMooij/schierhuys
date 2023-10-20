@@ -2,10 +2,13 @@ import styled from "styled-components"
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../functions/useFetch"
 import { useEffect } from "react";
+import { ReserveContext } from "../../context/ReserveContext";
+import { AuthContext } from "../../context/AuthContext";
+// import { goToTop } from "../../functions/toTop";
 
 const Container = styled.main`
 width: 100%;
@@ -203,21 +206,24 @@ const ReserveBtn = styled.button`
            margin-bottom: 15px;
         }
 `
-
 const Reserve = () => {
   const navigate = useNavigate()
-
-  const handleChange = (e) =>{
-    setGuest((prev) => {
-      return {...prev, [e.target.name]: e.target.value}
-    })
-  }
-// STATE VARIABLES
+  const { state, dispatch } = useContext(ReserveContext);
   const [guest , setGuest] = useState({
     firstname: "",
     lastname: "",
     email: "",
   })
+  console.log(state)
+  const handleChange = (e) =>{
+    dispatch({ 
+      type: "SET_GUEST_NUM", 
+      payload: { 
+        adults: e.target.name === "adults" ? e.target.value : 1,
+        children: e.target.name === "children" ? e.target.value : 0
+      }
+    });
+  }
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -225,39 +231,38 @@ const Reserve = () => {
       key: "selection",
     },
   ]);
-
-  //testeffect
+  //EFFECTS
   useEffect(()=> {
     setDateError(date[0].startDate === date[0].endDate);
   }, [date])
 
+  useEffect(() => {
+    setOptions({
+      adult: 1,
+      children: 0,
+    });
+  }, [state]);
 
   const [options, setOptions] = useState({
     adult: 1,
     children: 0,
   });
-  const topRef = useRef();
+
   // CHECK TOTAL TO NOT ALLOW MORE THAN 8 PEOPLE 
   const totaal = options.adult + options.children
   // SET ADULT AND CHILDREN 
   const handleOptions = (name, operation) => {
-    setOptions((prev) => {
-      return {  ...prev, [name]: operation === "i" ? options[name] + 1 : options[name] - 1,};
-    });
+    if (operation === "i") {
+      dispatch({ type: `SET_${name.toUpperCase()}`, payload: state[name] + 1 });
+    } else {
+      dispatch({ type: `SET_${name.toUpperCase()}`, payload: state[name] - 1 });
+    }
   };
 // SEARCH AND MISSINGs INFO FUNCTIONALITY
   const [firstName , setFirstName] = useState(false)
   const [lastName , setLastName] = useState(false)
   const [email , setEmail] = useState(false)
   const [dateError, setDateError] = useState(false)
-
-  const goToTop = () =>{
-    const top = topRef.current.offsetTop
-    window.scrollTo({
-        top: top,
-        behavior:"smooth"
-    })
-  }
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -270,29 +275,34 @@ const Reserve = () => {
       setFirstName(true);
       goToTop();
     }
-  
     if (!guest.lastname) {
       setLastName(true);
       goToTop();
     }
-  
     if (!guest.email) {
       setEmail(true);
       goToTop();
     }
-  
     if (date[0].startDate === date[0].endDate) {
       setDateError(true);
-      console.log("dateerror:" , dateError)
       goToTop();
-      
     }
-  
     if (guest.firstname && guest.lastname && guest.email && !dateError) {
       navigate("/paysummary", {state: {guest, date, options}});
     }
   }
-  
+
+  // to top of page function
+
+const topRef = useRef();
+
+const goToTop = () =>{
+  const top = topRef.current.offsetTop
+  window.scrollTo({
+      top: top,
+      behavior:"smooth"
+  })
+}
   // DISABLED DATES
        let disabled_dates =[]    
        const {data,error,loading} = useFetch('http://localhost:8080/api/reserve/unavailable')
@@ -316,6 +326,7 @@ const Reserve = () => {
                   {firstName ? <span style={{color:"red", fontSize: "22px"}}><b>Gelieve dit veld in te vullen</b></span> : "" }
                   <NameInput 
                     name="firstname"
+                   
                     type="text"
                     placeholder="Jan"
                     onChange={handleChange}

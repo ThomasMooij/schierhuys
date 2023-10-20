@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
-import useFetch from "../../functions/useFetch.js"
-import SingleReview from "./SingleReview.jsx"
-import newRequest from "../../functions/newRequest.js"
+import useFetch from "../../../functions/useFetch.js"
+import newRequest from "../../../functions/newRequest.js"
 import {  useState,useEffect, Suspense, lazy} from "react"
 import ReactPaginate from 'react-paginate';
-import './pagination.css'
+import '../pagination.css'
 
 const Main = styled.main`
     display: flex;
