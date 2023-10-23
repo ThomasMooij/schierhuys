@@ -2,8 +2,9 @@ import { createContext, useReducer } from "react";
 
 const INITIAL_STATE = {    
         name: "",
-        lastName: "",
+        last_name: "",
         dates: [],
+        user_email: "",
         adults: 1, 
         children: 0
 };
@@ -27,6 +28,11 @@ const ReserveReducer = (state, action) => {
           ...state,
           dates: action.payload, 
         };
+        case "SET_EMAIL":
+          return {
+            ...state,
+            email: action.payload, 
+          };
       case "SET_ADULTS":
         return {
           ...state,
@@ -50,6 +56,7 @@ const ReserveReducer = (state, action) => {
         name: state.name,
         lastName: state.lastName,
         dates: state.dates,
+        user_email: state.email,
         adults: state.adults, 
         children: state.children,
         dispatch,

@@ -1,37 +1,38 @@
-import styled from "styled-components"
+import styled from "styled-components";
 import { DateRange } from "react-date-range";
-import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css"; // theme css file
-import { useContext, useRef, useState } from "react";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import { useContext, useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useFetch from "../../functions/useFetch"
-import { useEffect } from "react";
+import useFetch from "../../functions/useFetch";
 import { ReserveContext } from "../../context/ReserveContext";
-import { AuthContext } from "../../context/AuthContext";
-// import { goToTop } from "../../functions/toTop";
 
 const Container = styled.main`
-width: 100%;
-height: 100%;
-background-color: whitesmoke;
-`
+  width: 100%;
+  height: 100%;
+  background-color: whitesmoke;
+`;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
+
 const TitleDiv = styled.div`
-display: flex;
+  display: flex;
   width: 100vw;
   max-width: 100%;
   background-color: beige;
   justify-content: center;
-`
+`;
+
 const Title = styled.h1`
   padding: 20px;
   color: #383333;
   font-weight: 400;
-`
+`;
+
 const Form = styled.form`
   display: flex;
   width: 80%;
@@ -39,17 +40,19 @@ const Form = styled.form`
   align-items: center;
   gap: 20px;
   @media (max-width: 1280px){
-           flex-direction: column;
-        }
-`
+    flex-direction: column;
+  }
+`;
+
 const Left = styled.div`
-display: flex;
-flex: 1;
-flex-direction: column;
-justify-content: space-between;
-padding: 20px;
-gap: 25px;
-`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 25px;
+`;
+
 const Top = styled.div`
   display: flex;
   flex-direction: column;
@@ -60,58 +63,64 @@ const Top = styled.div`
   box-shadow: 0px 1px 10px #999;
   border-radius: 35px;
   @media(max-width: 1280px ){
-     max-width: 280px;
-     margin-left: 15px;
-    }
-`
+    max-width: 280px;
+    margin-left: 15px;
+  }
+`;
+
 const LeftTitle = styled.h1`
   color: #383333;
   font-weight: 400;
-`
+`;
+
 const Label = styled.label`
   font-weight:200;
-`
+`;
+
 const NameInput = styled.input`
-   width: 60%;
-`
+  width: 60%;
+`;
+
 const LastNameInput = styled.input`
-   width: 60%;
-`
+  width: 60%;
+`;
+
 const EmailInput = styled.input`
-   width: 60%;
-`
+  width: 60%;
+`;
+
 const Options = styled.div`
-z-index: 2;
+  z-index: 2;
   background-color: white;
   color: gray;
   border-radius: 5px;
   -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
   box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
   width: 60%;
- 
-`
+`;
+
 const OptionsTitle = styled.h2`
   color: #383333;
   font-weight: 400;
-`
+`;
+
 const OptionsItem = styled.div`
   width: 200px;
   display: flex;
   justify-content: space-between;
   margin: 10px;
-  
-`
-const OptionsText = styled.span`
-  
-`
+`;
+
+const OptionsText = styled.span``;
+
 const OptionsCounter= styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
   font-size: 12px;
   color: black;
-  
-`
+`;
+
 const CounterBtn = styled.button`
   width: 30px;
   height: 30px;
@@ -122,74 +131,80 @@ const CounterBtn = styled.button`
   &:disabled{
     cursor: not-allowed;
   }
-  
-`
-const CounterNum = styled.span`
-  
-`
+`;
+
+const CounterNum = styled.span``;
+
 const Calender = styled.div`
-cursor: pointer;
-display: flex;
-flex-direction: column;
-background-color: #F9FBFF;
-align-items: center;
-justify-content: center;
-padding: 15px;
-box-shadow: 0px 1px 10px #999;
-border-radius: 35px;
-@media(max-width: 1280px ){
-     max-width: 280px;
-     margin-left: 15px;
-     border: none;
-     box-shadow: none;
-     background-color: whitesmoke;
-    }
-`
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  background-color: #F9FBFF;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  box-shadow: 0px 1px 10px #999;
+  border-radius: 35px;
+  @media(max-width: 1280px ){
+    max-width: 280px;
+    margin-left: 15px;
+    border: none;
+    box-shadow: none;
+    background-color: whitesmoke;
+  }
+`;
+
 const CalendarTitle = styled.h2`
   color: #383333;
   font-weight: 400;
-`
+`;
+
 const Right = styled.div`
-flex: 1;
-display: flex;
-align-self: center;
-flex-direction: column;
-gap: 25px;
-`
+  flex: 1;
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+  gap: 25px;
+`;
+
 const RightWrapper = styled.div`
-width: 300px;
-height: 300px;
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 15px;
-width: 60%;
-align-self: center;
-padding: 85px;
-background-color: #F9FBFF;
-box-shadow: 0px 1px 10px #999;
-border-radius: 50%;
-`
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 60%;
+  align-self: center;
+  padding: 85px;
+  background-color: #F9FBFF;
+  box-shadow: 0px 1px 10px #999;
+  border-radius: 50%;
+`;
+
 const WrapperTitle = styled.h2`
   color: #383333;
   font-weight: 400;
-`
-const WrapperSub = styled.h3`
-  
-`
+`;
+
+const WrapperSub = styled.h3``;
+
 const Rooms = styled.span`
   color: #383333;
   font-weight: 800;
-`
+`;
+
 const BathRooms = styled.span`
   color: #383333;
   font-weight: 800;
   margin-bottom: 45px;
-`
+`;
+
 const Price = styled.span`
   color: #383333;
   font-size:21px;
-`
+`;
+
 const ReserveBtn = styled.button`
   width: 40%;
   align-self: center;
@@ -203,27 +218,32 @@ const ReserveBtn = styled.button`
     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
   }
   @media (max-width: 1280px){
-           margin-bottom: 15px;
-        }
-`
+    margin-bottom: 15px;
+  }
+`;
+
 const Reserve = () => {
-  const navigate = useNavigate()
-  const { state, dispatch } = useContext(ReserveContext);
-  const [guest , setGuest] = useState({
+  const navigate = useNavigate();
+  const { name, last_name, dates, adults, user_email, children, dispatch } = useContext(ReserveContext);
+  const [guest, setGuest] = useState({
     firstname: "",
     lastname: "",
     email: "",
-  })
-  console.log(state)
-  const handleChange = (e) =>{
-    dispatch({ 
-      type: "SET_GUEST_NUM", 
-      payload: { 
-        adults: e.target.name === "adults" ? e.target.value : 1,
-        children: e.target.name === "children" ? e.target.value : 0
-      }
-    });
+  });
+
+  const totaal = adults + children;
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    if (name === "adults") {
+      dispatch({ type: "SET_ADULTS", payload: value });
+    } else if (name === "children") {
+      dispatch({ type: "SET_CHILDREN", payload: value });
+    }
   }
+
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -231,46 +251,23 @@ const Reserve = () => {
       key: "selection",
     },
   ]);
-  //EFFECTS
+
   useEffect(()=> {
     setDateError(date[0].startDate === date[0].endDate);
   }, [date])
 
-  useEffect(() => {
-    setOptions({
-      adult: 1,
-      children: 0,
-    });
-  }, [state]);
-
-  const [options, setOptions] = useState({
-    adult: 1,
-    children: 0,
-  });
-
-  // CHECK TOTAL TO NOT ALLOW MORE THAN 8 PEOPLE 
-  const totaal = options.adult + options.children
-  // SET ADULT AND CHILDREN 
-  const handleOptions = (name, operation) => {
-    if (operation === "i") {
-      dispatch({ type: `SET_${name.toUpperCase()}`, payload: state[name] + 1 });
-    } else {
-      dispatch({ type: `SET_${name.toUpperCase()}`, payload: state[name] - 1 });
-    }
-  };
-// SEARCH AND MISSINGs INFO FUNCTIONALITY
-  const [firstName , setFirstName] = useState(false)
-  const [lastName , setLastName] = useState(false)
-  const [email , setEmail] = useState(false)
-  const [dateError, setDateError] = useState(false)
+  const [firstName , setFirstName] = useState(false);
+  const [lastName , setLastName] = useState(false);
+  const [email , setEmail] = useState(false);
+  const [dateError, setDateError] = useState(false);
 
   const handleSearch = (e) => {
     e.preventDefault();
-  
+
     setFirstName(false);
     setLastName(false);
     setEmail(false);
-  
+
     if (!guest.firstname) {
       setFirstName(true);
       goToTop();
@@ -288,32 +285,29 @@ const Reserve = () => {
       goToTop();
     }
     if (guest.firstname && guest.lastname && guest.email && !dateError) {
-      navigate("/paysummary", {state: {guest, date, options}});
+      navigate("/paysummary", {state: {guest, date, adults, children}});
     }
   }
 
-  // to top of page function
+  const topRef = useRef();
+  const goToTop = () =>{
+    const top = topRef.current.offsetTop;
+    window.scrollTo({
+        top: top,
+        behavior:"smooth"
+    })
+  }
 
-const topRef = useRef();
+  let disabled_dates =[];    
+  const {data,error,loading} = useFetch('http://localhost:8080/api/reserve/unavailable');
+  const array = Object.values(data);
+  const length = array[0]?.length;
 
-const goToTop = () =>{
-  const top = topRef.current.offsetTop
-  window.scrollTo({
-      top: top,
-      behavior:"smooth"
-  })
-}
-  // DISABLED DATES
-       let disabled_dates =[]    
-       const {data,error,loading} = useFetch('http://localhost:8080/api/reserve/unavailable')
-       const array = Object.values(data);
-       const length = array[0]?.length 
-  
-       for(let i = 0; i < length ; i++){
-        disabled_dates.push(new Date(array[0][i]))
-        array[0][i]
-       }
-       
+  for(let i = 0; i < length ; i++){
+    disabled_dates.push(new Date(array[0][i]));
+    array[0][i];
+  }
+
   return (
     <Container ref={topRef} id="Reserve">
         <Wrapper>
@@ -326,19 +320,18 @@ const goToTop = () =>{
                   {firstName ? <span style={{color:"red", fontSize: "22px"}}><b>Gelieve dit veld in te vullen</b></span> : "" }
                   <NameInput 
                     name="firstname"
-                   
                     type="text"
                     placeholder="Jan"
                     onChange={handleChange}
-                    ></NameInput>
-                   <Label htmlFor="">Achternaam</Label> 
-                   {lastName ? <span style={{color:"red", fontSize: "22px"}}><b>Gelieve dit veld in te vullen</b></span> : "" }
+                  />
+                  <Label htmlFor="">Achternaam</Label> 
+                  {lastName ? <span style={{color:"red", fontSize: "22px"}}><b>Gelieve dit veld in te vullen</b></span> : "" }
                   <LastNameInput 
                     name="lastname"
                     type="text"
                     placeholder="Smit"
                     onChange={handleChange}
-                    ></LastNameInput>
+                  />
                   <Label htmlFor="">E-mail</Label> 
                   {email ? <span style={{color:"red", fontSize: "22px"}}><b>Gelieve dit veld in te vullen</b></span> : "" }
                   <EmailInput 
@@ -346,23 +339,24 @@ const goToTop = () =>{
                     type="email"
                     placeholder="Jan@smit.nl"
                     onChange={handleChange}
-                    ></EmailInput >
+                  />
                   <Options>
                     <OptionsTitle>Gelieve het aantal gasten aan te geven</OptionsTitle>
                     <OptionsItem>
                         <OptionsText>Volwassenen</OptionsText>
                             <OptionsCounter>
                             <CounterBtn
-                             disabled={options.adult <= 1}
-                             onClick={()=> handleOptions("adult" , "decrease")}
+                             disabled={adults <= 1}
+                             onClick={() => handleChange({ target: { name: "adults", value: adults - 1 } })}
                              type="button"
                              > - </CounterBtn>
 
-                                <CounterNum> {options.adult}</CounterNum>
+                                <CounterNum> {adults}</CounterNum>
 
                               <CounterBtn
                                disabled={totaal >= 8}
-                               onClick={()=> handleOptions("adult" , "i")}
+                               onClick={() => handleChange({ target: { name: "adults", value: adults + 1 } })}
+
                                type="button"
                                > + </CounterBtn>
                            </OptionsCounter>                     
@@ -371,20 +365,19 @@ const goToTop = () =>{
                         <OptionsText>Kinderen </OptionsText>
                             <OptionsCounter>
                               <CounterBtn
-                               disabled={options.children <= 0}
-                               onClick={()=> handleOptions("children" , "decrease")} 
+                               disabled={children <= 0}
+                               onClick={() => handleChange({ target: { name: "children", value: children - 1 } })}
                                type="button"                
                                > - </CounterBtn>
 
-                                <CounterNum> {options.children} </CounterNum>
+                                <CounterNum> {children} </CounterNum>
 
                               <CounterBtn 
                               disabled={totaal >= 8}
-                              onClick={()=> handleOptions("children" , "i")}
+                              onClick={() => handleChange({ target: { name: "children", value: children + 1 } })}
                               type="button"
                               > + </CounterBtn>
-                            </OptionsCounter>
-                        
+                            </OptionsCounter>                        
                     </OptionsItem>
                   </Options>
                 </Top>
@@ -415,7 +408,7 @@ const goToTop = () =>{
             </Form>
         </Wrapper>
     </Container>
-  )
+  );
 }
 
-export default Reserve
+export default Reserve;
